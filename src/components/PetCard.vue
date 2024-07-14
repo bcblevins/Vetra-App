@@ -1,6 +1,9 @@
 <template>
     <div class="main">
-        <img src="./img/Charlie.jpg" alt="Charlie Image" height="200px" class="portrait">
+        <div class="portrait">
+            <img src="./img/Charlie.jpg" alt="Charlie Image" height="200px">
+            <span>How's Charlie doing?</span>
+        </div>
         <h2>Charlie</h2>
 
 
@@ -31,7 +34,7 @@
     width: var(--card-width);
     height: var(--card-height);
 
-    font-family: var(--font-sans);
+    font-family: 'Trebuchet MS';
     background-color: #F1F7FF;
 
     border-top-left-radius: calc(var(--card-width) / 2);
@@ -46,14 +49,52 @@
         position: relative;
         top: -5px;
 
+        img {
+            border-radius: 100%;
+        }
+
+        span {
+            text-align: center;
+            position: absolute;
+            font-weight: 700;
+            font-size: 1.5em;
+            width: 100%;
+            height: 1.5em;
+            top: 30%;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            color: color-mix(in srgb, Semi-transparent 100%);
+            filter: brightness(1.5);
+            opacity: 0;
+
+        }
+
+    }
+
+    .portrait:hover {
+        cursor: pointer;
+
+        img {
+            filter: contrast(0.5) brightness(1.5) saturate(0.7);
+            box-shadow: 0px 0px 5px 0px var(--shadow-color);
+            transform: scale(1.01);
+        }
+
+        span {
+            opacity: 1;
+        }
     }
 
     h2 {
-        color: #094567;
+        background-color: #094567;
+        color: white;
         text-align: center;
-        font-weight: 600;
+        font-weight: 700;
         position: relative;
         top: 0px;
+        text-shadow: 0px 1px 0px #011927;
+
     }
 
     .icon {
@@ -65,7 +106,10 @@
     }
 
     .icon:hover {
-        height: 52px;
+        transform: scale(1.1);
+        cursor: pointer;
+        filter: contrast(1) brightness(1.4);
+
     }
 
     .icon-container {

@@ -1,8 +1,9 @@
 <template>
-    <div class="message-bubble">
+    <div :class="{'from': isFrom(), 'to': !isFrom(), 'message-bubble': true }">
         <span>
             {{ message.body }}
         </span>
+        <span class="timestamp"> {{ formatDate(message.time) }} </span>
     </div>
 </template>
 
@@ -16,8 +17,26 @@ export default {
                 "fromUsername": "cakelly4",
                 "toUsername": "bblevins96",
                 "testId": 1,
-                "patientId": 1
-            }
+                "patientId": 1,
+                "time": "2024-07-14T07:10:00.000Z"
+            },
+        }
+    },
+    methods: {
+        formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('en-US', {
+                month: '2-digit',
+                day: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+        },
+        isFrom() {
+            console.log(this.message.fromUsername === this.$store.state.user.username);
+            return this.message.fromUsername === this.$store.state.user.username;
         }
     },
 }
@@ -38,5 +57,27 @@ export default {
     padding: .7em;
     padding-left: 1.2em;
     box-shadow: 1px 1px 2px 1px rgb(162, 163, 163);
+    position: relative;
+
+    .timestamp {
+        font-size: .7em;
+        position: absolute;
+        left: 30px;
+        bottom: -20px;
+        color: #000;
+    }
+}
+
+.message-bubble.from {
+    background-color: #BDECFC;
+    margin-left: auto;
+    margin-right: 0px;
+
+    .timestamp {
+
+        bottom: -20px;
+        left: auto;
+        right: 30px;
+    }
 }
 </style>

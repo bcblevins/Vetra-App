@@ -3,6 +3,8 @@
   import PetCard from './components/PetCard.vue';
   import MessageBubble from './components/MessageBubble.vue';
 
+  
+
 </script>
 
 <template>
@@ -17,7 +19,9 @@
       background-color: #F1F7FF;
       width: 90vw;
       height: 90vh;
-      padding: 10vw;
+      padding: 2vw;
+      display: flex;
+      flex-direction: column;
     }
   
 </style>

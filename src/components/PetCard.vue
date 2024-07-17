@@ -1,25 +1,35 @@
 <template>
     <div class="main">
-        <div class="portrait">
-            <img src="./img/Charlie.jpg" alt="Charlie Image" height="200px">
-            <span>How's Charlie doing?</span>
+        <div class="portrait" @click="$router.push({name: patientPath})">
+            <img :src="imgPath" :alt="pet.name" height="200px">
+            <span>How's {{pet.name}} doing?</span>
         </div>
-        <h2>Charlie</h2>
 
+        <h2>{{pet.name}}</h2>
 
         <div class="icon-container">
-            <img src="./icons/message.svg" alt="Messages" class="icon messages">
-            <img src="./icons/results.svg" alt="Results" class="icon results">
-            <img src="./icons/pill.svg" alt="Medications" class="icon meds">
+            <img src="./icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({name: patientPath + '/messages'})">
+            <img src="./icons/results.svg" alt="Results" class="icon results" @click="$router.push({name: patientPath + '/results'})">
+            <img src="./icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({name: patientPath + '/medications'})">
         </div>
-
-
 
     </div>
 </template>
 
-<script setup>
+<script>
+    
+    export default {
+        props: ['pet'],
+        computed: {
+            imgPath() {
+                return './src/components/img/' + this.pet.id + '.jpg'
+            },
+            patientPath() {
+                return '/patient/' + pet.id;
+            }
+        },
 
+    };
 </script>
 
 <style scoped>

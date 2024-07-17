@@ -1,27 +1,25 @@
-<script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import PetCard from './components/PetCard.vue';
-  import MessageBubble from './components/MessageBubble.vue';
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import MessageTestingView from './views/MessageTestingView.vue'
+import PetcardTestingView from './views/PetcardTestingView.vue'
 
-  
+
+export default {
+  components: {
+    MessageTestingView,
+    PetcardTestingView
+  },
+};
+
 
 </script>
 
 <template>
-  <div class="container">
-    <MessageBubble />
+  <div>
+    <PetcardTestingView/>
   </div>
 </template>
 
 <style scoped>
 
-    .container {
-      background-color: #F1F7FF;
-      width: 90vw;
-      height: 90vh;
-      padding: 2vw;
-      display: flex;
-      flex-direction: column;
-    }
-  
 </style>

@@ -9,17 +9,10 @@
 
 <script>
 export default {
+    props: ['message'],
     data() {
         return {
-            message: {
-                "messageId": 1,
-                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.",
-                "fromUsername": "cakelly4",
-                "toUsername": "bblevins96",
-                "testId": 1,
-                "patientId": 1,
-                "time": "2024-07-14T07:10:00.000Z"
-            },
+
         }
     },
     methods: {
@@ -35,7 +28,6 @@ export default {
             });
         },
         isFrom() {
-            console.log(this.message.fromUsername === this.$store.state.user.username);
             return this.message.fromUsername === this.$store.state.user.username;
         }
     },
@@ -58,6 +50,7 @@ export default {
     padding-left: 1.2em;
     box-shadow: 1px 1px 2px 1px rgb(162, 163, 163);
     position: relative;
+    margin-block: 1em;
 
     .timestamp {
         font-size: .7em;

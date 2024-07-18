@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PetCard from '../components/PetCard.vue'
+import PetCard from '../../components/cards/PetCard.vue'
 export default {
     components: {
         PetCard
@@ -22,7 +22,9 @@ export default {
             }
         }
     },
-}
-</script>
+    }
+    </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

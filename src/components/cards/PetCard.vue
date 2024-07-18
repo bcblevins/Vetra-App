@@ -1,16 +1,16 @@
 <template>
     <div class="main">
-        <div class="portrait" @click="$router.push({name: patientPath})">
-            <img :src="imgPath" :alt="pet.name" height="200px">
+        <div class="portrait" @click="$router.push({name: 'profile', params: { petId: pet.id }})">
+            <img :src="imgSrc" :alt="pet.name" height="200px">
             <span>How's {{pet.name}} doing?</span>
         </div>
 
         <h2>{{pet.name}}</h2>
 
         <div class="icon-container">
-            <img src="./icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({name: patientPath + '/messages'})">
-            <img src="./icons/results.svg" alt="Results" class="icon results" @click="$router.push({name: patientPath + '/results'})">
-            <img src="./icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({name: patientPath + '/medications'})">
+            <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({ name: 'messages', params: { petId: pet.id } })">
+            <img src="../../assets/icons/results.svg" alt="Results" class="icon results" @click="$router.push({ name: 'tests', params: { petId: pet.id, testId: '0' } })">
+            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'medications', params: { petId: pet.id } })">
         </div>
 
     </div>
@@ -21,12 +21,10 @@
     export default {
         props: ['pet'],
         computed: {
-            imgPath() {
-                return './src/components/img/' + this.pet.id + '.jpg'
+            imgSrc() {
+                return './src/assets/img/' + this.pet.id + '.jpg'
             },
-            patientPath() {
-                return '/patient/' + pet.id;
-            }
+
         },
 
     };

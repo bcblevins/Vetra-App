@@ -1,12 +1,21 @@
 <template>
     <div>
-        <TestCard :test="test"/>
+        <!-- <TestCard :test="test"/> -->
+
+
+        <RxItem :med="med"/>
+        <RxItem :med="med"/>
+        <RxItem :med="med"/>
+        <RxItem :med="med"/>
+
+
     </div>
 </template>
 
 <script>
 import TestCard from '@/components/cards/TestCard.vue';
 import PetInfoCard from '@/components/cards/PetInfoCard.vue';
+import RxItem from '@/components/items/RxItem.vue';
 export default {
     data() {
         return {
@@ -64,11 +73,23 @@ export default {
                     }
                 ]
             },
+            med: {
+                "prescriptionId": "1",
+                "name": "Trazodone 50mg",
+                "quantity": "30",
+                "unit": "tablet",
+                "instructions": "Give 1 tablet by mouth 3 hours prior to thunderstorm",
+                "refills": "3",
+                "patientId": "1",
+                "doctorUsername": "cakelly4",
+                "active": "true"
+            }
         }
     },
     components: {
         PetInfoCard,
-        TestCard
+        TestCard,
+        RxItem
     },
 
 }

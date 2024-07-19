@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-    border-bottom: 1px solid #094567;
+    border-bottom: 2px solid #094567;
     height: 4em;
     color: #094567;
     padding-top: 10px;

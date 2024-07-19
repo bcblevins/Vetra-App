@@ -1,14 +1,9 @@
 <template>
-    <div>
+    <div class="main">
         <!-- <TestCard :test="test"/> -->
-
-
-        <RxItem :med="med"/>
-        <RxItem :med="med"/>
-        <RxItem :med="med"/>
-        <RxItem :med="med"/>
-
-
+        <!-- <RxItem :med="med"/> -->
+        <!-- <TestItem :test="test"/> -->
+        <Login />
     </div>
 </template>
 
@@ -16,6 +11,8 @@
 import TestCard from '@/components/cards/TestCard.vue';
 import PetInfoCard from '@/components/cards/PetInfoCard.vue';
 import RxItem from '@/components/items/RxItem.vue';
+import TestItem from '@/components/items/TestItem.vue';
+import Login from '@/components/items/Login.vue';
 export default {
     data() {
         return {
@@ -30,7 +27,7 @@ export default {
             },
             test: {
                 "id": 1,
-                "name": "CBC",
+                "name": "Fecal Analysis",
                 "timestamp": "2024-05-24T00:00:00",
                 "patientID": 1,
                 "doctorUsername": "cakelly4",
@@ -89,17 +86,19 @@ export default {
     components: {
         PetInfoCard,
         TestCard,
-        RxItem
+        RxItem,
+        TestItem,
+        Login
     },
 
 }
 </script>
 
 <style lang="scss" scoped>
-div {
+.main {
+    background-color: #F1F7FF;
     width: 90vw;
     height: 90vh;
-    background-color: #F1F7FF;
 
     .pet-info {
         width: 40vw;

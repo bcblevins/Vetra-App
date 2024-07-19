@@ -1,0 +1,108 @@
+<template>
+    <div class="main">
+        <div class="heading">
+            <h2> {{ test.name }} </h2>
+            <br>
+            <h4> {{ doctorName }} </h4>
+            <br>
+            <h3> {{ formattedTimeStamp }} </h3>
+        </div>
+        <table class="results">
+            <tr>
+                <th>Parameter</th>
+                <th>Result</th>
+                <th>Unit</th>
+                <th>Low Normal</th>
+                <th>High Normal</th>
+            </tr>
+            <tr v-for="result in test.results" :key="result.resultID">
+                <td> {{ result.parameterName }} </td>
+                <td> {{ result.resultValue }} </td>
+                <td> {{ result.unit }} </td>
+                <td> {{ result.rangeLow }} </td>
+                <td> {{ result.rangeHigh }} </td>
+            </tr>
+        </table>
+    </div>
+</template>
+
+<script>
+export default {
+    props: ['test'],
+    computed: {
+        formattedTimeStamp() {
+            const date = new Date(this.test.timestamp);
+            const dateString = date.toLocaleDateString('en-US', {
+                month: 'numeric',
+                day: 'numeric',
+                year: 'numeric',
+            });
+            const timeString = date.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            return `${dateString} ${timeString}`;
+        },
+        doctorName() {
+            return this.test.doctorUsername;
+        }
+    },
+}
+</script>
+
+<style lang="scss" scoped>
+.main {
+    color: #094567;
+    border: 2px solid #094567;
+    border-radius: 5px;
+    padding: 10px;
+    width: 75vw;
+
+    .heading {
+        padding: 20px;
+        padding-block: 0px;
+        margin-block: 20px;
+        border-left: 2px solid #094567;
+        width: auto;
+        display: inline-block;
+
+        h2 {
+            font-size: 2em;
+            font-weight: 700;
+        }
+    }
+
+    .heading * {
+        display: inline;
+        padding-right: 10px
+    }
+    
+
+    .results {
+        padding: 20px;
+        border-collapse: collapse;
+        margin: 10px;
+        width: 70vw;
+
+        th {
+            border-bottom: 2px solid #094567;
+            padding: 10px;
+            padding-block: 5px;
+            text-align: left;
+            background-color: #aae0ff;
+        }
+
+        td {
+            padding: 10px;
+            padding-block: 5px;
+
+        }
+
+        tr:nth-child(odd) {
+            background-color: #e0e0e0;
+        }
+    }
+}
+
+</style>

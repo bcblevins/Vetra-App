@@ -7,9 +7,9 @@
   - [x] PetInfoCard 
 - Items
   - [x] Messagebubble
-  - [ ] RxItem
-  - [ ] TestItem
-  - [ ] Login
+  - [x] RxItem
+  - [x] TestItem
+  - [x] Login
 - Containers
   - [ ] Conversation
   - [ ] TestList

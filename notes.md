@@ -6,7 +6,7 @@
   - [x] TestCard
   - [x] PetInfoCard 
 - Items
-  - [x] Messagebubble
+  - [ ] Messagebubble - NEED TO ADD NAME LABEL 
   - [x] RxItem
   - [x] TestItem
   - [x] Login

@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <div class="portrait" @click="$router.push({name: 'profile', params: { petId: pet.id } })">
+        <div class="portrait" @click="$router.push({name: 'profile', params: { id: pet.patientId } })">
             <img :src="imgSrc" :alt="pet.name" height="200px">
             <span>How's {{pet.name}} doing?</span>
         </div>
@@ -22,7 +22,7 @@
         props: ['pet'],
         computed: {
             imgSrc() {
-                return './src/assets/img/' + this.pet.id + '.jpg'
+                return '/src/assets/img/' + this.pet.patientId + '.jpg'
             },
 
         },
@@ -102,6 +102,8 @@
         position: relative;
         top: 0px;
         text-shadow: 0px 1px 0px #011927;
+        margin-bottom: 0px;
+        margin-top: 10px;
 
     }
 

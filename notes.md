@@ -6,19 +6,17 @@
   - [x] TestCard
   - [x] PetInfoCard 
 - Items
-  - [ ] Messagebubble - NEED TO ADD NAME LABEL 
+  - [x] Messagebubble - NEED TO ADD NAME LABEL 
   - [x] RxItem
   - [x] TestItem
   - [x] Login
 - Containers
-  - [ ] Conversation
-  - [ ] TestList
-  - [ ] RxList
+  - [x] Conversation
+  - [x] TestList
+  - [x] RxList
 - Views
-  - [ ] Landing
+  - [x] Landing
   - [ ] Profile
-  - [ ] PetConversation
-  - [ ] RxAll
   - [ ] Tests
   - [ ] Notifications
   - [ ] User

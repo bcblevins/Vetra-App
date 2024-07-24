@@ -1,15 +1,11 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import MessageTestingView from './views/testing/MessageTestingView.vue'
-import PetcardTestingView from './views/testing/PetcardTestingView.vue'
-import GeneralTestingView from './views/testing/GeneralTestingView.vue'
+import Header from './components/items/Header.vue';
 
 
 export default {
   components: {
-    MessageTestingView,
-    PetcardTestingView,
-    GeneralTestingView,
+    Header
   },
 };
 
@@ -17,11 +13,20 @@ export default {
 </script>
 
 <template>
-  <div>
-    <GeneralTestingView/>
+  <div class="app">
+    <Header />
+    <RouterView class="router-view"/>
   </div>
 </template>
 
 <style scoped>
 
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.router-view {
+  flex: 1;
+}
 </style>

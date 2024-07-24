@@ -1,9 +1,10 @@
 <template>
     <div :class="{'from': isFrom(), 'to': !isFrom(), 'message-bubble': true }">
+        <span class="username" v-show="!isFrom()"> {{ message.fromUsername }} </span>
         <span>
             {{ message.body }}
         </span>
-        <span class="timestamp"> {{ formatDate(message.time) }} </span>
+        <span class="timestamp"> {{ formatDate(message.timestamp) }} </span>
     </div>
 </template>
 
@@ -58,6 +59,14 @@ export default {
         left: 30px;
         bottom: -20px;
         color: #000;
+    }
+
+    .username {
+        font-size: 1em;
+        position: absolute;
+        left: 0px;
+        top: -1.5em;
+        color: #818181;
     }
 }
 

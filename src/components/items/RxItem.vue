@@ -49,7 +49,6 @@ export default {
         .med-title {
             border-bottom: 1px solid #094567;
             padding-bottom: .3em;
-            background-color: #b6ffff;
             .med-name {
                 font-size: 1.2em;
                 font-weight: 700;

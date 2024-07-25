@@ -67,6 +67,8 @@ export default {
     gap: 2em;
     padding: 1em;
     background-color: #F1F7FF;
+    margin: 20px;
+    border-radius: 5px;
 
     .conversation {
         grid-area: conversation;

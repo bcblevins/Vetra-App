@@ -31,7 +31,6 @@
 </script>
 
 <style scoped>
-@import "https://unpkg.com/open-props";
 
 .main {
     position: relative;

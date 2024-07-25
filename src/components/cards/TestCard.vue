@@ -40,6 +40,7 @@ export default {
     color: #094567;
     padding-top: 10px;
     padding-left: 10px;
+    background-color: aliceblue;
 
     h2 {
         font-size: 1.5em;
@@ -61,9 +62,9 @@ export default {
     color: #000000;
 }
 
-.nav {
+.main.nav {
     border-bottom: 2px solid #094567;
-    height: 100%;
+    height: auto;
     color: #094567;
     padding: 10px;
     display: flex;
@@ -88,6 +89,7 @@ export default {
         font-size: .7em;
         border-top: 1px solid var(--dark-blue);
         margin: 0px;
+        padding-top: .5em;
 
     }
 

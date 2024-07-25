@@ -29,6 +29,6 @@ import PetService from '@/services/PetService';
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px;
 }
 </style>

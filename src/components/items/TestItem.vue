@@ -54,6 +54,7 @@ export default {
 <style lang="scss" scoped>
 .main {
     color: #094567;
+    background-color: white;
     border: 2px solid #094567;
     border-radius: 5px;
     padding: 10px;
@@ -83,7 +84,7 @@ export default {
         padding: 20px;
         border-collapse: collapse;
         margin: 10px;
-        width: 70vw;
+        width: 95%;
 
         th {
             border-bottom: 2px solid #094567;
@@ -100,7 +101,7 @@ export default {
         }
 
         tr:nth-child(odd) {
-            background-color: #e0e0e0;
+            background-color: #c1ced3;
         }
     }
 }

@@ -29,6 +29,5 @@ export default {
 }
 .router-view {
   flex: 1;
-  margin: 1em;
 }
 </style>

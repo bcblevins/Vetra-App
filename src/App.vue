@@ -25,8 +25,10 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #BDECFC;
 }
 .router-view {
   flex: 1;
+  margin: 1em;
 }
 </style>

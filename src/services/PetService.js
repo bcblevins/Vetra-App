@@ -32,5 +32,8 @@ export default {
                 ownerUsername: "bblevins96",
             }
         ];
-    }
+    },
+    imgSource(id) {
+        return '/src/assets/img/' + id + '.jpg'
+    },
 }

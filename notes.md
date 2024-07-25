@@ -16,7 +16,7 @@
   - [x] RxList
 - Views
   - [x] Landing
-  - [ ] Profile
+  - [x] Profile
   - [ ] Tests
   - [ ] Notifications
   - [ ] User

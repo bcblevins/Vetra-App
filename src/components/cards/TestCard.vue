@@ -1,5 +1,5 @@
 <template>
-    <div class="main" @click="goToTest">
+    <div class="main" @click="goToTest()">
         <h2> {{ test.name }} </h2>
         <h3> {{ formattedTimeStamp }} </h3>
     </div>
@@ -27,7 +27,7 @@ export default {
     },        
     methods: {
         goToTest() {
-            this.$router.push({ name: 'test', params: { petId: test.patientID, test: test.id } })
+            this.$router.push({ name: 'tests', params: { petId: this.test.patientID, testId: this.test.id } })
         }
     }
 }
@@ -59,5 +59,37 @@ export default {
     background-color: #dedede;
     cursor: pointer;
     color: #000000;
+}
+
+.nav {
+    border-bottom: 2px solid #094567;
+    height: 100%;
+    color: #094567;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    h2 {
+        font-size: .7em;
+        font-weight: 700;
+        margin: 0px;
+        margin-bottom: .5em;
+        display: inline;
+        padding-right: .5em;
+        padding-bottom: .2em;
+        border-right: 1px solid #094567;
+        border-right: none;
+        display: inline-block;
+    }
+
+    h3 {
+        display: inline;
+        font-size: .7em;
+        border-top: 1px solid var(--dark-blue);
+        margin: 0px;
+
+    }
+
 }
 </style>

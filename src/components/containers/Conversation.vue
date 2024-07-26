@@ -35,7 +35,7 @@ export default {
 .conversation {
     border: 1px solid #d3d3d3;
     border-radius: .5em;
-    overflow: hidden;
+    overflow: scroll;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -46,10 +46,9 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         padding: 1em;
-        background-color: #ffffff;
-        overflow: hidden;
+        overflow: scroll;
         flex-grow: 1;
-        background-color: #dfdfdf;
+        background-color: #e8e8e8;
         border-radius: .5em;
         margin: 5px;
 

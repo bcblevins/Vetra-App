@@ -19,6 +19,6 @@ import RxItem from '../items/RxItem.vue';
     .rx-list {
         border: 1px solid #094567;
         border-radius: .5em;
-        overflow: hidden;
+        overflow: scroll;
     }
 </style>

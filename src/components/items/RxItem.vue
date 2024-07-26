@@ -41,6 +41,7 @@ export default {
     justify-content: space-between;
     border-bottom: 2px solid #094567;
     height: 6em;
+    background-color: rgb(255, 255, 255);
 
     .med-details {
         display: inline-block;

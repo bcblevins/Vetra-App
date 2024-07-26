@@ -40,7 +40,7 @@ export default {
     color: #094567;
     padding-top: 10px;
     padding-left: 10px;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
 
     h2 {
         font-size: 1.5em;

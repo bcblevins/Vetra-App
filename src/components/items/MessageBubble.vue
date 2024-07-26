@@ -46,9 +46,9 @@ export default {
     min-height: 2em;
     background-color: var(--bubble-color);
     color: #000;
-    border-radius: 2em;
+    border-radius: 1em;
     padding: .7em;
-    padding-left: 1.2em;
+    padding-inline: 1.2em;
     box-shadow: 1px 1px 2px 1px rgb(162, 163, 163);
     position: relative;
     margin-block: 1em;

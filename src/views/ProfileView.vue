@@ -1,12 +1,17 @@
 <template>
     <div class="profile">
-        <Conversation :messages="messages" class="conversation" />
-        <TestList :tests="tests" class="tests" />
+
         <div class="pet-info">
             <h1> {{ pet.name }} </h1>
             <img :src="imgSrc" :alt="pet.name">
         </div>
+
         <RxList :meds="meds" class="meds" />
+
+        <Conversation :messages="messages" class="conversation" />
+
+        <TestList :tests="tests" class="tests" />
+
     </div>
 </template>
 
@@ -60,15 +65,16 @@ export default {
 .profile {
     display: grid;
     grid-template-columns: 2fr 3fr;
-    grid-template-rows: 3fr 2fr;
+    grid-template-rows: 2fr 3fr;
     grid-template-areas:
-        "conversation tests"
-        "pet-info meds";
+        "pet-info meds"
+        "conversation tests";
     gap: 2em;
     padding: 1em;
     background-color: #F1F7FF;
     margin: 20px;
     border-radius: 5px;
+    height: calc(100vh - 128px);
 
     .conversation {
         grid-area: conversation;

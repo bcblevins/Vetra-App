@@ -33,7 +33,8 @@ export default {
 .test-container {
     border: 1px solid #094567;
     border-radius: .5em;
-    overflow: hidden;
+    overflow: scroll;
+    background-color: #F1F7FF;
 }
 
 .test-container.nav {

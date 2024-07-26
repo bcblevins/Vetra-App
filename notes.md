@@ -17,7 +17,7 @@
 - Views
   - [x] Landing
   - [x] Profile
-  - [ ] Tests
+  - [x] Tests
   - [ ] Notifications
   - [ ] User
     

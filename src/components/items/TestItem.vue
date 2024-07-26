@@ -15,7 +15,7 @@
                 <th>Low Normal</th>
                 <th>High Normal</th>
             </tr>
-            <tr v-for="result in test.results" :key="result.resultID">
+            <tr v-for="result in test.results" :key="result.resultID" :class="{'abnormal': abnormal(result)}">
                 <td> {{ result.parameterName }} </td>
                 <td> {{ result.resultValue }} </td>
                 <td> {{ result.unit }} </td>
@@ -46,15 +46,24 @@ export default {
         },
         doctorName() {
             return this.test.doctorUsername;
+        },
+
+    },
+    methods: {
+        abnormal(result) {
+            console.log(result.resultValue, result.rangeLow, result.rangeHigh);
+            console.log(+result.resultValue < +result.rangeLow || +result.resultValue > +result.rangeHigh);
+            return +result.resultValue < +result.rangeLow || +result.resultValue > +result.rangeHigh;
         }
     },
+
 }
 </script>
 
 <style lang="scss" scoped>
 .main {
     color: #094567;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border: 2px solid #094567;
     border-radius: 5px;
     padding: 10px;
@@ -64,6 +73,7 @@ export default {
         padding: 20px;
         padding-block: 0px;
         margin-block: 20px;
+        margin-left: 10px;
         border-left: 2px solid #094567;
         width: auto;
         display: inline-block;
@@ -102,6 +112,11 @@ export default {
 
         tr:nth-child(odd) {
             background-color: #c1ced3;
+        }
+
+        tr.abnormal {
+            background-color: #ff6e6e;
+            color: black;
         }
     }
 }

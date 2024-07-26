@@ -18,7 +18,7 @@ import RxItem from '../items/RxItem.vue';
 <style lang="scss" scoped>
     .rx-list {
         border: 1px solid #094567;
-        border-radius: 2em;
+        border-radius: .5em;
         overflow: hidden;
     }
 </style>

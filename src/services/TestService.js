@@ -78,7 +78,7 @@ let Tests = [
             {
                 "resultID": 22,
                 "testID": 6,
-                "resultValue": "Normal",
+                "resultValue": "6.4",
                 "parameterName": "RBC",
                 "rangeLow": "5.5",
                 "rangeHigh": "8.5",
@@ -87,7 +87,7 @@ let Tests = [
             {
                 "resultID": 23,
                 "testID": 6,
-                "resultValue": "Normal",
+                "resultValue": "11.5",
                 "parameterName": "HGB",
                 "rangeLow": "12",
                 "rangeHigh": "18",
@@ -96,7 +96,7 @@ let Tests = [
             {
                 "resultID": 24,
                 "testID": 6,
-                "resultValue": "Normal",
+                "resultValue": "43",
                 "parameterName": "HCT",
                 "rangeLow": "37",
                 "rangeHigh": "55",
@@ -105,7 +105,7 @@ let Tests = [
             {
                 "resultID": 25,
                 "testID": 6,
-                "resultValue": "Normal",
+                "resultValue": "10.4",
                 "parameterName": "WBC",
                 "rangeLow": "6",
                 "rangeHigh": "17",
@@ -114,7 +114,7 @@ let Tests = [
             {
                 "resultID": 26,
                 "testID": 6,
-                "resultValue": "Normal",
+                "resultValue": "200",
                 "parameterName": "PLT",
                 "rangeLow": "170",
                 "rangeHigh": "400",

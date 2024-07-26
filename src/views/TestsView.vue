@@ -5,7 +5,7 @@
         </nav>
         <main>
             <TestItem :test="test" class="test-item"/>
-            <Conversation />
+            <Conversation :messages="[]" class="conversation"/>
         </main>
     </div>
 </template>
@@ -19,18 +19,21 @@ import Conversation from '@/components/containers/Conversation.vue';
 export default {
     components: {
         TestList,
-        TestItem
+        TestItem,
+        Conversation
     },
     data() {
         return {
             tests: [],
-            test: {}
         }
     },
     created() {
         this.tests = TestService.getTests(this.$route.params.petId);
-        this.test = TestService.getTest(this.$route.params.testId);
-        console.log(this.test);
+    },
+    computed: {
+        test() {
+            return TestService.getTest(this.$route.params.testId);
+        }
     },
 }
 </script>
@@ -48,8 +51,16 @@ export default {
         justify-content: start;
         align-items: center;
         width: 100%;
+
         .test-item {
             width: 50vw;
+            margin-bottom: 20px;
+        }
+
+        .conversation {
+            width: 60vw;
+            min-height: 30vh;
+            border-radius: 0%;
         }
     }
 }

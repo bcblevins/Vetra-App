@@ -32,12 +32,12 @@ export default {
 <style lang="scss" scoped>
 .test-container {
     border: 1px solid #094567;
-    border-radius: 2em;
+    border-radius: .5em;
     overflow: hidden;
 }
 
 .test-container.nav {
-    width: 15vw;
+    width: 10vw;
     height: 100%;
     border-radius: 0px;
 }

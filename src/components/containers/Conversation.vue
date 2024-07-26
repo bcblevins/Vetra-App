@@ -2,6 +2,7 @@
     <div class="conversation">
         <div class="messages">
             <MessageBubble v-for="message in sortedMessages" :key="message.id" :message="message" />
+            <span v-show="noMessages">Send a message to start a conversation...</span>
         </div>
         <form class="send">
             <textarea class="box" placeholder="Type a message..."></textarea>
@@ -22,6 +23,9 @@ export default {
             return this.messages.slice().sort((a, b) => {
                 return new Date(a.timestamp) - new Date(b.timestamp);
             });
+        },
+        noMessages() {
+            return this.messages.length === 0;
         }
     }
 }
@@ -30,8 +34,11 @@ export default {
 <style lang="scss" scoped>
 .conversation {
     border: 1px solid #d3d3d3;
-    border-radius: 2em;
+    border-radius: .5em;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
 
 
     .messages {
@@ -41,6 +48,14 @@ export default {
         padding: 1em;
         background-color: #ffffff;
         overflow: hidden;
+        flex-grow: 1;
+        background-color: #dfdfdf;
+        border-radius: .5em;
+        margin: 5px;
+
+        span {
+            margin: auto;
+        }
     }
 
     .send {

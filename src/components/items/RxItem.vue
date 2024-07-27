@@ -12,7 +12,7 @@
         </div>
 
         <div class="med-refills">
-            <p class="request-refill">Request Refill</p>
+            <p class="request-refill">Refill</p>
         </div>
     </div>
 </template>
@@ -106,7 +106,42 @@ export default {
         }
     }
 
+}
 
+.main.shrink {
+    height: auto;
+    .med-details {
+        .med-title {
+            border-bottom: none;
+            span {
+                font-size: var(--standard-text);
+            }
+            .med-name {
+                font-size: var(--header-3);
+                border-right: none;
+            }
 
+            .med-quantity {
+                display: none;
+            }
+
+            .med-refill-quantity {
+                display: none;
+            }
+        }
+
+        p {
+            display: none;
+        }
+    }
+
+    .med-refills {
+        padding: 0px;
+
+        p {
+            font-size: var(--header-3);
+            margin: 0px;
+        }
+    }
 }
 </style>

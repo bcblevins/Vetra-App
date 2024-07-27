@@ -1,7 +1,7 @@
 <template>
     <div class="test-view">
         <nav>
-            <TestList :tests="tests" :nav="true" />
+            <TestList :tests="tests" :shrink="true" />
         </nav>
         <main>
             <TestItem :test="test" class="test-item"/>

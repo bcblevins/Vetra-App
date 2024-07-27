@@ -49,7 +49,8 @@ export default {
     border-radius: 1em;
     padding: .7em;
     padding-inline: 1.2em;
-    box-shadow: 1px 1px 2px 1px rgb(162, 163, 163);
+    border: 1px solid #b6b6b6;
+    box-shadow: 0px 5px 5px -5px var(--shadow-color);
     position: relative;
     margin-block: 1em;
 

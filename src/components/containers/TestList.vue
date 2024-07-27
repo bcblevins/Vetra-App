@@ -1,6 +1,6 @@
 <template>
-    <div :class="{ 'test-container': true, 'nav': nav }">
-        <TestCard v-for="test in tests" :key="test.id" :test="test" :class="{ 'nav': nav }"/>
+    <div :class="{ 'test-container': true, 'shrink': shrink }">
+        <TestCard v-for="test in tests" :key="test.id" :test="test" :class="{ 'shrink': shrink }"/>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 
     props: {
         tests: Array,
-        nav: {
+        shrink: {
             type: Boolean,
             default: false
         }
@@ -31,15 +31,15 @@ export default {
 
 <style lang="scss" scoped>
 .test-container {
-    border: 1px solid #094567;
+    border: 3px solid #094567;
+    border-block: 1px solid;
     border-radius: .5em;
     overflow: scroll;
     background-color: #F1F7FF;
 }
 
-.test-container.nav {
+.test-container.shrink {
     width: 10vw;
     height: 100%;
-    border-radius: 0px;
 }
 </style>

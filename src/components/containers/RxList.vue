@@ -1,6 +1,6 @@
 <template>
     <div class="rx-list">
-        <RxItem v-for="med in meds" :key="med.id" :med="med" />
+        <RxItem v-for="med in meds" :key="med.id" :med="med" :class="{ 'shrink': shrink }"/>
     </div>
 </template>
 
@@ -8,7 +8,13 @@
 import RxItem from '../items/RxItem.vue';
 
     export default {
-        props: ['meds'],
+        props: {
+            meds: Object,
+            shrink: {
+                type: Boolean,
+                default: false
+            }
+        },
         components: {
             RxItem
         }
@@ -17,7 +23,8 @@ import RxItem from '../items/RxItem.vue';
 
 <style lang="scss" scoped>
     .rx-list {
-        border: 1px solid #094567;
+        border: 3px solid #094567;
+        border-block: 1px solid;
         border-radius: .5em;
         overflow: scroll;
     }

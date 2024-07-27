@@ -62,7 +62,7 @@ export default {
     color: #000000;
 }
 
-.main.nav {
+.main.shrink {
     border-bottom: 2px solid #094567;
     height: auto;
     color: #094567;
@@ -72,7 +72,7 @@ export default {
     justify-content: start;
 
     h2 {
-        font-size: .7em;
+        font-size: var(--header-3);
         font-weight: 700;
         margin: 0px;
         margin-bottom: .5em;
@@ -86,7 +86,8 @@ export default {
 
     h3 {
         display: inline;
-        font-size: .7em;
+        font-size: var(--standard-text);
+        font-weight: 400;
         border-top: 1px solid var(--dark-blue);
         margin: 0px;
         padding-top: .5em;

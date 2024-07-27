@@ -33,12 +33,17 @@ export default {
 
 <style lang="scss" scoped>
 .conversation {
-    border: 1px solid #d3d3d3;
+    border: 3px solid var(--dark-blue);
+    border-block: 1px solid;
+
     border-radius: .5em;
+
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-image: var(--gradient-9);
+    background-size: 200% 200%;
+
 
 
     .messages {
@@ -48,9 +53,9 @@ export default {
         padding: 1em;
         overflow: scroll;
         flex-grow: 1;
-        background-color: #e8e8e8;
         border-radius: .5em;
         margin: 5px;
+        background-color: #ffffff;
 
         span {
             margin: auto;
@@ -63,15 +68,18 @@ export default {
         align-items: center;
         padding: 1em;
         background-color: #f1f1f1;
+        height: 6em;
 
         .box {
             padding: 0.5em;
             border-radius: .5em;
             border: 1px solid #d3d3d3;
             flex-grow: 1;
+            height: 100%;
         }
 
         input {
+            margin-left: 10px;
             margin-bottom: auto;
         };
     }

@@ -1,119 +1,134 @@
 <template>
     <div class="profile">
 
-        <div class="pet-info">
-            <h1> {{ pet.name }} </h1>
-            <img :src="imgSrc" :alt="pet.name">
-        </div>
+        <main>
+            <div class="left">
+                <div class="pet-info">
+                    <img :src="imgSrc" :alt="pet.name">
+                    <h1> {{ pet.name }} </h1>
+                </div>
+                <RxList :meds="meds" class="meds" :shrink="true" />
+            </div>
 
-        <RxList :meds="meds" class="meds" />
+            <Conversation :messages="messages" class="conversation" />
 
-        <Conversation :messages="messages" class="conversation" />
+            <TestList :tests="tests" class="tests" :shrink="true" />
+        </main>
 
-        <TestList :tests="tests" class="tests" />
 
     </div>
 </template>
 
 <script>
-import TestList from '@/components/containers/TestList.vue';
-import RxList from '@/components/containers/RxList.vue';
-import Conversation from '@/components/containers/Conversation.vue';
-import MessageService from '@/services/MessageService';
-import TestService from '@/services/TestService';
-import RxService from '@/services/RxService';
-import PetService from '@/services/PetService';
+    import TestList from '@/components/containers/TestList.vue';
+    import RxList from '@/components/containers/RxList.vue';
+    import Conversation from '@/components/containers/Conversation.vue';
+    import MessageService from '@/services/MessageService';
+    import TestService from '@/services/TestService';
+    import RxService from '@/services/RxService';
+    import PetService from '@/services/PetService';
 
-export default {
-    data() {
-        return {
-            pet: {},
-            messages: [],
-            meds: [],
-            tests: [],
-            imgSrc: ''
-        }
-    },
-    components: {
-        TestList,
-        RxList,
-        Conversation
-    },
-    computed: {
-        age() {
-            const today = new Date();
-            const birthDate = new Date(this.pet.birthday);
-            const m = today.getMonth() - birthDate.getMonth();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
+    export default {
+        data() {
+            return {
+                pet: {},
+                messages: [],
+                meds: [],
+                tests: [],
+                imgSrc: ''
             }
-            return age;
+        },
+        components: {
+            TestList,
+            RxList,
+            Conversation
+        },
+        computed: {
+            age() {
+                const today = new Date();
+                const birthDate = new Date(this.pet.birthday);
+                const m = today.getMonth() - birthDate.getMonth();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age;
+            }
+        },
+        created() {
+            this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
+            this.messages = MessageService.getMessages(this.pet.patientId);
+            this.tests = TestService.getTests(this.pet.patientId);
+            this.meds = RxService.getMeds(this.pet.patientId);
+            this.imgSrc = PetService.imgSource(this.pet.patientId);
         }
-    },
-    created() {
-        this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
-        this.messages = MessageService.getMessages(this.pet.patientId);
-        this.tests = TestService.getTests(this.pet.patientId);
-        this.meds = RxService.getMeds(this.pet.patientId);
-        this.imgSrc = PetService.imgSource(this.pet.patientId);
     }
-}
 </script>
 
 <style lang="scss" scoped>
 .profile {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    grid-template-rows: 2fr 3fr;
-    grid-template-areas:
-        "pet-info meds"
-        "conversation tests";
-    gap: 2em;
     padding: 1em;
     background-color: #F1F7FF;
-    margin: 20px;
-    border-radius: 5px;
-    height: calc(100vh - 128px);
 
-    .conversation {
-        grid-area: conversation;
-    }
 
-    .tests {
-        grid-area: tests;
-    }
 
-    .pet-info {
-        grid-area: pet-info;
-        color: var(--dark-blue);
+    main {
         display: flex;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        padding-inline: 5em;
+        justify-content: space-between;
+        height: 100%;
+        .left {
+            display: flex;
+            flex-direction: column;
+            .pet-info {
+                color: var(--dark-blue);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-bottom: 1px solid var(--dark-blue);
+                border-right: 3px solid var(--dark-blue);
+                border-bottom-right-radius: 10px;
+                margin-bottom: 10px;
+                box-shadow: 0px 5px 10px -5px var(--shadow-color);
+                img {
+                    height: 100px;
+                    width: 100px;
+                    object-fit: cover;
+                    margin: 10px;
+                    border-radius: 100%;
+                }
 
-        h1 {
-            font-size: 2em;
-            font-weight: 700;
-            margin: 0;
-            margin-inline: 10px;
-            border-bottom: 2px solid var(--dark-blue);
+                h1 {
+                    font-size: var(--header-2);
+                    font-weight: 700;
+                    margin: 10px;
+                    border-bottom: 2px solid var(--dark-blue);
+                }
+
+            }   
+
+            .meds {
+                flex-grow: 1;     
+                box-shadow: 0px 5px 10px -5px var(--shadow-color);
+       
+            }
         }
 
-        img {
-            height: 100px;
+        .conversation {
             flex-grow: 1;
-            object-fit: cover;
-            margin: 10px;
+            margin-inline: 2em;
+            box-shadow: 0px 5px 10px -5px var(--shadow-color);
+
+        }
+
+        .tests {
+            min-width: 15vw;
+            height: auto;
+            box-shadow: 0px 5px 10px -5px var(--shadow-color);
+
         }
 
 
-
-    }
-
-    .meds {
-        grid-area: meds;
+        .meds {}
     }
 
 }

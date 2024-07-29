@@ -7,7 +7,7 @@
                     <img :src="imgSrc" :alt="pet.name">
                     <h1> {{ pet.name }} </h1>
                 </div>
-                <RxList :meds="meds" class="meds" :shrink="true" />
+                <RxList :meds="meds" :class="{ 'meds': true, 'focus-meds': medsFocused }" :shrink="true" @click="focusMeds"/>
             </div>
 
             <Conversation :messages="messages" class="conversation" />
@@ -35,7 +35,9 @@
                 messages: [],
                 meds: [],
                 tests: [],
-                imgSrc: ''
+                imgSrc: '',
+                medsFocused: false,
+                
             }
         },
         components: {
@@ -61,14 +63,19 @@
             this.tests = TestService.getTests(this.pet.patientId);
             this.meds = RxService.getMeds(this.pet.patientId);
             this.imgSrc = PetService.imgSource(this.pet.patientId);
-        }
+        },
+        methods: {
+            focusMeds() {
+                this.medsFocused = true;
+            }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
 .profile {
     padding: 1em;
-    background-color: #F1F7FF;
+    background-color: var(--background-blue);
 
 
 
@@ -79,6 +86,7 @@
         .left {
             display: flex;
             flex-direction: column;
+            min-width: 20vw;
             .pet-info {
                 color: var(--dark-blue);
                 display: flex;
@@ -89,6 +97,8 @@
                 border-bottom-right-radius: 10px;
                 margin-bottom: 10px;
                 box-shadow: 0px 5px 10px -5px var(--shadow-color);
+                background: linear-gradient(to bottom, white 70%, var(--background-blue));
+                width: 20vw;
                 img {
                     height: 100px;
                     width: 100px;
@@ -109,7 +119,6 @@
             .meds {
                 flex-grow: 1;     
                 box-shadow: 0px 5px 10px -5px var(--shadow-color);
-       
             }
         }
 
@@ -121,15 +130,20 @@
         }
 
         .tests {
-            min-width: 15vw;
+            min-width: 20vw;
             height: auto;
             box-shadow: 0px 5px 10px -5px var(--shadow-color);
 
         }
 
 
-        .meds {}
     }
 
+}
+
+.focus-meds {
+    min-width: 40vw;
+    max-width: 40vw;
+    transition: ease-in-out 0.5s;
 }
 </style>

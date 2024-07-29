@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'test-container': true, 'shrink': shrink }">
+    <div :class="{ 'test-container': true, 'shrink': shrink, 'nav': true }">
         <TestCard v-for="test in tests" :key="test.id" :test="test" :class="{ 'shrink': shrink }"/>
     </div>
 </template>
@@ -41,5 +41,11 @@ export default {
 .test-container.shrink {
     width: 10vw;
     height: 100%;
+    min-width: 20vw;
+}
+
+.test-container.nav {
+    border-radius: 0px;
+    width: 12vw;
 }
 </style>

@@ -89,7 +89,6 @@ export default {
         align-items: center;
         cursor: pointer;
         border: 1px solid #ffffff;
-        border-radius: 5px;
 
         .request-refill {
             font-size: 1.2em;

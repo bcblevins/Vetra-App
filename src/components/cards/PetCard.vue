@@ -49,6 +49,7 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
+    margin-bottom: 30px;
     box-shadow: 0px 0px 10px 0px var(--shadow-color);
 
     .portrait {

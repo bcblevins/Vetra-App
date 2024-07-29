@@ -43,6 +43,9 @@ export default {
     flex-direction: column;
     background-image: var(--gradient-9);
     background-size: 200% 200%;
+    padding: 10px;
+
+    min-width: 20vw;
 
 
 
@@ -55,7 +58,8 @@ export default {
         flex-grow: 1;
         border-radius: .5em;
         margin: 5px;
-        background-color: #ffffff;
+        background: linear-gradient(to bottom, white , var(--background-blue));
+        box-shadow: 0px 5px 5px -5px var(--shadow-color);
 
         span {
             margin: auto;

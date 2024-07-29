@@ -1,6 +1,6 @@
 <template>
-    <div class="rx-list">
-        <RxItem v-for="med in meds" :key="med.id" :med="med" :class="{ 'shrink': shrink }"/>
+    <div class="rx-list" >
+        <RxItem v-for="med in meds" :key="med.id" :med="med" :class="{ 'shrink': shrink}"/>
     </div>
 </template>
 
@@ -17,7 +17,12 @@ import RxItem from '../items/RxItem.vue';
         },
         components: {
             RxItem
-        }
+        },
+        data() {
+            return {
+            }
+        },
+        
     }
 </script>
 
@@ -28,4 +33,6 @@ import RxItem from '../items/RxItem.vue';
         border-radius: .5em;
         overflow: scroll;
     }
+
+
 </style>

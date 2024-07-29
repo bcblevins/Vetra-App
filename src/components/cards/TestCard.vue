@@ -75,7 +75,6 @@ export default {
         font-size: var(--header-3);
         font-weight: 700;
         margin: 0px;
-        margin-bottom: .5em;
         display: inline;
         padding-right: .5em;
         padding-bottom: .2em;

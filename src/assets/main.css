@@ -39,6 +39,7 @@ a,
 html, body, #app {
   height: 100%;
   margin: 0;
+  color: var(--dark-blue);
 }
 
 * {
@@ -48,8 +49,9 @@ html, body, #app {
   --dark-blue: #094567;
   --header-1: 2rem;
   --header-2: 1.5rem;
-  --header-3: 1.1rem;
+  --header-3: 1rem;
   --shadow-color: rgb(78, 90, 114);
 
-  --standard-text: 1rem;
+  --standard-text: .8rem;
+  
 }

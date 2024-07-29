@@ -118,6 +118,9 @@ export default {
             .med-name {
                 font-size: var(--header-3);
                 border-right: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .med-quantity {

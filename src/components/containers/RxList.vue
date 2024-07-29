@@ -30,8 +30,9 @@ import RxItem from '../items/RxItem.vue';
     .rx-list {
         border: 3px solid #094567;
         border-block: 1px solid;
-        border-radius: .5em;
         overflow: scroll;
+        font-size: var(--standard-text);
+
     }
 
 

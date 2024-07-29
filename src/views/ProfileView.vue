@@ -7,12 +7,12 @@
                     <img :src="imgSrc" :alt="pet.name">
                     <h1> {{ pet.name }} </h1>
                 </div>
-                <RxList :meds="meds" :class="{ 'meds': true, 'focus-meds': medsFocused }" :shrink="true" @click="focusMeds"/>
+                <RxList :meds="meds" class="meds" :shrink="true" />
+                <TestList :tests="tests" class="tests" :shrink="true" />
             </div>
 
             <Conversation :messages="messages" class="conversation" />
 
-            <TestList :tests="tests" class="tests" :shrink="true" />
         </main>
 
 
@@ -36,7 +36,6 @@
                 meds: [],
                 tests: [],
                 imgSrc: '',
-                medsFocused: false,
                 
             }
         },
@@ -65,16 +64,14 @@
             this.imgSrc = PetService.imgSource(this.pet.patientId);
         },
         methods: {
-            focusMeds() {
-                this.medsFocused = true;
-            }
+
         },
     }
 </script>
 
 <style lang="scss" scoped>
 .profile {
-    padding: 1em;
+    padding-left: 0%;
     background-color: var(--background-blue);
 
 
@@ -86,19 +83,20 @@
         .left {
             display: flex;
             flex-direction: column;
-            min-width: 20vw;
+            align-items: center;
+            width: 16vw;
+            background-color: var(--off-white);
             .pet-info {
                 color: var(--dark-blue);
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                border-bottom: 1px solid var(--dark-blue);
-                border-right: 3px solid var(--dark-blue);
+
                 border-bottom-right-radius: 10px;
-                margin-bottom: 10px;
-                box-shadow: 0px 5px 10px -5px var(--shadow-color);
-                background: linear-gradient(to bottom, white 70%, var(--background-blue));
-                width: 20vw;
+                margin-bottom: 5vh;
+                width: 15vw;
+
                 img {
                     height: 100px;
                     width: 100px;
@@ -108,42 +106,49 @@
                 }
 
                 h1 {
-                    font-size: var(--header-2);
+                    font-size: var(--header-1);
                     font-weight: 700;
                     margin: 10px;
                     border-bottom: 2px solid var(--dark-blue);
+                    text-shadow: 0px 0px 2px  white;
                 }
 
             }   
 
             .meds {
-                flex-grow: 1;     
-                box-shadow: 0px 5px 10px -5px var(--shadow-color);
+                max-height: 20vh;
+                max-width: 15vw;
+                margin-bottom: 5vh;
+                border: none;
             }
+
+            .tests {
+                max-width: 10vw;
+                height: 40vh;
+                border: none;
+    
+            }
+        }
+
+        .left>h2 {
+            font-size: var(--header-2);
+            font-weight: 700;
+            margin: 10px;
         }
 
         .conversation {
             flex-grow: 1;
             margin-inline: 2em;
+            margin-block: 1em;
             box-shadow: 0px 5px 10px -5px var(--shadow-color);
 
         }
 
-        .tests {
-            min-width: 20vw;
-            height: auto;
-            box-shadow: 0px 5px 10px -5px var(--shadow-color);
 
-        }
 
 
     }
 
 }
 
-.focus-meds {
-    min-width: 40vw;
-    max-width: 40vw;
-    transition: ease-in-out 0.5s;
-}
 </style>

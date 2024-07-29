@@ -41,7 +41,7 @@ export default {
 .test-container.shrink {
     width: 10vw;
     height: 100%;
-    min-width: 20vw;
+    min-width: 15vw;
 }
 
 .test-container.nav {

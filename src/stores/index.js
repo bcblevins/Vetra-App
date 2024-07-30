@@ -3,6 +3,7 @@ import { createStore as _createStore } from 'vuex';
 export function createStore() {
   return _createStore({
     state: {
+      token: null,
       user: {
         username: "bblevins96",
         password: "$2a$10$o5y4WbVoawMUwZiTnQINJOAm6QJyOE3dD2KYIE1kkze7O0m6PzqA.",
@@ -38,11 +39,14 @@ export function createStore() {
       ]
     },
     mutations: {
-      SET_USER(user) {
-        this.state.user = user;
+      SET_USER(state, user) {
+        state.user = user;
       },
-      SET_PETS(pets) {
-        this.state.pets = pets;
+      SET_PETS(state, pets) {
+        state.pets = pets;
+      },
+      SET_TOKEN(state, token) {
+        state.token = token;
       }
     },
     // Strict should not be used in production code. It is used here as a

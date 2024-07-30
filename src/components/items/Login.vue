@@ -1,44 +1,61 @@
 <template>
     <div class="main">
         <img src="../../assets/VetRA-Logo.svg" alt="">
-        <form action="" @submit.prevent="login">
-            <input type="text" placeholder="username" class="username" v-model="username"/>
-            <input type="password" placeholder="password" class="password" v-model="password"/>
+        <form action="" @submit.prevent="login" v-show="!loading">
+            <input type="text" placeholder="username" class="username" v-model="username" name="username"/>
+            <input type="password" placeholder="password" class="password" v-model="password" name="password"/>
             <input type="submit" value="Login" class="login-btn">
             <span v-show="fail">Incorrect username or password</span>
         </form>
+        <div class="loading" v-show="loading">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
     </div>
 </template>
 
 <script>
 import UserService from '@/services/UserService.js';
 
-    export default {
-        data() {
-            return {
-                username: '',
-                password: '',
-            }
-        },
-        methods: {
-            login() {
-                console.log('login');
-                UserService.login(this.username, this.password)
-                    .then(() => {
-                        this.$router.push({ name: 'home' });
-                    })
-                    .catch(() => {
-                        this.fail = true;
-                    });
-            }
-        },
-    }
+export default {
+    data() {
+        return {
+            username: '',
+            password: '',
+            fail: false,
+            loading: false
+        }
+    },
+    methods: {
+        login() {
+            this.loading = true;
+            UserService.login(this.username, this.password)
+                .then((response) => {
+                    this.$store.commit("SET_TOKEN", response.data.accessToken.token);
+                    // this.$router.push({ name: 'home' });
+                    UserService.getUser(this.username, this.$store.state.token)
+                        .then((response) => {
+                            this.$store.commit('SET_USER', response.data);
+                            this.$router.push({ name: 'home' });
+                            })
+                        .catch(() => {
+                            this.fail = true;
+                        });
+                })
+                .catch(() => {
+                    this.fail = true;
+                });
+
+            this.loading = false;
+        }
+    },
+}
 </script>
 
 <style lang="scss" scoped>
+.main {
 
-.main{
-    
     img {
         width: 300px;
         height: 200px;
@@ -54,6 +71,46 @@ import UserService from '@/services/UserService.js';
         margin-top: 20px;
     }
 
+    .loading {
+        margin-top: 40px;
+
+        .dot {
+            display: inline-block;
+            height: 5px;
+            width: 5px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            margin: 4px;
+            animation: dot-bounce .8s infinite;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.4s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0s;
+        }
+
+        @keyframes dot-bounce {
+
+            0%,
+            20%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+        }
+    }
+
     input {
         margin: 10px;
         padding: 10px;
@@ -64,7 +121,7 @@ import UserService from '@/services/UserService.js';
     }
 
     .login-btn {
-        background: linear-gradient(  #0c5e8d , #094567 70%);
+        background: linear-gradient(#0c5e8d, #094567 70%);
         color: white;
         border: none;
         cursor: pointer;
@@ -83,6 +140,8 @@ import UserService from '@/services/UserService.js';
         padding: 10px;
         border-radius: 10px;
         margin-top: 10px;
-    };
+    }
+
+    ;
 }
 </style>

@@ -2,7 +2,10 @@
     <div class="header">
         <img src="../../assets/icons/message.svg" alt="Notifications">
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
-        <img src="../../assets/icons/message.svg" alt="User">
+        <div>
+            <span> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </span>
+            <img src="../../assets/icons/message.svg" alt="User">
+        </div>
     </div>
 </template>
 
@@ -26,6 +29,11 @@
 
     img {
         height: 100%;
+    }
+    span {
+        color: white;
+        font-size: var(--standard-text);
+        margin-right: 1em;
     }
 
     .logo:hover {

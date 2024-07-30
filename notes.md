@@ -20,4 +20,10 @@
   - [x] Tests
   - [ ] Notifications
   - [ ] User
+- Misc
+  - [ ] Server messages rework
+    - [x] sql
+    - [x] model
+    - [x] dao
+    - [x] controllers (message + user for names)
     

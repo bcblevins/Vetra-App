@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
 .header {
-    background-color: #094567;
+    background-color: #073b4d;
     height: 40px;
     display: flex;
     justify-content: space-between;

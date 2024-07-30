@@ -1,5 +1,5 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 import Header from './components/items/Header.vue';
 
 
@@ -7,6 +7,14 @@ export default {
   components: {
     Header
   },
+  computed: {
+    route() {
+      return useRoute()
+    },
+    showHeader() {
+      return this.route.name !== 'login'
+    }
+  }
 };
 
 
@@ -14,7 +22,7 @@ export default {
 
 <template>
   <div class="app">
-    <Header />
+    <Header v-show="showHeader"/>
     <RouterView class="router-view"/>
   </div>
 </template>

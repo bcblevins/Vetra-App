@@ -37,7 +37,14 @@ export function createStore() {
         }
       ]
     },
-    mutations: {},
+    mutations: {
+      SET_USER(user) {
+        this.state.user = user;
+      },
+      SET_PETS(pets) {
+        this.state.pets = pets;
+      }
+    },
     // Strict should not be used in production code. It is used here as a
     // learning aid to warn you if state is modified without using a mutation.
     strict: true

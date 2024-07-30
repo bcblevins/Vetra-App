@@ -1,18 +1,37 @@
 <template>
     <div class="main">
-        <img src="../../assets/VetRA-Logo-Background.svg" alt="">
-        <form action="">
-            <input type="text" placeholder="username" class="username"/>
-            <input type="text" placeholder="password" class="password"/>
+        <img src="../../assets/VetRA-Logo.svg" alt="">
+        <form action="" @submit.prevent="login">
+            <input type="text" placeholder="username" class="username" v-model="username"/>
+            <input type="password" placeholder="password" class="password" v-model="password"/>
             <input type="submit" value="Login" class="login-btn">
-
+            <span v-show="fail">Incorrect username or password</span>
         </form>
     </div>
 </template>
 
 <script>
+import UserService from '@/services/UserService.js';
+
     export default {
-        
+        data() {
+            return {
+                username: '',
+                password: '',
+            }
+        },
+        methods: {
+            login() {
+                console.log('login');
+                UserService.login(this.username, this.password)
+                    .then(() => {
+                        this.$router.push({ name: 'home' });
+                    })
+                    .catch(() => {
+                        this.fail = true;
+                    });
+            }
+        },
     }
 </script>
 
@@ -21,10 +40,11 @@
 .main{
     
     img {
-        width: 100px;
-        height: 100px;
+        width: 300px;
+        height: 200px;
         margin: 0 auto;
         display: block;
+        filter: drop-shadow(0px 5px 5px #072231);
     }
 
     form {
@@ -39,19 +59,30 @@
         padding: 10px;
         margin-block: 5px;
         width: 200px;
-        border-radius: 5px;
-        border: 1px solid #094567;
+        border-radius: 10px;
+        border: none;
     }
 
     .login-btn {
-        background-color: #094567;
+        background: linear-gradient(  #0c5e8d , #094567 70%);
         color: white;
         border: none;
         cursor: pointer;
+        box-shadow: 0px 5px 5px -3px #072231;
     }
 
     .login-btn:hover {
-        background-color: #0c5e8d;
+        background: none;
+        background-color: #2f7197;
     }
+
+    span {
+        color: white;
+        font-weight: 500;
+        background-color: rgb(240, 81, 81);
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+    };
 }
 </style>

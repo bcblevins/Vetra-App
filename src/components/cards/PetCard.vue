@@ -26,6 +26,11 @@
             },
 
         },
+        methods: {
+            openTest() {
+                
+            }
+        },
 
     };
 </script>
@@ -95,7 +100,7 @@
     }
 
     h2 {
-        background-color: #094567;
+        background-color: var(--dark-blue);
         color: white;
         text-align: center;
         font-weight: 700;

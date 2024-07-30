@@ -19,6 +19,9 @@ import PetService from '@/services/PetService';
     },
     created() {
       this.pets = this.$store.state.pets;
+    },
+    mounted() {
+      document.title = 'Home';
     }
   }
 </script>

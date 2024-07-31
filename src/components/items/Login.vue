@@ -39,22 +39,28 @@ export default {
             UserService.login(this.username, this.password)
                 .then((response) => {
                     this.$store.commit("SET_TOKEN", response.data.accessToken.token);
-
+                    localStorage.setItem('token', response.data.accessToken.token);
                     // Getting the user data from the server
                     UserService.getUser(this.username, this.$store.state.token)
                         .then((response) => {
                             this.$store.commit('SET_USER', response.data);
-                            this.$router.push({ name: 'home' });
-                            this.loading = false;
+                            setTimeout(() => {
+                                this.loading = false;
+                                this.$router.push({ name: 'home' });
+                            }, 1000);
                         })
                         .catch(() => {
-                            this.fail = true;
-                            this.loading = false;
+                            setTimeout(() => {
+                                this.loading = false;
+                                this.fail = true;
+                            }, 1000);
                         });
                 })
                 .catch(() => {
-                    this.fail = true;
-                    this.loading = false;
+                    setTimeout(() => {
+                        this.loading = false;
+                        this.fail = true;
+                    }, 1000);
                 });
 
         }

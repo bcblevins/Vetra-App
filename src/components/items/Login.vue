@@ -20,6 +20,7 @@
 <script>
 import UserService from '@/services/UserService.js';
 import PetService from '@/services/PetService';
+import LoginService from '@/services/LoginService';
 
 export default {
     data() {
@@ -32,36 +33,50 @@ export default {
     },
     methods: {
         login() {
-
-            //Posting the login data to the server
             this.loading = true;
             this.fail = false;
-            UserService.login(this.username, this.password)
-                .then((response) => {
-                    this.$store.commit("SET_TOKEN", response.data.accessToken.token);
-                    localStorage.setItem('token', response.data.accessToken.token);
-                    // Getting the user data from the server
-                    UserService.getUser(this.username, this.$store.state.token)
-                        .then((response) => {
-                            this.$store.commit('SET_USER', response.data);
-                            setTimeout(() => {
-                                this.loading = false;
-                                this.$router.push({ name: 'home' });
-                            }, 1000);
-                        })
-                        .catch(() => {
-                            setTimeout(() => {
-                                this.loading = false;
-                                this.fail = true;
-                            }, 1000);
-                        });
-                })
-                .catch(() => {
-                    setTimeout(() => {
-                        this.loading = false;
+            setTimeout(() => {
+                LoginService.login(this.username, this.password, true).then(loginResult => {
+                    if (!loginResult) {
                         this.fail = true;
-                    }, 1000);
-                });
+                        return;
+                    } else {
+                        console.log("Login successful");
+                        this.$router.push({ name: 'home' });
+                    }
+                })
+            }, 1000);
+
+
+            //Posting the login data to the server
+            //     this.loading = true;
+            //     this.fail = false;
+            //     UserService.login(this.username, this.password)
+            //         .then((response) => {
+            //             this.$store.commit("SET_TOKEN", response.data.accessToken.token);
+            //             localStorage.setItem('token', response.data.accessToken.token);
+            //             // Getting the user data from the server
+            //             UserService.getUser(this.username, this.$store.state.token)
+            //                 .then((response) => {
+            //                     this.$store.commit('SET_USER', response.data);
+            //                     setTimeout(() => {
+            //                         this.loading = false;
+            //                         this.$router.push({ name: 'home' });
+            //                     }, 1000);
+            //                 })
+            //                 .catch(() => {
+            //                     setTimeout(() => {
+            //                         this.loading = false;
+            //                         this.fail = true;
+            //                     }, 1000);
+            //                 });
+            //         })
+            //         .catch(() => {
+            //             setTimeout(() => {
+            //                 this.loading = false;
+            //                 this.fail = true;
+            //             }, 1000);
+            //         });
 
         }
     },

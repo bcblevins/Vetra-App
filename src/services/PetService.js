@@ -1,11 +1,11 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// const http = axios.create({
-//     baseURL: 'http://localhost:3000',
-// });
+const http = axios.create({
+     baseURL: 'http://localhost:8080',
+});
 
 export default {
-    list() {
+    getPetsTest(token) {
         return [
             {
                 patientId: "3",
@@ -32,6 +32,10 @@ export default {
                 ownerUsername: "bblevins96",
             }
         ];
+    },
+    getPets(token) {
+        http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        return http.get('/patients');
     },
     imgSource(id) {
         return '/src/assets/img/' + id + '.jpg'

@@ -8,7 +8,7 @@ import { createStore } from './stores'
 import App from './App.vue'
 import router from './router'
 
-const store = createStore();
+export const store = createStore();
 const app = createApp(App)
 
 app.use(createPinia())

@@ -14,7 +14,7 @@ export function createStore() {
       pets: [
         {
           patientId: "3",
-          name: "Arlo",
+          firstName: "Arlo",
           birthday: "01/01/2019",
           species: "Feline",
           sex: "CM",
@@ -22,7 +22,7 @@ export function createStore() {
         },
         {
           patientId: "1",
-          name: "Charlie",
+          firstName: "Charlie",
           birthday: "03/03/2015",
           species: "Canine",
           sex: "SF",
@@ -30,7 +30,7 @@ export function createStore() {
         },
         {
           patientId: "2",
-          name: "Sunny",
+          firstName: "Sunny",
           birthday: "01/01/2017",
           species: "Feline",
           sex: "CM",

@@ -4,8 +4,8 @@
         <main>
             <div class="left">
                 <div class="pet-info">
-                    <img :src="imgSrc" :alt="pet.name">
-                    <h1> {{ pet.name }} </h1>
+                    <img :src="imgSrc" :alt="pet.firstName">
+                    <h1> {{ pet.firstName }} </h1>
                 </div>
                 <RxList :meds="meds" class="meds" :shrink="true" />
                 <TestList :tests="tests" class="tests" :shrink="true" />
@@ -67,7 +67,7 @@ export default {
 
     },
     mounted() {
-        document.title = 'Profile | ' + this.pet.name;
+        document.title = 'Profile | ' + this.pet.firstName;
     }
 }
 </script>

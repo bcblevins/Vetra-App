@@ -1,12 +1,14 @@
 <template>
     <div class="main">
         <img src="../../assets/VetRA-Logo.svg" alt="">
+
         <form action="" @submit.prevent="login" v-show="!loading">
-            <input type="text" placeholder="username" class="username" v-model="username" name="username"/>
-            <input type="password" placeholder="password" class="password" v-model="password" name="password"/>
+            <input type="text" placeholder="username" class="username" v-model="username" name="username" />
+            <input type="password" placeholder="password" class="password" v-model="password" name="password" />
             <input type="submit" value="Login" class="login-btn">
             <span v-show="fail">Incorrect username or password</span>
         </form>
+
         <div class="loading" v-show="loading">
             <div class="dot"></div>
             <div class="dot"></div>
@@ -17,6 +19,7 @@
 
 <script>
 import UserService from '@/services/UserService.js';
+import PetService from '@/services/PetService';
 
 export default {
     data() {
@@ -29,25 +32,31 @@ export default {
     },
     methods: {
         login() {
+
+            //Posting the login data to the server
             this.loading = true;
+            this.fail = false;
             UserService.login(this.username, this.password)
                 .then((response) => {
                     this.$store.commit("SET_TOKEN", response.data.accessToken.token);
-                    // this.$router.push({ name: 'home' });
+
+                    // Getting the user data from the server
                     UserService.getUser(this.username, this.$store.state.token)
                         .then((response) => {
                             this.$store.commit('SET_USER', response.data);
                             this.$router.push({ name: 'home' });
-                            })
+                            this.loading = false;
+                        })
                         .catch(() => {
                             this.fail = true;
+                            this.loading = false;
                         });
                 })
                 .catch(() => {
                     this.fail = true;
+                    this.loading = false;
                 });
 
-            this.loading = false;
         }
     },
 }

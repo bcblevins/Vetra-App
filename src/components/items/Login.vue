@@ -36,15 +36,17 @@ export default {
             this.loading = true;
             this.fail = false;
             setTimeout(() => {
-                LoginService.login(this.username, this.password, true).then(loginResult => {
-                    if (!loginResult) {
-                        this.fail = true;
-                        return;
-                    } else {
-                        console.log("Login successful");
-                        this.$router.push({ name: 'home' });
-                    }
-                })
+                let loginResult = LoginService.login(this.username, this.password, true)
+                console.log("Login result: " + loginResult);
+                if (loginResult) {
+                    console.log("Login successful");
+                    this.$router.push({ name: 'home' });
+                } else {
+                    this.fail = true;
+                    this.loading = false;
+                    return;
+                }
+
             }, 1000);
 
 

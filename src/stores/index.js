@@ -36,6 +36,9 @@ export function createStore() {
           sex: "CM",
           ownerUsername: "bblevins96",
         }
+      ],
+      roles: [
+        "owner",
       ]
     },
     mutations: {
@@ -47,6 +50,9 @@ export function createStore() {
       },
       SET_TOKEN(state, token) {
         state.token = token;
+      },
+      SET_ROLES(state, roles) {
+        state.roles = roles;
       }
     },
     // Strict should not be used in production code. It is used here as a

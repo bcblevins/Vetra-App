@@ -76,9 +76,7 @@ export default {
 .profile {
     padding-left: 0%;
     background-color: var(--background-blue);
-
-
-
+    height: 90%;
     main {
         display: flex;
         justify-content: space-between;

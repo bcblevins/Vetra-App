@@ -32,22 +32,26 @@ export default {
         }
     },
     methods: {
-        login() {
+        async login() {
             this.loading = true;
             this.fail = false;
-            setTimeout(() => {
-                let loginResult = LoginService.login(this.username, this.password, true)
+            try {
+                const loginResult = await LoginService.login(this.username, this.password, true)
                 console.log("Login result: " + loginResult);
                 if (loginResult) {
                     console.log("Login successful");
                     this.$router.push({ name: 'home' });
                 } else {
                     this.fail = true;
-                    this.loading = false;
                     return;
                 }
+            } catch (error) {
+                console.log("Error: " + error);
+                this.fail = true;
+            } finally {
+                this.loading = false;
+            }
 
-            }, 1000);
 
 
             //Posting the login data to the server

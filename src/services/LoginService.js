@@ -31,7 +31,7 @@ export default {
       store.commit("SET_USER", userResponse.data);
       console.log("User committed to store");
 
-      const rolesResponse = await UserService.getRoles(username, token);
+      const rolesResponse = await UserService.getRoles(token);
       console.log("Roles response received: ", rolesResponse);
 
       if (!rolesResponse || !rolesResponse.data) {

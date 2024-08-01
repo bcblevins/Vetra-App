@@ -110,17 +110,23 @@ export default {
 .main.shrink {
     height: auto;
     .med-details {
+        padding-inline: 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         .med-title {
             border-bottom: none;
             span {
                 font-size: var(--standard-text);
             }
             .med-name {
-                font-size: var(--header-3);
+                font-size: var(--standard-text);
                 border-right: none;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                margin-right: 0px;
+                
             }
 
             .med-quantity {

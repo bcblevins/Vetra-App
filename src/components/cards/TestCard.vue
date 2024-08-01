@@ -72,7 +72,7 @@ export default {
     justify-content: start;
 
     h2 {
-        font-size: var(--header-3);
+        font-size: var(--standard-text);
         font-weight: 700;
         margin: 0px;
         display: inline;

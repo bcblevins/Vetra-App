@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div class="app">
-    <Header v-show="showHeader"/>
+    <Header v-show="showHeader" class="header"/>
     <RouterView class="router-view"/>
   </div>
 </template>
@@ -34,6 +34,10 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #BDECFC;
+
+  .header {
+    flex: 0 0 40px;
+  }
 }
 .router-view {
   flex: 1;

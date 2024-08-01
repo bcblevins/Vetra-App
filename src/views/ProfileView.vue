@@ -7,7 +7,9 @@
                     <img :src="imgSrc" :alt="pet.firstName">
                     <h1> {{ pet.firstName }} </h1>
                 </div>
+                <h2>Prescriptions</h2>
                 <RxList :meds="meds" class="meds" :shrink="true" />
+                <h2>Tests</h2>
                 <TestList :tests="tests" class="tests" :shrink="true" />
             </div>
 

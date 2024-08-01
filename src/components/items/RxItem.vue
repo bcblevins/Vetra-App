@@ -1,5 +1,8 @@
 <template>
     <div class="main">
+        <div class="med-refills">
+            <p class="request-refill">Refill</p>
+        </div>
         <div class="med-details">
             <div class="med-title">
                 <span class="med-name"> {{ med.name }} </span>
@@ -11,9 +14,7 @@
             <p class="med-instructions"> {{ med.instructions }} </p>
         </div>
 
-        <div class="med-refills">
-            <p class="request-refill">Refill</p>
-        </div>
+
     </div>
 </template>
 
@@ -38,17 +39,20 @@ export default {
 .main {
     color: #094567;
     display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid #094567;
+    justify-content: start;
     height: 6em;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--off-white);
+    margin-bottom: 10px;
+    box-shadow: 0px 5px 10px -5px;
+    border-radius: 10px;
+    
 
     .med-details {
         display: inline-block;
         padding: .7em;
 
         .med-title {
-            border-bottom: 1px solid #094567;
+            border-bottom: 1px solid var(--dark-blue);
             padding-bottom: .3em;
             .med-name {
                 font-size: 1.2em;
@@ -56,17 +60,17 @@ export default {
                 margin: 10px;
                 display: inline;
                 padding-right: .5em;
-                border-right: 1px solid #094567;
+                border-right: 1px solid var(--dark-blue);
             }
 
             .med-quantity {
-                border-right: 1px solid #094567;
+                border-right: 1px solid var(--dark-blue);
                 padding-right: 10px;
                 margin-right: 10px;
             }
 
             .med-refill-quantity {
-                color: #094567;
+                color: var(--dark-blue);
             }
         }
 
@@ -81,7 +85,7 @@ export default {
     .med-refills {
         display: inline-block;
         padding: 10px;
-        background-color: #094567;
+        background-color: var(--dark-blue);
         color: white;
         display: flex;
         flex-direction: column;
@@ -89,6 +93,7 @@ export default {
         align-items: center;
         cursor: pointer;
         border: 1px solid #ffffff;
+        border-radius: 10px;
 
         .request-refill {
             font-size: 1.2em;
@@ -101,7 +106,7 @@ export default {
         background-color: #01f7d6;
 
         .request-refill {
-            color: #094567;
+            color: var(--dark-blue);
         }
     }
 
@@ -109,11 +114,13 @@ export default {
 
 .main.shrink {
     height: auto;
+    
     .med-details {
         padding-inline: 0px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
         .med-title {
             border-bottom: none;
             span {

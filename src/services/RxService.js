@@ -5,7 +5,7 @@
 // });
 
 export default {
-    getMeds(id) {
+    getMeds(id, token) {
         return [
             {
                 "prescriptionId": "1",

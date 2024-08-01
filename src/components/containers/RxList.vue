@@ -28,8 +28,7 @@ import RxItem from '../items/RxItem.vue';
 
 <style lang="scss" scoped>
     .rx-list {
-        border: 3px solid #094567;
-        border-block: 1px solid;
+        border: none;
         overflow: scroll;
         font-size: var(--standard-text);
 

@@ -1,12 +1,12 @@
 <template>
     <div class="conversation">
-        <div class="messages">
+        <div class="messages" ref="messagesContainer">
             <MessageBubble v-for="message in sortedMessages" :key="message.id" :message="message" />
             <span v-show="noMessages">Send a message to start a conversation...</span>
         </div>
         <form class="send">
             <textarea class="box" placeholder="Type a message..." v-model="messageBody"></textarea>
-            <input type="submit" value="send" @click.prevent="sendMessage"  />
+            <input type="submit" value="send" @click.prevent="sendMessage" />
         </form>
     </div>
 </template>
@@ -19,14 +19,12 @@ export default {
     data() {
         return {
             message: {},
-            messageBody: ''
+            messageBody: '',
+            messages: []
         };
     },
-    props: { 
-        messages: { 
-            type: Array, 
-            required: true 
-        },
+    props: {
+
         patient: {
             type: Boolean
         },
@@ -35,7 +33,7 @@ export default {
         },
         medication: {
             type: Boolean
-        } 
+        }
     },
     components: {
         MessageBubble
@@ -59,19 +57,47 @@ export default {
                     timestamp: new Date(),
                     fromUsername: this.$store.state.user.username,
                     // TODO: Hardcoded! Bad!
-                    toUsername: "cakelly",
+                    toUsername: "cakelly4",
                     testId: null,
                     prescriptionId: null
                 }
 
                 // TODO: custom event to update messages from message service?
-                MessageService.sendMessage(this.message, this.$store.state.token);
-            }
+                MessageService.sendMessage(this.message, this.$store.state.token).then(response => {
+                    this.updateMessages();
+                    this.messageBody = '';
+                    this.scrollToBottom();
+                }).catch(error => {
+                    console.log(error);
+                });
             }
         },
-    
-
+        updateMessages() {
+            if (this.patient) {
+                MessageService.getMessagesByPatient(this.$route.params.id, this.$store.state.token).then(response => {
+                    this.messages = response.data;
+                    this.scrollToBottom();
+                });
+            }
+        },
+        scrollToBottom() {
+            const container = this.$refs.messagesContainer;
+            container.scrollTop = container.clientHeight;
+            console.log("scrollTop: ", container.scrollTop);
+            console.log("clientHeight: ", container.clientHeight);
+            console.log(container);
+        }
+    },
+    created() {
+        this.updateMessages();
+    },
+    updated() {
+        this.scrollToBottom();
+    }
 }
+
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -124,7 +150,9 @@ export default {
         input {
             margin-left: 10px;
             margin-bottom: auto;
-        };
+        }
+
+        ;
     }
 }
 </style>

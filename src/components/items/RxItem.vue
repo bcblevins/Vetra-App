@@ -50,6 +50,7 @@ export default {
     .med-details {
         display: inline-block;
         padding: .7em;
+        width: 100%;
 
         .med-title {
             border-bottom: 1px solid var(--dark-blue);
@@ -93,6 +94,7 @@ export default {
         align-items: center;
         cursor: pointer;
         border-radius: 10px;
+        box-shadow: 5px 0px 10px -5px var(--dark-blue);
 
         .request-refill {
             font-size: 1.2em;

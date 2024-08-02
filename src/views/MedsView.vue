@@ -2,7 +2,10 @@
     <div class="meds-view">
         <main>
             <h1>Prescriptions</h1>
-            <RxList :meds="meds" class="rx-list" />
+            <div class="rx-list">
+                <RxItem v-for="med in meds" :key="med.id" :med="med" />
+            </div>
+
         </main>
     </div>
 </template>
@@ -10,6 +13,7 @@
 <script>
 import RxList from '@/components/containers/RxList.vue';
 import RxService from '@/services/RxService';
+import RxItem from '@/components/items/RxItem.vue';
 export default {
     data() {
         return {
@@ -18,9 +22,12 @@ export default {
     },
     components: {
         RxList,
+        RxItem
     },
     created() {
-        this.meds = RxService.getMeds(this.$route.params.petId, this.$store.state.token)
+        RxService.getMeds(this.$route.params.petId, this.$store.state.token).then(response => {
+            this.meds = response.data;
+        });
     },
 }
 </script>
@@ -29,7 +36,7 @@ export default {
 .meds-view {
     display: flex;
     justify-content: center;
-    
+
 
     main {
         width: 60vw;
@@ -38,6 +45,7 @@ export default {
         align-items: center;
         justify-content: start;
         margin-top: 80px;
+
         img {
             height: var(--header-1);
         }
@@ -51,6 +59,13 @@ export default {
             border-radius: 20px;
             background-color: var(--off-white);
             border-inline: 3px solid var(--dark-blue);
+        }
+
+        .rx-list {
+            border: none;
+            overflow: scroll;
+            font-size: var(--standard-text);
+
         }
     }
 }

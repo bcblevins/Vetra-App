@@ -17,7 +17,7 @@
                 <TestList :tests="tests" class="tests" :shrink="true" />
             </div>
 
-            <Conversation :messages="messages" class="conversation" :patient="true"/>
+            <Conversation class="conversation" :patient="true"/>
 
         </main>
 
@@ -29,7 +29,6 @@
 import TestList from '@/components/containers/TestList.vue';
 import RxList from '@/components/containers/RxList.vue';
 import Conversation from '@/components/containers/Conversation.vue';
-import MessageService from '@/services/MessageService';
 import TestService from '@/services/TestService';
 import RxService from '@/services/RxService';
 import PetService from '@/services/PetService';
@@ -38,7 +37,6 @@ export default {
     data() {
         return {
             pet: {},
-            messages: [],
             meds: [],
             tests: [],
             imgSrc: '',
@@ -64,11 +62,10 @@ export default {
     },
     created() {
         this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
-        MessageService.getMessagesByPatient(this.pet.patientId, this.$store.state.token).then(response => {
-            this.messages = response.data;
-        })
         this.tests = TestService.getTests(this.pet.patientId);
-        this.meds = RxService.getMeds(this.pet.patientId);
+        RxService.getMeds(this.pet.patientId, this.$store.state.token).then(response => {
+            this.meds = response.data;
+        });
         this.imgSrc = PetService.imgSource(this.pet.patientId);
     },
     methods: {

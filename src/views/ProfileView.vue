@@ -7,8 +7,14 @@
                     <img :src="imgSrc" :alt="pet.firstName">
                     <h1> {{ pet.firstName }} </h1>
                 </div>
-                <h2>Prescriptions</h2>
-                <RxList :meds="meds" class="meds" :shrink="true" />
+                <div class="meds">
+                    <h2>Prescriptions</h2>
+                    <ul class="meds-list">
+                        <li v-for="med in meds" key="med.prescriptionId" > {{ med.name }} </li>
+                    </ul>
+                    <!-- <RxList :meds="meds" class="meds-list" :shrink="true" /> -->
+                </div>
+
                 <h2>Tests</h2>
                 <TestList :tests="tests" class="tests" :shrink="true" />
             </div>
@@ -122,11 +128,32 @@ export default {
 
             }
 
+
             .meds {
-                max-height: 20vh;
-                max-width: 15vw;
-                margin-bottom: 5vh;
-                border: none;
+                padding: 5px;
+                border-radius: 10px;
+                h2 {
+                    margin-top: 0px;
+                }
+                .meds-list {
+                    max-height: 20vh;
+                    max-width: 15vw;
+                    margin-bottom: 0px;
+                    padding-left: 15px;
+                    list-style: none;
+                    li::before {
+                        content: '';
+                        display: inline-block;
+                        height: y;
+                        width: x;
+                        background-image: url('../assets/icon/pill.svg');
+                      }
+
+                }
+            }
+
+            .meds:hover {
+                box-shadow: 0px 0px 10px var(--shadow-color);
             }
 
             .tests {

@@ -11,12 +11,23 @@ export default {
     console.log("Starting login: ", username, password, rememberMe);
 
     try {
-      const loginResponse = await http.post("/auth/login", { username, password });
+      // Login, get token, store token /////////////////////
+      const loginResponse = await http.post("/auth/login", {
+        username,
+        password,
+      });
       console.log("Login response received: ", loginResponse);
 
       const token = loginResponse.data.accessToken.token;
       console.log("Token received: ", token);
 
+      if (rememberMe) {
+        store.commit("SET_TOKEN", token);
+        console.log("Token committed to store");
+        localStorage.setItem("token", token);
+      }
+
+      // Get user, store user ///////////////////////////////
       const userResponse = await UserService.getUser(username, token);
       console.log("User response received: ", userResponse);
 
@@ -25,12 +36,10 @@ export default {
         throw new Error("Invalid user response");
       }
 
-      store.commit("SET_TOKEN", token);
-      console.log("Token committed to store");
-
       store.commit("SET_USER", userResponse.data);
       console.log("User committed to store");
 
+      // Get roles, store roles /////////////////////////////
       const rolesResponse = await UserService.getRoles(token);
       console.log("Roles response received: ", rolesResponse);
 
@@ -42,11 +51,17 @@ export default {
       store.commit("SET_ROLES", rolesResponse.data);
       console.log("Roles committed to store");
 
-      const tokenSuccess = !!token;
-      const userSuccess = !!userResponse.data;
-      const rolesSuccess = !!rolesResponse.data;
+      // Final success states ///////////////////////////////
+      const tokenSuccess = token !== null;
+      const userSuccess = userResponse.data !== null;
+      const rolesSuccess = rolesResponse.data !== null;
 
-      console.log("Final success states: ", tokenSuccess, userSuccess, rolesSuccess);
+      console.log(
+        "Final success states: ",
+        "Token received: ", tokenSuccess,
+        "User Received: ",  userSuccess,
+        "Roles received",  rolesSuccess
+      );
 
       return tokenSuccess && userSuccess && rolesSuccess;
     } catch (error) {

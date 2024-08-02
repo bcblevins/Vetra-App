@@ -37,6 +37,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),
+    },
+    {
+      path: '/pet/:petId/prescriptions',
+      name: 'rx',
+      component: () => import('../views/MedsView.vue')
     }
   ]
 })

@@ -9,15 +9,15 @@
 
         <div class="icon-container">
             <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({ name: 'messages', params: { petId: pet.id } })">
-            <img src="../../assets/icons/results.svg" alt="Results" class="icon results" @click="$router.push({ name: 'tests', params: { petId: pet.id, testId: '0' } })">
-            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'medications', params: { petId: pet.id } })">
+            <img src="../../assets/icons/results.svg" alt="Results" class="icon results" @click="openTest(pet.patientId)">
+            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'rx', params: { petId: pet.patientId } })">
         </div>
 
     </div>
 </template>
 
 <script>
-    
+    import TestService from '@/services/TestService';
     export default {
         props: ['pet'],
         computed: {
@@ -27,9 +27,11 @@
 
         },
         methods: {
-            openTest() {
-                
-            }
+            openTest(id) {
+                let tests = TestService.getTests()
+                console.log(id, tests[0].id)
+                this.$router.push({ name: 'tests', params: { petId: id, testId: tests[0].id } })
+            },
         },
 
     };

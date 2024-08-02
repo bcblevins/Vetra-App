@@ -5,16 +5,38 @@
             <span v-show="noMessages">Send a message to start a conversation...</span>
         </div>
         <form class="send">
-            <textarea class="box" placeholder="Type a message..."></textarea>
-            <input type="submit" value="send" @click.prevent="">
+            <textarea class="box" placeholder="Type a message..." v-model="messageBody"></textarea>
+            <input type="submit" value="send" @click.prevent="sendMessage"  />
         </form>
     </div>
 </template>
 
 <script>
 import MessageBubble from '../items/MessageBubble.vue';
+import MessageService from '@/services/MessageService';
+
 export default {
-    props: ['messages'],
+    data() {
+        return {
+            message: {},
+            messageBody: ''
+        };
+    },
+    props: { 
+        messages: { 
+            type: Array, 
+            required: true 
+        },
+        patient: {
+            type: Boolean
+        },
+        test: {
+            type: Boolean
+        },
+        medication: {
+            type: Boolean
+        } 
+    },
     components: {
         MessageBubble
     },
@@ -27,7 +49,28 @@ export default {
         noMessages() {
             return this.messages.length === 0;
         }
-    }
+    },
+    methods: {
+        sendMessage() {
+            if (this.patient) {
+                this.message = {
+                    body: this.messageBody,
+                    patientId: this.$route.params.id,
+                    timestamp: new Date(),
+                    fromUsername: this.$store.state.user.username,
+                    // TODO: Hardcoded! Bad!
+                    toUsername: "cakelly",
+                    testId: null,
+                    prescriptionId: null
+                }
+
+                // TODO: custom event to update messages from message service?
+                MessageService.sendMessage(this.message, this.$store.state.token);
+            }
+            }
+        },
+    
+
 }
 </script>
 

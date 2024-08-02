@@ -17,7 +17,7 @@
                 <TestList :tests="tests" class="tests" :shrink="true" />
             </div>
 
-            <Conversation :messages="messages" class="conversation" />
+            <Conversation :messages="messages" class="conversation" :patient="true"/>
 
         </main>
 

@@ -7,14 +7,12 @@
                     <img :src="imgSrc" :alt="pet.firstName">
                     <h1> {{ pet.firstName }} </h1>
                 </div>
-                <div class="meds">
+                <div class="meds" @click="$router.push({ name: 'rx', params: { petId: pet.patientId } })">
                     <h2>Prescriptions</h2>
                     <ul class="meds-list">
-                        <li v-for="med in meds" key="med.prescriptionId" > {{ med.name }} </li>
+                        <li v-for="med in meds" key="med.prescriptionId"> {{ med.name }} </li>
                     </ul>
-                    <!-- <RxList :meds="meds" class="meds-list" :shrink="true" /> -->
                 </div>
-
                 <h2>Tests</h2>
                 <TestList :tests="tests" class="tests" :shrink="true" />
             </div>
@@ -66,7 +64,9 @@ export default {
     },
     created() {
         this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
-        this.messages = MessageService.getMessages(this.pet.patientId);
+        MessageService.getMessagesByPatient(this.pet.patientId, this.$store.state.token).then(response => {
+            this.messages = response.data;
+        })
         this.tests = TestService.getTests(this.pet.patientId);
         this.meds = RxService.getMeds(this.pet.patientId);
         this.imgSrc = PetService.imgSource(this.pet.patientId);
@@ -85,6 +85,7 @@ export default {
     padding-left: 0%;
     background-color: var(--background-blue);
     height: 90%;
+
     main {
         display: flex;
         justify-content: space-between;
@@ -106,15 +107,27 @@ export default {
                 justify-content: center;
                 align-items: center;
 
+                border-bottom: 3px solid var(--dark-blue);
+                border-inline: 2px solid var(--dark-blue);
+
+                border-top-left-radius: calc(120px / 2);
+                border-top-right-radius: calc(120px / 2);
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+
                 border-bottom-right-radius: 10px;
                 margin-bottom: 5vh;
-                width: 15vw;
+                margin-top: 10px;
+                width: 120px;
+
+                box-shadow: 0px 5px 5px -5px var(--dark-blue);
 
                 img {
-                    height: 100px;
-                    width: 100px;
+                    height: 120px;
+                    width: 120px;
                     object-fit: cover;
-                    margin: 10px;
+                    margin: 0px;
+                    margin-top: -4px;
                     border-radius: 100%;
                 }
 
@@ -132,28 +145,41 @@ export default {
             .meds {
                 padding: 5px;
                 border-radius: 10px;
+                transition: .1s ease;
+
                 h2 {
                     margin-top: 0px;
                 }
+
                 .meds-list {
                     max-height: 20vh;
                     max-width: 15vw;
                     margin-bottom: 0px;
                     padding-left: 15px;
                     list-style: none;
+
                     li::before {
                         content: '';
                         display: inline-block;
                         height: y;
                         width: x;
                         background-image: url('../assets/icon/pill.svg');
-                      }
+                    }
 
                 }
             }
 
             .meds:hover {
                 box-shadow: 0px 0px 10px var(--shadow-color);
+                background-color: white;
+                cursor: pointer;
+                h2 {
+                    border-bottom: 2px solid var(--dark-blue);
+                    margin-bottom: 18px;
+
+                }
+
+
             }
 
             .tests {
@@ -183,5 +209,4 @@ export default {
 
     }
 
-}
-</style>
+}</style>

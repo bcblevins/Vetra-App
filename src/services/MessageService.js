@@ -1,11 +1,10 @@
-// import axios from 'axios';
-
-// const http = axios.create({
-//     baseURL: 'http://localhost:3000',
-// });
+import axios from 'axios';
+const http = axios.create({
+    baseURL: 'http://localhost:8080',
+});
 
 export default {
-    getMessages(id) {
+    getMessagesTest(id) {
         return [
             {
                 "id": 1,
@@ -37,5 +36,11 @@ export default {
                 "body": "She's doing well, thank you for asking."
             }
         ];
+    },
+    getMessagesByPatient(id, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+            let response = http.get(`/patients/${id}/messages`);
+            return response;
     }
 }

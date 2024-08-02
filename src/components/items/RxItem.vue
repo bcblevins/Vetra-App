@@ -92,7 +92,6 @@ export default {
         justify-content: space-around;
         align-items: center;
         cursor: pointer;
-        border: 1px solid #ffffff;
         border-radius: 10px;
 
         .request-refill {

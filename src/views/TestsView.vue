@@ -5,7 +5,7 @@
         </nav>
         <main>
             <TestItem :test="test" class="test-item"/>
-            <Conversation :messages="[]" class="conversation"/>
+            <Conversation :messages="messages" class="conversation"/>
         </main>
     </div>
 </template>
@@ -15,6 +15,7 @@ import TestList from '@/components/containers/TestList.vue';
 import TestService from '@/services/TestService';
 import TestItem from '@/components/items/TestItem.vue';
 import Conversation from '@/components/containers/Conversation.vue';
+import MessageService from '@/services/MessageService';
 
 export default {
     components: {
@@ -25,6 +26,7 @@ export default {
     data() {
         return {
             tests: [],
+            messages: []
         }
     },
     created() {

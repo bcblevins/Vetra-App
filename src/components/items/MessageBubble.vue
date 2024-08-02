@@ -1,7 +1,7 @@
 <template>
     <div :class="{'from': isFrom(), 'to': !isFrom(), 'message-bubble': true }">
-        <span class="username" v-show="!isFrom()"> {{ message.fromUsername }} </span>
-        <span>
+        <span class="username" v-show="!isFrom()"> {{ name }} </span>
+        <span class="body">
             {{ message.body }}
         </span>
         <span class="timestamp"> {{ formatDate(message.timestamp) }} </span>
@@ -9,11 +9,12 @@
 </template>
 
 <script>
+import UserService from '@/services/UserService';
 export default {
     props: ['message'],
     data() {
         return {
-
+            name: ''
         }
     },
     methods: {
@@ -32,6 +33,12 @@ export default {
             return this.message.fromUsername === this.$store.state.user.username;
         }
     },
+    created() {
+        UserService.getName(this.message.fromUsername, this.$store.state.token).then(response => {
+                this.name = response.data;
+                console.log(this.name);
+            })
+    }
 }
 </script>
 
@@ -43,16 +50,18 @@ export default {
     min-width: 4em;
     width: auto;
     max-width: 80%;
-    min-height: 2em;
     background-color: var(--bubble-color);
     color: #000;
     border-radius: 1em;
     padding: .7em;
     padding-inline: 1.2em;
-    border: 1px solid #b6b6b6;
-    box-shadow: 0px 5px 5px -5px var(--shadow-color);
     position: relative;
-    margin-block: 1em;
+    margin-block: 2em;
+
+    .body {
+        font-size: 1em;
+        margin: 0px;
+    }
 
     .timestamp {
         font-size: .7em;

@@ -8,7 +8,7 @@
         <h2>{{pet.firstName}}</h2>
 
         <div class="icon-container">
-            <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({ name: 'messages', params: { petId: pet.id } })">
+            <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({name: 'profile', params: { id: pet.patientId } })">
             <img src="../../assets/icons/results.svg" alt="Results" class="icon results" @click="openTest(pet.patientId)">
             <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'rx', params: { petId: pet.patientId } })">
         </div>

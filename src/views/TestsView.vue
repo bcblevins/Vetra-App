@@ -5,7 +5,7 @@
         </nav>
         <main>
             <TestItem :test="test" class="test-item"/>
-            <Conversation :messages="messages" class="conversation"/>
+            <Conversation :test="true" class="conversation"/>
         </main>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
 .test-view {
     display: flex;
     nav {
-        height: 100%;
+        height: calc(100% - 2px);
     }
     main {
         padding: 20px;
@@ -52,7 +52,9 @@ export default {
         flex-direction: column;
         justify-content: start;
         align-items: center;
+        height: calc(100vh - var(--header-total-height) - 40px);
         width: 100%;
+        overflow: scroll;
 
         .test-item {
             width: 50vw;
@@ -61,7 +63,7 @@ export default {
 
         .conversation {
             width: 60vw;
-            min-height: 30vh;
+            min-height: 30em;
             border-radius: 0%;
         }
     }

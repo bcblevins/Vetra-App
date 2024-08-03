@@ -10,7 +10,7 @@
         <div class="icon-container">
             <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({name: 'profile', params: { id: pet.patientId } })">
             <img src="../../assets/icons/results.svg" alt="Results" class="icon results" @click="openTest(pet.patientId)">
-            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'rx', params: { petId: pet.patientId } })">
+            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
         </div>
 
     </div>
@@ -30,7 +30,7 @@
             openTest(id) {
                 let tests = TestService.getTests()
                 console.log(id, tests[0].id)
-                this.$router.push({ name: 'tests', params: { petId: id, testId: tests[0].id } })
+                this.$router.push({ name: 'tests', params: { id: id, testId: tests[0].id } })
             },
         },
 

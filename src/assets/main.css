@@ -53,5 +53,9 @@ html, body, #app {
   --shadow-color: rgb(78, 90, 114);
 
   --standard-text: .8rem;
+  --header-height: 40px;
+  --header-padding: 10px;
+
+  --header-total-height: calc(var(--header-height) + var(--header-padding) + var(--header-padding));
   
 }

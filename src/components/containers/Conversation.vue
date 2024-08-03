@@ -50,8 +50,7 @@ export default {
     },
     methods: {
         sendMessage() {
-            if (this.patient) {
-                this.message = {
+            this.message = {
                     body: this.messageBody,
                     patientId: this.$route.params.id,
                     timestamp: new Date(),
@@ -61,20 +60,25 @@ export default {
                     testId: null,
                     prescriptionId: null
                 }
-
-                // TODO: custom event to update messages from message service?
-                MessageService.sendMessage(this.message, this.$store.state.token).then(response => {
+            if (this.test) {
+                this.message.testId = this.$route.params.testId;
+            }
+            MessageService.sendMessage(this.message, this.$store.state.token).then(response => {
                     this.updateMessages();
                     this.messageBody = '';
                     this.scrollToBottom();
                 }).catch(error => {
                     console.log(error);
                 });
-            }
         },
         updateMessages() {
             if (this.patient) {
                 MessageService.getMessagesByPatient(this.$route.params.id, this.$store.state.token).then(response => {
+                    this.messages = response.data;
+                    this.scrollToBottom();
+                });
+            } else if (this.test) {
+                MessageService.getMessagesByTest(this.$route.params.id, this.$route.params.testId, this.$store.state.token).then(response => {
                     this.messages = response.data;
                     this.scrollToBottom();
                 });
@@ -93,6 +97,11 @@ export default {
     },
     updated() {
         this.scrollToBottom();
+    },
+    watch: {
+        $route(to, from) {
+            this.updateMessages();
+        }
     }
 }
 
@@ -107,13 +116,13 @@ export default {
 
     border-radius: .5em;
 
-    overflow: scroll;
     display: flex;
     flex-direction: column;
     background-image: var(--gradient-9);
     background-size: 200% 200%;
 
     min-width: 20vw;
+    min-height: 12em;
 
     .messages {
         display: flex;

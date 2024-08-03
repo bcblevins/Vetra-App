@@ -25,7 +25,7 @@ export default {
         RxItem
     },
     created() {
-        RxService.getMeds(this.$route.params.petId, this.$store.state.token).then(response => {
+        RxService.getMeds(this.$route.params.id, this.$store.state.token).then(response => {
             this.meds = response.data;
         });
     },

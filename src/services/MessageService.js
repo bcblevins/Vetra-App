@@ -38,7 +38,13 @@ export default {
   },
   getMessagesByPatient(id, token) {
     http.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    console.log(http.getUri)
     let response = http.get(`/patients/${id}/messages`);
+    return response;
+  },
+  getMessagesByTest(petId, testId, token) {
+    http.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    let response = http.get(`/patients/${petId}/tests/${testId}/messages`);
     return response;
   },
   sendMessage(message, token) {

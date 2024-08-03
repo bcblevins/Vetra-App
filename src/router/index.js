@@ -19,7 +19,7 @@ const router = createRouter({
       component: () => import('../views/ProfileView.vue')
     },
     {
-      path: '/pet/:petId/tests/:testId',
+      path: '/pet/:id/tests/:testId',
       name: 'tests',
       component: () => import('../views/TestsView.vue')
     },
@@ -39,7 +39,7 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue'),
     },
     {
-      path: '/pet/:petId/prescriptions',
+      path: '/pet/:id/prescriptions',
       name: 'rx',
       component: () => import('../views/MedsView.vue')
     }

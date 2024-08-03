@@ -22,8 +22,8 @@ export default {
 <style lang="scss" scoped>
 .header {
     background-color: #073b4d;
-    height: 40px;
-    padding: .5em;
+    height: var(--header-height);
+    padding: var(--header-padding);
 
     img {
         height: 100%;

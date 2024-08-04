@@ -1,44 +1,52 @@
 <template>
     <div class="main">
-        <div class="portrait" @click="$router.push({name: 'profile', params: { id: pet.patientId } })">
+        <div class="portrait" @click="$router.push({ name: 'profile', params: { id: pet.patientId } })">
             <img :src="imgSrc" :alt="pet.firstName" height="200px">
-            <span>How's {{pet.firstName}} doing?</span>
+            <span>How's {{ pet.firstName }} doing?</span>
         </div>
 
-        <h2>{{pet.firstName}}</h2>
+        <h2>{{ pet.firstName }}</h2>
 
         <div class="icon-container">
-            <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages" @click="$router.push({name: 'profile', params: { id: pet.patientId } })">
-            <img src="../../assets/icons/results.svg" alt="Results" class="icon results" @click="openTest(pet.patientId)">
-            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds" @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
+            <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages"
+                @click="$router.push({ name: 'profile', params: { id: pet.patientId } })">
+            <img src="../../assets/icons/results.svg" alt="Results" class="icon results"
+                @click="openTest(pet.patientId)">
+            <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds"
+                @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
         </div>
 
     </div>
 </template>
 
 <script>
-    import TestService from '@/services/TestService';
-    export default {
-        props: ['pet'],
-        computed: {
-            imgSrc() {
-                return '/src/assets/img/' + this.pet.patientId + '.jpg'
-            },
-
+import TestService from '@/services/TestService';
+export default {
+    props: ['pet'],
+    computed: {
+        imgSrc() {
+            return '/src/assets/img/' + this.pet.patientId + '.jpg'
         },
-        methods: {
-            openTest(id) {
-                let tests = TestService.getTests()
+
+    },
+    methods: {
+        openTest(id) {
+            let tests
+            TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
+                tests = response.data;
                 console.log(id, tests[0].id)
                 this.$router.push({ name: 'tests', params: { id: id, testId: tests[0].id } })
-            },
-        },
+            }).catch(error => {
+                console.log(error);
+            });
 
-    };
+        },
+    },
+
+};
 </script>
 
 <style scoped>
-
 .main {
     position: relative;
     --card-width: 200px;

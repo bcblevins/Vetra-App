@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import RxList from '@/components/containers/RxList.vue';
 import RxService from '@/services/RxService';
 import RxItem from '@/components/items/RxItem.vue';
 export default {
@@ -21,12 +20,28 @@ export default {
         }
     },
     components: {
-        RxList,
         RxItem
     },
     created() {
         RxService.getMeds(this.$route.params.id, this.$store.state.token).then(response => {
             this.meds = response.data;
+            for (let med of this.meds) {
+                RxService.getRefillRequests(this.$route.params.id, med.prescriptionId, this.$store.state.token).then(response => {
+                    if (response.data.length > 0) {
+                        let array = response.data;
+                        console.log(array);
+                        array.sort((a, b) => {
+                            return new Date(b.requestId) - new Date(a.requestId);
+                        });
+                        console.log(array);
+                        if (array[0].status === 'PENDING') {
+                            med.refillPending = true;
+                        }
+                    } else {
+                        med.refillPending = false;
+                    }
+                });
+            }
         });
     },
 }

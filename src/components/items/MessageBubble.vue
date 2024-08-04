@@ -36,7 +36,6 @@ export default {
     created() {
         UserService.getName(this.message.fromUsername, this.$store.state.token).then(response => {
                 this.name = response.data;
-                console.log(this.name);
             })
     }
 }

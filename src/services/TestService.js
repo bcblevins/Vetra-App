@@ -1,8 +1,8 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// const http = axios.create({
-//     baseURL: 'http://localhost:3000',
-// });
+const http = axios.create({
+    baseURL: 'http://localhost:8080',
+});
 
 let Tests = [
     {
@@ -125,10 +125,15 @@ let Tests = [
 ];
 
 export default {
-    getTests(patientId) {
-        return Tests;
-    },
     getTest(id) {
         return Tests.find(test => test.id == id);
+    },
+    getTests(id, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return http.get(`/patients/${id}/tests`);
+    },
+    getResults(id, petId, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return http.get(`/patients/${petId}/tests/${id}/results`);
     }
 }

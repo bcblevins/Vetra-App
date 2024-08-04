@@ -1,6 +1,6 @@
 <template>
   <div class="pet-cards">
-    <PetCard v-for="pet in pets" :key="pet.id" :pet="pet"/>
+    <PetCard v-for="pet in pets" :key="pet.patientId" :pet="pet"/>
   </div>
 </template>
 

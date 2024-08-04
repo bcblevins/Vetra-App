@@ -2,12 +2,12 @@
     <div class="profile">
 
         <main>
-            <div class="left">
+            <nav class="left">
                 <div class="pet-info">
                     <img :src="imgSrc" :alt="pet.firstName">
                     <h1> {{ pet.firstName }} </h1>
                 </div>
-                <div class="meds" @click="$router.push({ name: 'rx', params: { petId: pet.patientId } })">
+                <div class="meds" @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
                     <h2>Prescriptions</h2>
                     <ul class="meds-list">
                         <li v-for="med in meds" key="med.prescriptionId"> {{ med.name }} </li>
@@ -15,7 +15,7 @@
                 </div>
                 <h2>Tests</h2>
                 <TestList :tests="tests" class="tests" :shrink="true" />
-            </div>
+            </nav>
 
             <Conversation class="conversation" :patient="true"/>
 
@@ -62,7 +62,9 @@ export default {
     },
     created() {
         this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
-        this.tests = TestService.getTests(this.pet.patientId);
+        TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
+            this.tests = response.data;
+        });
         RxService.getMeds(this.pet.patientId, this.$store.state.token).then(response => {
             this.meds = response.data;
         });
@@ -99,6 +101,7 @@ export default {
 
             .pet-info {
                 color: var(--dark-blue);
+                background-color: white;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

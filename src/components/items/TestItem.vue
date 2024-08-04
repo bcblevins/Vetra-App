@@ -51,8 +51,7 @@ export default {
     },
     methods: {
         abnormal(result) {
-            console.log(result.resultValue, result.rangeLow, result.rangeHigh);
-            console.log(+result.resultValue < +result.rangeLow || +result.resultValue > +result.rangeHigh);
+            // "+" is used to convert strings to numbers
             return +result.resultValue < +result.rangeLow || +result.resultValue > +result.rangeHigh;
         }
     },

@@ -23,7 +23,7 @@ export default {
 
     methods: {
         goToTest(test) {
-            this.$router.push({ name: 'tests', params: { petId: test.patientID, testId: test.id } });
+            this.$router.push({ name: 'tests', params: { id: test.patientID, testId: test.id } });
         }
     }
 }
@@ -35,7 +35,8 @@ export default {
     border-block: 1px solid;
     border-radius: .5em;
     overflow: scroll;
-    background-color: #F1F7FF;
+    background: linear-gradient(to bottom, #ffffff 95%, var(--shadow-color) 110%);  
+    height: 100%;
 }
 
 .test-container.shrink {

@@ -38,7 +38,6 @@ export default {
   },
   getMessagesByPatient(id, token) {
     http.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    console.log(http.getUri)
     let response = http.get(`/patients/${id}/messages`);
     return response;
   },

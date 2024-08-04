@@ -87,9 +87,7 @@ export default {
         scrollToBottom() {
             const container = this.$refs.messagesContainer;
             container.scrollTop = container.clientHeight;
-            console.log("scrollTop: ", container.scrollTop);
-            console.log("clientHeight: ", container.clientHeight);
-            console.log(container);
+
         }
     },
     created() {

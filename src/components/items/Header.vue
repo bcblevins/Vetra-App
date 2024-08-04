@@ -1,10 +1,10 @@
 <template>
     <div class="header">
-        <img src="../../assets/icons/message.svg" alt="Notifications" class="notifications">
+        <img src="../../assets/icons/notification.svg" alt="Notifications" class="notifications">
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
 
         <span> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </span>
-        <img src="../../assets/icons/message.svg" alt="User" class="user">
+        <img src="../../assets/icons/user.svg" alt="User" class="user">
 
     </div>
 </template>

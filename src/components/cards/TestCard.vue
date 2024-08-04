@@ -27,7 +27,7 @@ export default {
     },        
     methods: {
         goToTest() {
-            this.$router.push({ name: 'tests', params: { petId: this.test.patientID, testId: this.test.id } })
+            this.$router.push({ name: 'tests', params: { id: this.test.patientID, testId: this.test.id } })
         }
     }
 }
@@ -40,7 +40,6 @@ export default {
     color: #094567;
     padding-top: 10px;
     padding-left: 10px;
-    background-color: rgb(255, 255, 255);
 
     h2 {
         font-size: 1.5em;

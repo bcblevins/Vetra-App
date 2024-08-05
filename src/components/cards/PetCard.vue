@@ -1,11 +1,11 @@
 <template>
     <div class="main">
         <div class="portrait" @click="$router.push({ name: 'profile', params: { id: pet.patientId } })">
-            <img :src="imgSrc" :alt="pet.firstName" height="200px">
-            <span>How's {{ pet.firstName }} doing?</span>
+            <img :src="imgSrc" :alt="pet.name" height="200px">
+            <span>How's {{ pet.name }} doing?</span>
         </div>
 
-        <h2>{{ pet.firstName }}</h2>
+        <h2>{{ pet.name }}</h2>
 
         <div class="icon-container">
             <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages"

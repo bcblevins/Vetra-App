@@ -4,7 +4,7 @@
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
 
         <span> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </span>
-        <img src="../../assets/icons/user.svg" alt="User" class="user">
+        <img src="../../assets/icons/user.svg" alt="User" class="user" @click="goToUser">
 
     </div>
 </template>
@@ -14,6 +14,9 @@ export default {
     methods: {
         goToHome() {
             this.$router.push({ name: 'home' });
+        },
+        goToUser() {
+            this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
         }
     }
 }

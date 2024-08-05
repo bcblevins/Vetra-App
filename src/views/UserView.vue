@@ -1,0 +1,150 @@
+<template>
+    <div class="user-view">
+        <main v-show="!editing" >
+            <h1> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </h1>
+            <p> {{ "Username: " + $store.state.user.username }} </p>
+            <p> {{ "Email: " + $store.state.user.email }} </p>
+            <p class="pet-list-header">Pets:</p>
+            <ul>
+                <li v-for="pet in pets" key="pet.patientId" > {{ pet.name }} </li>
+            </ul>
+            <button @click="editing = !editing" >Edit</button>
+        </main>
+
+        <form action="" v-show="editing" @click.prevent="" >
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" v-model="$store.state.user.firstName" required>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" v-model="$store.state.user.lastName" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" v-model="$store.state.user.email" required>
+            <button @click="editing = !editing" >Cancel</button>
+            <button @click="saveChanges" >Save</button>
+        </form>
+    </div>
+</template>
+
+<script>
+import PetService from '@/services/PetService';
+    export default {
+        data() {
+            return {
+                pets: [],
+                editing: false,
+                editedUser: {
+                    username: this.$store.state.user.username,
+                    firstName: this.$store.state.user.firstName,
+                    lastName: this.$store.state.user.lastName,
+                    email: this.$store.state.user.email,
+                    password: ''
+                }
+            }
+        },
+        created() {
+            PetService.getPets(this.$store.state.token).then(response => {
+                this.pets = response.data;
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+        methods: {
+            saveChanges() {
+                this.$store.commit('setUser', this.editedUser);
+                this.editing = !this.editing;
+            }
+        }
+
+    }
+</script>
+
+<style lang="scss" scoped>
+    .user-view {
+        height: 100%;
+        background-color: white;
+        margin: 20px;
+        margin-inline: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+
+        main {
+            display: flex;
+            flex-direction: column;
+            width: 30em;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+
+            h1 {
+                border-bottom: 2px solid black;
+            }
+
+            p {
+            margin-block: 5px;
+            }
+
+            .pet-list-header {
+                margin-bottom: 0px;
+            }
+
+            ul {
+                margin-top: 0px;
+                list-style-type: none;
+            }   
+
+            button {
+                margin-inline: auto;
+                padding: 10px;
+                padding-inline: 20px;
+                background-color: white;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+
+            button:hover {
+                background-color: #f0f0f0;
+                cursor: pointer;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 30em;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+
+            label {
+                margin-top: 10px;
+            }
+
+            input {
+                margin-bottom: 10px;
+                padding: 5px;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+
+            button {
+                margin-inline: auto;
+                margin-top: 10px;
+                padding: 10px;
+                padding-inline: 20px;
+                background-color: white;
+                border: 1px solid black;
+                border-radius: 5px;
+                width: 8em;
+            }
+
+            button:hover {
+                background-color: #f0f0f0;
+                cursor: pointer;
+            }
+        }
+    }
+</style>

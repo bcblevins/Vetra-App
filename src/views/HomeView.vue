@@ -20,7 +20,10 @@ import PetService from '@/services/PetService';
     created() {
       PetService.getPets(this.$store.state.token).then(response => {
         this.pets = response.data;
-      })
+      }).catch(error => {
+        console.log(error);
+      }
+      );
     },
     mounted() {
       document.title = 'Home';
@@ -36,5 +39,13 @@ import PetService from '@/services/PetService';
   align-items: center;
   margin: 20px;
   color: #000;
+}
+
+@media screen and (max-width: 600px) {
+  .pet-cards {
+    display:block;
+    max-width: 100vw;
+    overflow-x: scroll;
+  }
 }
 </style>

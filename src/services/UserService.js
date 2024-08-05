@@ -19,5 +19,9 @@ export default {
     getName(username, token) {
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return http.get(`/users/${username}/name`);
+    },
+    updateSelf(user, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return http.put(`/users/${user.username}/self`, user);
     }
 }

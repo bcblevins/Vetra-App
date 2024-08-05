@@ -39,6 +39,11 @@ export default {
         left: 10px;
     }
 
+    .notifications:hover {
+        cursor: pointer;
+        filter: contrast(0.8) brightness(1.8) drop-shadow(0 0 0.75rem #ffffff);
+    }
+
     .logo {
         position: absolute;
         margin-left: auto;
@@ -51,6 +56,11 @@ export default {
     .user {
         position: absolute;
         right: 10px;
+    }
+
+    .user:hover {
+        cursor: pointer;
+        filter: contrast(0.8) brightness(1.8) drop-shadow(0 0 0.75rem #ffffff);
     }
 
     span {

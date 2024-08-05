@@ -1,9 +1,9 @@
 <template>
     <div class="user-view">
         <main v-show="!editing" >
-            <h1> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </h1>
-            <p> {{ "Username: " + $store.state.user.username }} </p>
-            <p> {{ "Email: " + $store.state.user.email }} </p>
+            <h1> {{ user.firstName + " " + user.lastName }} </h1>
+            <p> {{ "Username: " + user.username }} </p>
+            <p> {{ "Email: " + user.email }} </p>
             <p class="pet-list-header">Pets:</p>
             <ul>
                 <li v-for="pet in pets" key="pet.patientId" > {{ pet.name }} </li>
@@ -13,11 +13,11 @@
 
         <form action="" v-show="editing" @click.prevent="" >
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" v-model="$store.state.user.firstName" required>
+            <input type="text" id="firstName" name="firstName" v-model="editedUser.firstName" required>
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" v-model="$store.state.user.lastName" required>
+            <input type="text" id="lastName" name="lastName" v-model="editedUser.lastName" required>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" v-model="$store.state.user.email" required>
+            <input type="email" id="email" name="email" v-model="editedUser.email" required>
             <button @click="editing = !editing" >Cancel</button>
             <button @click="saveChanges" >Save</button>
         </form>
@@ -26,6 +26,7 @@
 
 <script>
 import PetService from '@/services/PetService';
+import UserService from '@/services/UserService';
     export default {
         data() {
             return {
@@ -36,7 +37,7 @@ import PetService from '@/services/PetService';
                     firstName: this.$store.state.user.firstName,
                     lastName: this.$store.state.user.lastName,
                     email: this.$store.state.user.email,
-                    password: ''
+                    password: '0000'
                 }
             }
         },
@@ -49,10 +50,19 @@ import PetService from '@/services/PetService';
         },
         methods: {
             saveChanges() {
-                this.$store.commit('setUser', this.editedUser);
-                this.editing = !this.editing;
+                UserService.updateSelf(this.editedUser, this.$store.state.token).then(response => {
+                    this.$store.commit('SET_USER', response.data);
+                    this.editing = !this.editing;
+                }).catch(error => {
+                    console.log(error);
+                });
             }
-        }
+        },
+        computed: {
+            user() {
+                return this.$store.state.user;
+            }
+        },
 
     }
 </script>

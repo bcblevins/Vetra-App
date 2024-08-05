@@ -17,7 +17,7 @@
                 <TestList :tests="tests" class="tests" :shrink="true" />
             </nav>
 
-            <Conversation class="conversation" :patient="true"/>
+            <Conversation class="conversation" :patient="true" />
 
         </main>
 
@@ -61,7 +61,9 @@ export default {
         }
     },
     created() {
+              // TODO: rewrite to get pet from server. Also make tests mobile button ointeractaible
         this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
+        console.log(this.pet)
         TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
             this.tests = response.data;
         });
@@ -173,6 +175,7 @@ export default {
                 box-shadow: 0px 0px 10px var(--shadow-color);
                 background-color: white;
                 cursor: pointer;
+
                 h2 {
                     border-bottom: 2px solid var(--dark-blue);
                     margin-bottom: 18px;
@@ -201,12 +204,41 @@ export default {
             margin-inline: 2em;
             margin-block: 1em;
             box-shadow: 0px 5px 10px -5px var(--shadow-color);
+            min-height: 30em;
 
         }
 
-
-
-
     }
 
-}</style>
+}
+
+@media screen and (max-width: 600px) {
+    .profile {
+        overflow: auto;
+
+        main {
+            flex-direction: column;
+
+            .left {
+                width: 100%;
+
+                .meds-list {
+                    display: none;
+                }
+
+
+                .tests {
+                    display: none;
+                }
+
+                h2 {
+                    border: 1px solid var(--dark-blue);
+                    border-radius: 5px;
+                    padding: 10px;
+                    background-color: white;
+                }
+            }
+        }
+    }
+}
+</style>

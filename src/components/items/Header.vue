@@ -1,6 +1,7 @@
 <template>
     <div class="header">
-        <img src="../../assets/icons/notification.svg" alt="Notifications" class="notifications">
+        <Notifications v-if="showNotifications" @click="showNotifications = !showNotifications"/>
+        <img src="../../assets/icons/notification.svg" alt="Notifications" class="notifications" @click="showNotifications = !showNotifications">
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
 
         <span> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </span>
@@ -10,7 +11,14 @@
 </template>
 
 <script>
+import Notifications from '../containers/Notifications.vue';
+
 export default {
+    data() {
+        return {
+            showNotifications: false
+        }
+    },
     methods: {
         goToHome() {
             this.$router.push({ name: 'home' });
@@ -18,7 +26,10 @@ export default {
         goToUser() {
             this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
         }
-    }
+    },
+    components: {
+        Notifications,
+    },
 }
 </script>
 

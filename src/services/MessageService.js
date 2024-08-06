@@ -36,6 +36,10 @@ export default {
       },
     ];
   },
+  getMessage(id, token) {
+    http.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    return http.get(`/messages/${id}`);
+  },
   getMessagesByPatient(id, token) {
     http.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     let response = http.get(`/patients/${id}/messages`);

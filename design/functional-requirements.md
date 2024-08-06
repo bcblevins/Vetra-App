@@ -45,3 +45,12 @@
         - recieve messages about the test result
         - click the VetRA logo to return to the home page
         - click the user icon to visit my profile
+  
+## User Page 
+    - As a registered, authenticated user I can:
+        - view my profile
+        - view a list of my pets
+        - click on a pet to visit their profile
+        - update my name or email
+        - click the VetRA logo to return to the home page
+  

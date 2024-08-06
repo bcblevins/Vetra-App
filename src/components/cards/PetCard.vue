@@ -25,6 +25,7 @@ export default {
     props: ['pet'],
     computed: {
         imgSrc() {
+            console.log(this.pet.name)
             return '/src/assets/img/' + this.pet.patientId + '.jpg'
         },
 
@@ -142,5 +143,33 @@ export default {
         justify-content: space-around;
     }
 
+}
+
+@media screen and (max-width: 600px) {
+    .main {
+        height: auto;
+        width: auto;
+
+        .portrait {
+
+            img {
+                height: 100px;
+                width: 100px;
+            
+            }
+            span {
+                display: none;
+            }
+        }
+
+        h2 {
+            padding-block: 10px;
+
+        }
+        .icon-container {
+            display:none;
+        }
+    }
+    
 }
 </style>

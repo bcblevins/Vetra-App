@@ -48,6 +48,11 @@ export default {
             console.log(error);
         });
     },
+    watch: {
+        '$route.params.testId': function() {
+            this.test = this.tests.find(test => test.id == this.$route.params.testId);
+        }
+    }
 
 }
 </script>            

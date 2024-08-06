@@ -51,6 +51,9 @@ export default {
 .meds-view {
     display: flex;
     justify-content: center;
+    background-color: white;
+    margin: 20px;
+    margin-inline: 10vw;
 
 
     main {
@@ -69,19 +72,26 @@ export default {
             padding: 10px;
             display: inline-block;
             font-size: var(--header-1);
-            text-shadow: 0px 2px 2px white;
-            box-shadow: 0px 3px 5px -3px var(--dark-blue);
-            border-radius: 20px;
-            background-color: var(--off-white);
-            border-inline: 3px solid var(--dark-blue);
+            background-color: var(--dark-blue);
+            color: white;
         }
 
         .rx-list {
             border: none;
-            overflow: scroll;
+            overflow-y: scroll;
             font-size: var(--standard-text);
 
         }
     }
+}
+
+@media screen and (max-width: 600px) {
+    .meds-view {
+        margin: 10px;
+        main {
+            width: 90vw;
+        }
+    }
+    
 }
 </style>

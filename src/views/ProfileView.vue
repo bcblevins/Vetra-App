@@ -10,11 +10,18 @@
                 <div class="meds" @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
                     <h2>Prescriptions</h2>
                     <ul class="meds-list">
-                        <li v-for="med in meds" key="med.prescriptionId"> {{ med.name }} </li>
+                        <li v-for="med in meds.slice(0,2)" key="med.prescriptionId"> {{ med.name }} </li>
+                        <li v-show="meds.length > 3">...</li>
                     </ul>
                 </div>
-                <h2>Tests</h2>
-                <TestList :tests="tests" class="tests" :shrink="true" />
+                <div class="tests" @click="$router.push({name: 'tests', params:{id: this.$route.params.id, testId: this.tests[0].id}}) ">
+                    <h2>Tests</h2>
+                    <ul>
+                        <li v-for="test in tests.slice(0, 3)"> {{test.name + " | " + new Date(test.timestamp).toLocaleDateString()}} </li>
+                        <li v-show="tests.length > 4">...</li>
+                    </ul>
+                </div>
+
             </nav>
 
             <Conversation class="conversation" :patient="true" />
@@ -61,16 +68,22 @@ export default {
         }
     },
     created() {
-              // TODO: rewrite to get pet from server. Also make tests mobile button ointeractaible
-        this.pet = this.$store.state.pets.find(pet => pet.patientId === this.$route.params.id);
-        console.log(this.pet)
-        TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
-            this.tests = response.data;
-        });
-        RxService.getMeds(this.pet.patientId, this.$store.state.token).then(response => {
-            this.meds = response.data;
-        });
-        this.imgSrc = PetService.imgSource(this.pet.patientId);
+        PetService.getPet(this.$route.params.id, this.$store.state.token).then(response => {
+            this.pet = response.data;
+
+            TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
+                this.tests = response.data;
+            });
+
+            RxService.getMeds(this.pet.patientId, this.$store.state.token).then(response => {
+                this.meds = response.data;
+            });
+
+            this.imgSrc = PetService.imgSource(this.pet.patientId);
+        }).catch(error => {
+            console.log(error);
+        })
+
     },
     methods: {
 
@@ -98,31 +111,23 @@ export default {
             align-items: center;
             width: 16vw;
             background-color: var(--off-white);
-
+            border-inline: 3px solid var(--dark-blue);
 
 
             .pet-info {
                 color: var(--dark-blue);
-                background-color: white;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
 
-                border-bottom: 3px solid var(--dark-blue);
-                border-inline: 2px solid var(--dark-blue);
 
-                border-top-left-radius: calc(120px / 2);
-                border-top-right-radius: calc(120px / 2);
-                border-bottom-left-radius: 10px;
-                border-bottom-right-radius: 10px;
 
-                border-bottom-right-radius: 10px;
+
                 margin-bottom: 5vh;
-                margin-top: 10px;
-                width: 120px;
+                padding-top: 10px;
+                width: 100%;
 
-                box-shadow: 0px 5px 5px -5px var(--dark-blue);
 
                 img {
                     height: 120px;
@@ -138,19 +143,28 @@ export default {
                     font-weight: 700;
                     margin: 10px;
                     border-bottom: 2px solid var(--dark-blue);
-                    text-shadow: 0px 0px 2px white;
+                    color: aliceblue;
+                    background-color: var(--dark-blue);
+                    box-shadow: 0px 5px 5px -5px var(--dark-blue);
+                    width: 100%;
+                    text-align: center;
+
                 }
 
             }
 
 
             .meds {
-                padding: 5px;
                 border-radius: 10px;
                 transition: .1s ease;
+                width: 100%;
 
                 h2 {
                     margin-top: 0px;
+                    background-color: var(--dark-blue);
+                    width: 100%;
+                    color: white;
+                    text-align: center;
                 }
 
                 .meds-list {
@@ -159,44 +173,53 @@ export default {
                     margin-bottom: 0px;
                     padding-left: 15px;
                     list-style: none;
-
-                    li::before {
-                        content: '';
-                        display: inline-block;
-                        height: y;
-                        width: x;
-                        background-image: url('../assets/icon/pill.svg');
-                    }
+                    margin-bottom: 20px;
 
                 }
             }
 
             .meds:hover {
-                box-shadow: 0px 0px 10px var(--shadow-color);
+                box-shadow: 0px 0px 10px white;
                 background-color: white;
                 cursor: pointer;
 
                 h2 {
-                    border-bottom: 2px solid var(--dark-blue);
-                    margin-bottom: 18px;
-
+                    background-color: rgb(102, 109, 126);
                 }
 
 
             }
 
             .tests {
-                max-width: 10vw;
-                height: 40vh;
-                border: none;
+                width: 100%;
+
+                h2 {
+                    margin-top: 0px;
+                    background-color: var(--dark-blue);
+                    width: 100%;
+                    color: white;
+                    text-align: center;
+                }
+
+                ul {
+                    max-height: 20vh;
+                    max-width: 15vw;
+                    margin-bottom: 0px;
+                    padding-left: 15px;
+                    list-style: none;
+                }
 
             }
-        }
 
-        .left>h2 {
-            font-size: var(--header-2);
-            font-weight: 700;
-            margin: 10px;
+            .tests:hover {
+                box-shadow: 0px 0px 10px white;
+                background-color: white;
+                cursor: pointer;
+
+                h2 {
+                    background-color: rgb(102, 109, 126);
+                }
+            }
         }
 
         .conversation {
@@ -228,7 +251,10 @@ export default {
 
 
                 .tests {
-                    display: none;
+                    width: 50vw;
+                    ul {
+                        display: none;
+                    }
                 }
 
                 h2 {
@@ -236,6 +262,7 @@ export default {
                     border-radius: 5px;
                     padding: 10px;
                     background-color: white;
+                    
                 }
             }
         }

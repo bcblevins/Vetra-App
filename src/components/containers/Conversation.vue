@@ -152,6 +152,7 @@ export default {
             border: 1px solid #d3d3d3;
             flex-grow: 1;
             height: 100%;
+            
         }
 
         input {

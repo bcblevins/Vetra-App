@@ -37,6 +37,10 @@ export default {
         http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         return http.get('/patients');
     },
+    getPet(patientId, token) {
+        http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        return http.get('/patients/' + patientId);
+    },
     imgSource(id) {
         return '/src/assets/img/' + id + '.jpg'
     },

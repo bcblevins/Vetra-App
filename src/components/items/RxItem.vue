@@ -54,7 +54,7 @@ export default {
     color: #094567;
     display: flex;
     justify-content: start;
-    height: 6em;
+    height: auto;
     background-color: var(--off-white);
     margin-bottom: 10px;
     box-shadow: 0px 5px 10px -5px;
@@ -64,7 +64,7 @@ export default {
     .med-details {
         display: inline-block;
         padding: .7em;
-        width: 100%;
+        width: 95%;
 
         .med-title {
             border-bottom: 1px solid var(--dark-blue);
@@ -144,52 +144,15 @@ export default {
 
 }
 
-.main.shrink {
-    height: auto;
+@media screen and (max-width: 600px) {
+    .main {
+        flex-direction: column;
 
-    .med-details {
-        padding-inline: 0px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        .med-title {
-            border-bottom: none;
-
-            span {
-                font-size: var(--standard-text);
-            }
-
+        .med-details {
+            
             .med-name {
-                font-size: var(--standard-text);
-                border-right: none;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                margin-right: 0px;
-
+                display: block;
             }
-
-            .med-quantity {
-                display: none;
-            }
-
-            .med-refill-quantity {
-                display: none;
-            }
-        }
-
-        p {
-            display: none;
-        }
-    }
-
-    .med-refills {
-        padding: 0px;
-
-        p {
-            font-size: var(--header-3);
-            margin: 0px;
         }
     }
 }

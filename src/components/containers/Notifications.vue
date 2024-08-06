@@ -73,14 +73,14 @@ export default {
 
         },
         imgSrc(n) {
-            console.log(n);
+            console.log(n.id);
             if (n.messageId > 0) {
                 console.log(n.timestamp);
-                return './src/assets/icons/message.svg';
+                return '/img/message.svg';
             } else if (n.testId > 0) {
-                return './src/assets/icons/results.svg';
+                return '/img/results.svg';
             } else if (n.requestId > 0) {
-                return './src/assets/icons/pill.svg';
+                return '/img/pill.svg';
             }
         },
         go(n) {
@@ -94,9 +94,15 @@ export default {
                         this.$router.push({ name: 'profile', params: { id: message.patientId } })
                     }
                 })
+            } else if (n.type === "test") {
+                this.$router.push({ name: 'tests', params: { id: n.patientId, testId: n.testId } });
+            } else if (n.type === "request") {
+                this.$router.push({ name: 'rx', params: { id: n.patientId} });
+            } else {
+                console.log("Error redirecting to notification source. Notification type not set properly.")
             }
         }
-    },
+    }
 }
 </script>
 

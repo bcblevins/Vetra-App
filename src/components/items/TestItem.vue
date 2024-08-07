@@ -3,9 +3,9 @@
         <div class="heading">
             <h2> {{ test.name }} </h2>
             <br>
-            <h4> {{ doctorName }} </h4>
+            <h4 class="doctor-name"> {{ doctorName }} </h4>
             <br>
-            <h3> {{ formattedTimeStamp }} </h3>
+            <h3 class="timestamp"> {{ formattedTimeStamp }} </h3>
         </div>
         <table class="results">
             <tr>
@@ -118,6 +118,32 @@ export default {
             color: black;
         }
     }
+}
+
+@media screen and (max-width: 600px) {
+    .main {
+        .heading {
+
+            h2 {
+                font-size: 1em;
+            }
+
+            .doctor-name {
+                display: none;
+            }
+
+            .timestamp {
+                display: none;
+            }
+        }
+
+        .results {
+            font-size: 0.6em;
+            width: 100%;
+            margin: 0px;
+        }
+    }
+    
 }
 
 </style>

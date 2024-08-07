@@ -91,4 +91,22 @@ export default {
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .test-view {
+        nav {
+
+        }
+        main {
+
+            .test-item {
+                width: 100%;
+            }
+            .conversation {
+                width: 90vw;
+            }
+        }
+    }
+    
+}
 </style>

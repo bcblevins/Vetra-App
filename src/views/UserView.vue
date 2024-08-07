@@ -1,5 +1,5 @@
 <template>
-    <div class="user-view">
+    <div class="user-view" >
         <main v-show="!editing" >
             <h1> {{ user.firstName + " " + user.lastName }} </h1>
             <p> {{ "Username: " + user.username }} </p>
@@ -21,6 +21,8 @@
             <button @click="editing = !editing" >Cancel</button>
             <button @click="saveChanges" >Save</button>
         </form>
+
+        <button @click="logout" class="logout" >Logout</button>
     </div>
 </template>
 
@@ -56,6 +58,12 @@ import UserService from '@/services/UserService';
                 }).catch(error => {
                     console.log(error);
                 });
+            },
+            logout() {
+                console.log("Logging out");
+                localStorage.removeItem('token');
+                this.$store.commit('SET_TOKEN', null);
+                this.$router.push('/login');
             }
         },
         computed: {
@@ -74,8 +82,9 @@ import UserService from '@/services/UserService';
         margin: 20px;
         margin-inline: 100px;
         display: flex;
-        justify-content: center;
-        align-items: start;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
 
         main {
             display: flex;
@@ -155,6 +164,21 @@ import UserService from '@/services/UserService';
                 background-color: #f0f0f0;
                 cursor: pointer;
             }
+        }
+
+        .logout {
+            background: linear-gradient(#0c5e8d, #094567 70%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            padding-inline: 20px;
+            border-radius: 5px;
+        }
+    
+        .logout:hover {
+            background: none;
+            background-color: #2f7197;
         }
     }
 </style>

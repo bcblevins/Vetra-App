@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+// content type set explicitly to avoid errors. Without this, sending the integer in markRead() causes this error: "Content-Type 'application/x-www-form-urlencoded;charset=UTF-8' is not supported"
 const http = axios.create({
     baseURL: 'http://localhost:8080',
+    headers: {
+        'Content-type': 'application/json'
+    }
 });
 
 
@@ -41,9 +45,9 @@ export default {
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return http.get('/notifications');
     },
-    markNotificationRead(notificationId, token) {
+    markRead(notificationId, token) {
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        return http.post('/notifications', {id: notificationId}); 
+        return http.post('/notifications', notificationId); 
     }
 
 }

@@ -11,6 +11,7 @@
                 </div>
 
             </li>
+            <li v-show="longerThanFive">...</li>
         </ul>
     </div>
 </template>
@@ -23,19 +24,32 @@ export default {
     data() {
         return {
             notifications: [],
+            longerThanFive: false
         }
     },
     created() {
+        // TODO: is this right?
+        NotificationService.getNotifications(this.$store.state.token).then(response => {
+            console.log(response.data);
+            if (response.data.length > 4) {
+                this.longerThanFive = true;
+            }
+            this.notifications = response.data.slice(0, 4);
+            this.notifications.sort((a, b) => {
+                let dateA = new Date(a.timestamp);
+                let dateB = new Date(b.timestamp);
+
+                return dateB - dateA;
+            });
+        }).catch(error => {
+            console.log(error);
+        });
+
         this.notifications = NotificationService.getNotificationsTest();
 
         this.notifications = this.notifications.filter(n => n.isRead == false);
 
-        this.notifications.sort((a, b) => {
-            let dateA = new Date(a.timestamp);
-            let dateB = new Date(b.timestamp);
 
-            return dateB - dateA;
-        })
 
         console.log(this.notifications);
     },
@@ -84,23 +98,34 @@ export default {
             }
         },
         go(n) {
-            if (n.type === "message") {
-                MessageService.getMessage(n.messageId, this.$store.state.token).then(response => {
-                    let message = response.data;
+            // TODO: is this right?
+            NotificationService.markRead(n.id, this.$store.state.token).then(response => {
 
-                    if (message.testId > 0) {
-                        this.$router.push({ name: 'tests', params: { id: message.patientId, testId: message.testId } });
-                    } else {
-                        this.$router.push({ name: 'profile', params: { id: message.patientId } })
-                    }
-                })
-            } else if (n.type === "test") {
-                this.$router.push({ name: 'tests', params: { id: n.patientId, testId: n.testId } });
-            } else if (n.type === "request") {
-                this.$router.push({ name: 'rx', params: { id: n.patientId} });
-            } else {
-                console.log("Error redirecting to notification source. Notification type not set properly.")
-            }
+
+                if (n.type === "message") {
+                    MessageService.getMessage(n.messageId, this.$store.state.token).then(response => {
+                        let message = response.data;
+
+                        if (message.testId > 0) {
+                            this.$router.push({ name: 'tests', params: { id: message.patientId, testId: message.testId } });
+                        } else {
+                            this.$router.push({ name: 'profile', params: { id: message.patientId } })
+                        }
+                    })
+                } else if (n.type === "test") {
+                    this.$router.push({ name: 'tests', params: { id: n.patientId, testId: n.testId } });
+                } else if (n.type === "request") {
+                    this.$router.push({ name: 'rx', params: { id: n.patientId } });
+                } else {
+                    console.log("Error redirecting to notification source. Notification type not set properly.")
+                }
+
+
+            }).catch(error => {
+                console.log(error);
+            });
+
+
         }
     }
 }

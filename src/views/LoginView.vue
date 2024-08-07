@@ -12,6 +12,9 @@ import Login from '@/components/items/Login.vue';
         },
         mounted() {
             document.title = 'Welcome to VetRA';
+        },
+        created() {
+            this.$store.commit('SET_USER', null);
         }
     }
 </script>

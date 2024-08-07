@@ -36,5 +36,14 @@ export default {
                 "timestamp": "2024-08-01T12:00:00"
             }
         ];
+    },
+    getNotifications(token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return http.get('/notifications');
+    },
+    markNotificationRead(notificationId, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return http.post('/notifications', {id: notificationId}); 
     }
+
 }

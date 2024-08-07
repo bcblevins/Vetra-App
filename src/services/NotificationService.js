@@ -14,7 +14,7 @@ export default {
                 "messageId": 1,
                 "requestId": 0,
                 "testId": 0,
-                "status": "unread",
+                "isRead": false,
                 "timestamp": "2024-08-01T12:00:00"
             },
             {
@@ -23,7 +23,7 @@ export default {
                 "messageId": 0,
                 "requestId": 1,
                 "testId": 0,
-                "status": "unread",
+                "isRead": false,
                 "timestamp": "2024-08-04T12:00:00"
             },
             {
@@ -32,7 +32,7 @@ export default {
                 "messageId": 0,
                 "requestId": 0,
                 "testId": 1,
-                "status": "unread",
+                "isRead": false,
                 "timestamp": "2024-08-01T12:00:00"
             }
         ];

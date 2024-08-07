@@ -28,7 +28,7 @@ export default {
     created() {
         this.notifications = NotificationService.getNotificationsTest();
 
-        this.notifications = this.notifications.filter(n => n.status == 'unread');
+        this.notifications = this.notifications.filter(n => n.isRead == false);
 
         this.notifications.sort((a, b) => {
             let dateA = new Date(a.timestamp);

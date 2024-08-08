@@ -1,5 +1,5 @@
 <template>
-    <div class="notification-container">
+    <div :class=" { 'notification-container': true, 'view': fullView } ">
         <ul>
             <li v-for="n in notifications" key="n.id" @click="go(n)">
                 <div class="n-icon">
@@ -11,7 +11,8 @@
                 </div>
 
             </li>
-            <li v-show="longerThanFive">...</li>
+            <li v-show="longerThanFive" @click="$router.push( {name: 'notifications'} )">...</li>
+            <li v-show="!longerThanZero" class="no-notifications" >No new notifications</li>
         </ul>
     </div>
 </template>
@@ -21,37 +22,36 @@ import NotificationService from '@/services/NotificationService'
 import MessageService from '@/services/MessageService';
 
 export default {
+    props: ['full-view'],
     data() {
         return {
             notifications: [],
-            longerThanFive: false
+            longerThanFive: false,
+            longerThanZero: true
         }
     },
     created() {
-        // TODO: is this right?
         NotificationService.getNotifications(this.$store.state.token).then(response => {
-            console.log(response.data);
-            if (response.data.length > 4) {
-                this.longerThanFive = true;
-            }
-            this.notifications = response.data.slice(0, 4);
-            this.notifications.sort((a, b) => {
-                let dateA = new Date(a.timestamp);
-                let dateB = new Date(b.timestamp);
+            response.data.sort((a, b) => {
+                    let dateA = new Date(a.timestamp);
+                    let dateB = new Date(b.timestamp);
 
-                return dateB - dateA;
-            });
+                    return dateB - dateA;
+                });
+            if (response.data.length > 4 && !this.fullView) {
+                this.longerThanFive = true;
+                this.notifications = response.data.slice(0, 4);
+            } else if (response.data.length > 0) {
+                this.notifications = response.data;
+            } else {
+                this.longerThanZero = false;
+            }
+
         }).catch(error => {
             console.log(error);
         });
 
-        this.notifications = NotificationService.getNotificationsTest();
 
-        this.notifications = this.notifications.filter(n => n.isRead == false);
-
-
-
-        console.log(this.notifications);
     },
     methods: {
         title(n) {
@@ -87,9 +87,7 @@ export default {
 
         },
         imgSrc(n) {
-            console.log(n.id);
             if (n.messageId > 0) {
-                console.log(n.timestamp);
                 return '/img/message.svg';
             } else if (n.testId > 0) {
                 return '/img/results.svg';
@@ -98,7 +96,6 @@ export default {
             }
         },
         go(n) {
-            // TODO: is this right?
             NotificationService.markRead(n.id, this.$store.state.token).then(response => {
 
 
@@ -136,8 +133,7 @@ export default {
     position: absolute;
     top: 55px;
     background-color: white;
-    box-shadow: 0px 0px 5px 0px var(--shadow-color);
-    z-index: 100;
+    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);    z-index: 100;
 
     ul {
         list-style: none;
@@ -178,6 +174,19 @@ export default {
             cursor: pointer;
             background-color: var(--background-blue);
         }
+
+        .no-notifications:hover {
+            cursor: default;
+            background-color: white;
+        }
     }
+}
+
+.notification-container.view {
+    width: 300px;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position:static;
 }
 </style>

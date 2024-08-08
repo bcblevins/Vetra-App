@@ -1,6 +1,7 @@
 <template>
     <div class="header">
         <Notifications v-if="showNotifications" @click="showNotifications = !showNotifications"/>
+        <div v-show="unreadNotifications > 0" class="notification-bubble"> <p>{{ unreadNotifications > 10 ? '10+' : unreadNotifications }}</p> </div>
         <img src="../../assets/icons/notification.svg" alt="Notifications" class="notifications" @click="showNotifications = !showNotifications">
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
 
@@ -12,11 +13,14 @@
 
 <script>
 import Notifications from '../containers/Notifications.vue';
+import NotificationService from '@/services/NotificationService'
+
 
 export default {
     data() {
         return {
-            showNotifications: false
+            showNotifications: false,
+            unreadNotifications: 0
         }
     },
     methods: {
@@ -30,6 +34,15 @@ export default {
     components: {
         Notifications,
     },
+    created() {
+        setInterval(() => {
+            NotificationService.getNotifications(this.$store.state.token).then(response => {
+                this.unreadNotifications = response.data.length
+            }).catch((error) => {
+                console.error(error);
+            });
+        }, 500)
+    }
 }
 </script>
 
@@ -53,6 +66,26 @@ export default {
     .notifications:hover {
         cursor: pointer;
         filter: contrast(0.8) brightness(1.8) drop-shadow(0 0 0.75rem #ffffff);
+    }
+
+    .notification-bubble {
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        background-color: rgb(255, 0, 0);
+        border-radius: 50%;
+        left: 35px;
+        z-index: 99;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2px;
+
+        p {
+            color: white;
+
+        }
     }
 
     .logo {

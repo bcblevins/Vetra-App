@@ -10,14 +10,16 @@
                 <div class="meds" @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
                     <h2>Prescriptions</h2>
                     <ul class="meds-list">
-                        <li v-for="med in meds.slice(0,2)" key="med.prescriptionId"> {{ med.name }} </li>
+                        <li v-for="med in meds.slice(0, 2)" key="med.prescriptionId"> {{ med.name }} </li>
                         <li v-show="meds.length > 3">...</li>
                     </ul>
                 </div>
-                <div class="tests" @click="$router.push({name: 'tests', params:{id: this.$route.params.id, testId: this.tests[0].id}}) ">
+                <div class="tests"
+                    @click="$router.push({ name: 'tests', params: { id: this.$route.params.id, testId: this.tests[0].id } })">
                     <h2>Tests</h2>
                     <ul>
-                        <li v-for="test in tests.slice(0, 3)"> {{test.name + " | " + new Date(test.timestamp).toLocaleDateString()}} </li>
+                        <li v-for="test in tests.slice(0, 3)"> {{ test.name + " | " + new
+                            Date(test.timestamp).toLocaleDateString()}} </li>
                         <li v-show="tests.length > 4">...</li>
                     </ul>
                 </div>
@@ -235,7 +237,7 @@ export default {
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
     .profile {
         overflow: auto;
 
@@ -245,13 +247,18 @@ export default {
             .left {
                 width: 100%;
 
-                .meds-list {
-                    display: none;
+                .meds {
+                    width: 50vw;
+
+                    .meds-list {
+                        display: none;
+                    }
                 }
 
 
                 .tests {
                     width: 50vw;
+
                     ul {
                         display: none;
                     }
@@ -262,8 +269,13 @@ export default {
                     border-radius: 5px;
                     padding: 10px;
                     background-color: white;
-                    
+
                 }
+
+            }
+
+            .conversation {
+                margin-inline: 0px;
             }
         }
     }

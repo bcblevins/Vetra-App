@@ -97,15 +97,15 @@ export default {
 
         th {
             border-bottom: 2px solid #094567;
-            padding: 10px;
-            padding-block: 5px;
+            padding-inline: 3px;
+            padding-block: 2px;
             text-align: left;
             background-color: #aae0ff;
         }
 
         td {
-            padding: 10px;
-            padding-block: 5px;
+            padding-inline: 3px;
+            padding-block: 2px;
 
         }
 
@@ -120,7 +120,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
     .main {
         .heading {
 

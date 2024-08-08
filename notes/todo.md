@@ -11,6 +11,7 @@
     - [ ] pets
 - [ ] darken/blur page when notifications are shown?
 - [ ] hover messages over buttons
+- [ ] fewer fake tests
   
 ## Elements
 - [ ] add a "back" button to all views.

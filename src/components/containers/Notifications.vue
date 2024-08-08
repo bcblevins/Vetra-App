@@ -137,6 +137,7 @@ export default {
     top: 55px;
     background-color: white;
     box-shadow: 0px 0px 5px 0px var(--shadow-color);
+    z-index: 100;
 
     ul {
         list-style: none;

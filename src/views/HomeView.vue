@@ -42,7 +42,7 @@ import PetService from '@/services/PetService';
   color: #000;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   .pet-cards {
     display:flex;
     max-width: 100vw;

@@ -34,5 +34,12 @@ import RxItem from '../items/RxItem.vue';
 
     }
 
+    @media screen and (min-width: 1024px) {
+        .rx-list {
+            overflow: hidden;
+        }
+        
+    }
+
 
 </style>

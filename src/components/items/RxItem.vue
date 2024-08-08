@@ -6,7 +6,7 @@
         <div class="med-details">
             <div class="med-title">
                 <span class="med-name"> {{ med.name }} </span>
-                <span class="med-quantity"> {{ med.quantity + ' ' + med.unit + sIfNeeded }} </span>
+                <span class="med-quantity"> {{ med.quantity + ' ' + med.unit}} </span>
                 <span class="med-refill-quantity"> {{ med.refills + ' refills' }} </span>
             </div>
 
@@ -144,14 +144,23 @@ export default {
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
     .main {
         flex-direction: column;
 
         .med-details {
-            
-            .med-name {
-                display: block;
+            .med-title {
+                .med-name {
+                    display: block;
+                    text-align: center;
+                    border-right: none;
+                }
+
+                .med-quantity {
+                    border-right: none;
+                    margin-right: 60%;
+                }
+
             }
         }
     }

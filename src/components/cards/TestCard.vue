@@ -55,6 +55,8 @@ export default {
     }
 }
 
+
+
 .main:hover {
     background-color: #dedede;
     cursor: pointer;
@@ -93,4 +95,21 @@ export default {
     }
 
 }
+
+@media screen and (max-width: 1024px) {
+    .main.shrink {
+        padding: 15px;
+        padding-inline: 2px;
+        h2 {
+            font-size: .7em;
+        }
+
+        h3 {
+            display: none;
+        }
+    }
+    
+}
+
+
 </style>

@@ -27,5 +27,8 @@ import Login from '@/components/items/Login.vue';
     align-items: center;
     height: 100vh;
     background-color: #073b4d;
+    background-image: url('../assets/backgrounds/collageDS.png');
+    background-size: 2000px;
+    background-position: center;
 }
 </style>

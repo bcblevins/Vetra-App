@@ -12,6 +12,7 @@
                     <ul class="meds-list">
                         <li v-for="med in meds.slice(0, 2)" key="med.prescriptionId"> {{ med.name }} </li>
                         <li v-show="meds.length > 3">...</li>
+                        <li v-show="meds.length < 1" >No current medications</li>
                     </ul>
                 </div>
                 <div class="tests"
@@ -21,6 +22,7 @@
                         <li v-for="test in tests.slice(0, 3)"> {{ test.name + " | " + new
                             Date(test.timestamp).toLocaleDateString()}} </li>
                         <li v-show="tests.length > 4">...</li>
+                        <li v-show="tests.length < 1" >No tests in record</li>
                     </ul>
                 </div>
 

@@ -1,8 +1,11 @@
 <template>
     <div class="header">
-        <Notifications v-if="showNotifications" @click="showNotifications = !showNotifications"/>
-        <div v-show="unreadNotifications > 0" class="notification-bubble"> <p>{{ unreadNotifications > 10 ? '10+' : unreadNotifications }}</p> </div>
-        <img src="../../assets/icons/notification.svg" alt="Notifications" class="notifications" @click="showNotifications = !showNotifications">
+        <Notifications v-if="showNotifications" @click="showNotifications = !showNotifications" />
+        <div v-show="unreadNotifications > 0" class="notification-bubble">
+            <p>{{ unreadNotifications > 10 ? '10+' : unreadNotifications }}</p>
+        </div>
+        <img src="../../assets/icons/notification.svg" alt="Notifications" class="notifications"
+            @click="showNotifications = !showNotifications">
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
 
         <span> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </span>
@@ -40,6 +43,10 @@ export default {
                 this.unreadNotifications = response.data.length
             }).catch((error) => {
                 console.error(error);
+
+                if (error.response.status === 401) {
+                    this.$router.push({ name: 'login' })
+                }
             });
         }, 500)
     }
@@ -49,6 +56,10 @@ export default {
 <style lang="scss" scoped>
 .header {
     background-color: #073b4d;
+    background-image: url('../../assets/backgrounds/collageDS.png');
+    background-size: cover;
+    background-position: center;
+
     height: var(--header-height);
     padding: var(--header-padding);
 
@@ -123,5 +134,4 @@ export default {
         cursor: pointer;
         filter: contrast(0.8) brightness(1.8) drop-shadow(0 0 0.75rem #ffffff);
     }
-}
-</style>
+}</style>

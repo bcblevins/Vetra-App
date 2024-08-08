@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div class="app">
-    <Header v-show="showHeader" class="header"/>
+    <Header v-if="showHeader" class="header"/>
     <RouterView class="router-view"/>
   </div>
 </template>

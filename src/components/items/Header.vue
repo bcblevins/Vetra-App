@@ -8,7 +8,6 @@
             @click="showNotifications = !showNotifications">
         <img src="../../assets/VetRA-Logo.svg" alt="Logo" class="logo" @click="goToHome">
 
-        <span> {{ $store.state.user.firstName + " " + $store.state.user.lastName }} </span>
         <img src="../../assets/icons/user.svg" alt="User" class="user" @click="goToUser">
 
     </div>
@@ -23,7 +22,7 @@ export default {
     data() {
         return {
             showNotifications: false,
-            unreadNotifications: 0
+            unreadNotifications: 0,
         }
     },
     methods: {
@@ -32,13 +31,8 @@ export default {
         },
         goToUser() {
             this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
-        }
-    },
-    components: {
-        Notifications,
-    },
-    created() {
-        setInterval(() => {
+        },
+        getNotifications() {
             NotificationService.getNotifications(this.$store.state.token).then(response => {
                 this.unreadNotifications = response.data.length
             }).catch((error) => {
@@ -48,8 +42,27 @@ export default {
                     this.$router.push({ name: 'login' })
                 }
             });
-        }, 500)
-    }
+        }
+    },
+    components: {
+        Notifications,
+    },
+    created() {
+
+
+        this.getNotifications();
+        setInterval(() => {
+            if (!(this.$route.name === 'login' || this.$route.name === 'register')) {
+                this.getNotifications();
+            }
+        }, 5000)
+
+    },
+    computed: {
+        stop() {
+            return this.$route.name === 'login' || this.$route.name === 'register'
+        }
+    },
 }
 </script>
 
@@ -134,4 +147,5 @@ export default {
         cursor: pointer;
         filter: contrast(0.8) brightness(1.8) drop-shadow(0 0 0.75rem #ffffff);
     }
-}</style>
+}
+</style>

@@ -52,38 +52,6 @@ export default {
                 this.loading = false;
             }
 
-
-
-            //Posting the login data to the server
-            //     this.loading = true;
-            //     this.fail = false;
-            //     UserService.login(this.username, this.password)
-            //         .then((response) => {
-            //             this.$store.commit("SET_TOKEN", response.data.accessToken.token);
-            //             localStorage.setItem('token', response.data.accessToken.token);
-            //             // Getting the user data from the server
-            //             UserService.getUser(this.username, this.$store.state.token)
-            //                 .then((response) => {
-            //                     this.$store.commit('SET_USER', response.data);
-            //                     setTimeout(() => {
-            //                         this.loading = false;
-            //                         this.$router.push({ name: 'home' });
-            //                     }, 1000);
-            //                 })
-            //                 .catch(() => {
-            //                     setTimeout(() => {
-            //                         this.loading = false;
-            //                         this.fail = true;
-            //                     }, 1000);
-            //                 });
-            //         })
-            //         .catch(() => {
-            //             setTimeout(() => {
-            //                 this.loading = false;
-            //                 this.fail = true;
-            //             }, 1000);
-            //         });
-
         }
     },
 }
@@ -91,13 +59,13 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-
     img {
         width: 400px;
         height: 200px;
         margin: 0 auto;
         display: block;
-        filter: drop-shadow(0px 5px 5px #072231);
+
+        filter: drop-shadow(0px 5px 10px #000000);
     }
 
     form {

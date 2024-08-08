@@ -178,7 +178,17 @@ export default {
                     padding-left: 15px;
                     list-style: none;
                     margin-bottom: 20px;
-
+                    text-decoration: underline;
+                    
+                    li::before {
+                        content: '';
+                        display: inline-block;
+                        width: 1em;
+                        height: 1em;
+                        background-image: url('../assets/icons/pill.svg');
+                        background-size: cover;
+                        margin-right: 8px;
+                    }
                 }
             }
 
@@ -196,6 +206,8 @@ export default {
 
             .tests {
                 width: 100%;
+                text-decoration: underline;
+
 
                 h2 {
                     margin-top: 0px;
@@ -210,7 +222,22 @@ export default {
                     max-width: 15vw;
                     margin-bottom: 0px;
                     padding-left: 15px;
-                    list-style: none;
+
+                    li {
+                        list-style: none;
+                        margin-bottom: 10px;
+                    }
+
+                    li::before {
+                        content: '';
+                        display: inline-block;
+                        width: 1em;
+                        height: 1em;
+                        background-image: url('../assets/icons/results.svg');
+                        background-size:contain;
+                        background-repeat: no-repeat;
+                        margin-right: 8px;
+                    }
                 }
 
             }

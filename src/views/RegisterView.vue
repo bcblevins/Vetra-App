@@ -3,26 +3,73 @@
         <div class="register-header">
             <img src="../assets/VetRA-Logo.svg" alt="" class="logo">
             <div class="slogan">
-                <h2> Stronger Connections </h2>
+                <h2 class="first-slogan"> Stronger Connections </h2>
                 <h2 class="second-slogan"> Healthier Pets </h2>
             </div>
-            <img src="../assets/misc/arrow.svg" alt="" class="arrow"
-
+            <img src="../assets/misc/arrow.svg" alt="" class="arrow" @click="scrollToRegister"/>
         </div>
         <div class="join-vetra">
-            <h1>Join VetRA today</h1>
-            <form action="">
-                <input type="text" placeholder="username" class="username" name="username">
-                <input type="text" placeholder="email" class="email" name="email">
-                <input type="password" placeholder="password" class="password" name="password">
+            <form @submit.prevent="register">
+                <h1>Join VetRA today</h1>
+                <input type="text" placeholder="username" class="username" name="username" v-model="username">
+                <input type="text" placeholder="email" class="email" name="email" v-model="email">
+                <input type="text" placeholder="First Name" class="first-name" name="firstname" v-model="firstName">
+                <input type="text" placeholder="Last Name" class="last-name" name="lastname" v-model="lastName">
+                <input type="password" placeholder="password" class="password" name="password" v-model="password">
+                <input type="password" placeholder="confirm password" class="password" name="confirm-password"
+                    v-model="confirmPassword">
+                <p v-if="!passwordMatch" class="match-error">Passwords do not match</p>
                 <input type="submit" value="Register" class="register-btn">
             </form>
+            <p class="login-link" ref="loginLink">
+                Already have an account? <router-link class="click-here" :to=" {name: 'login'} ">click here</router-link> to login
+            </p>
         </div>
     </div>
 </template>
 
 <script>
+import UserService from '@/services/UserService';
+
 export default {
+
+    data() {
+        return {
+            username: '',
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: '',
+            confirmPassword: '',
+            passwordMatch: true
+        }
+    },
+    methods: {
+        register() {
+            if (this.password === this.confirmPassword) {
+                let user = {
+                    username: this.username,
+                    email: this.email,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    password: this.password
+                }
+                UserService.register(user)
+                    .then(() => {
+                        this.$router.push({ name: 'login' });
+                    })
+                    .catch((error) => {
+                        console.log("Error: " + error);
+                    });
+            } else {
+                this.passwordMatch = false;
+            }
+        },
+        scrollToRegister() {
+            const lastElement = this.$refs.loginLink
+            lastElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
 }
 </script>
@@ -47,18 +94,19 @@ export default {
         align-items: start;
 
         .logo {
-            height: 30vh;
+            width: 30vw;
             margin-left: 8vw;
-            filter: drop-shadow(0px 5px 10px rgb(49, 53, 60)) ;
+            filter: drop-shadow(0px 5px 10px rgb(49, 53, 60));
             margin-top: auto;
         }
 
         .slogan {
             display: flex;
             flex-direction: column;
-            justify-content: start;
-            align-items: center;
             margin-top: 20px;
+            margin-left: 8vw;
+            width: 30vw;
+
             h2 {
                 font-size: 2.5em;
                 margin: 0px;
@@ -71,7 +119,7 @@ export default {
 
             .second-slogan {
                 margin-top: 20px;
-                margin-left: 20vw;
+                align-self: flex-end;
             }
         }
 
@@ -83,16 +131,32 @@ export default {
 
             margin-top: auto;
             animation: bounce 2s infinite;
+            transition: .4s ease-in-out;
+        }
+
+        .arrow:hover {
+            cursor: pointer;
+            animation: none;
+            padding-bottom: 40px;
+            filter: drop-shadow(0px 5px 2px rgb(155, 162, 174));
         }
 
         @keyframes bounce {
-            0%, 50%, 70%, 100% {
+
+            0%,
+            50%,
+            75%,
+            100% {
                 transform: translateY(0);
+                filter: drop-shadow(0px 0px 0px rgba(49, 53, 60, 0)) opacity(.5);
             }
-            30%, 40% {
+
+            30%,
+            40% {
                 transform: translateY(-15px);
                 filter: drop-shadow(0px 5px 2px rgb(155, 162, 174));
             }
+
             60% {
                 transform: translateY(-5px);
             }
@@ -105,17 +169,14 @@ export default {
     .join-vetra {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        margin-top: 20px;
         height: 100vh;
         width: 100%;
-        background-color: var(--background-blue);
-        h1 {
-            font-size: 2em;
-            font-weight: 400;
-            
-        }
+        background-image: url('../assets/backgrounds/collageDS.png');
+        background-size: 2000px;
+        background-position: center;
+
 
         form {
             display: flex;
@@ -123,9 +184,65 @@ export default {
             align-items: center;
             margin-top: 20px;
             width: 40vw;
-            height: 60vh;
-            border: 1px solid black;
+            height: 70vh;
+            background-color: var(--off-white);
+
+            h1 {
+                font-size: 3em;
+                font-weight: 400;
+            }
+
+            .username,
+            .first-name,
+            .last-name,
+            .password,
+            .email {
+                width: 80%;
+                height: 8%;
+                margin-top: 10px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 1em;
+                box-shadow: 0px 0px 4px -2px rgb(140, 152, 174);
+            }
+
+            .match-error {
+                color: red;
+                font-size: 1em;
+                margin-top: 10px;
+            }
+
+            .register-btn {
+                background: linear-gradient(#0c5e8d, #094567 70%);
+                color: white;
+                border: none;
+                cursor: pointer;
+                padding: 10px;
+                padding-inline: 20px;
+                border-radius: 5px;
+                font-size: 1.5em;
+                margin-top: 20px;
+                margin-bottom: 20px
+            }
+
+            .register-btn:hover {
+                background: none;
+                background-color: #2f7197;
+            }
+        }
+
+        .login-link {
+            color: white;
+
+            .click-here {
+                color: #53c0ff;
+                text-decoration: none;
+                cursor: pointer;
+            }
         }
     }
+
+
 }
 </style>

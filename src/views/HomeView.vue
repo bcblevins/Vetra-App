@@ -1,6 +1,11 @@
 <template>
   <div class="pet-cards">
     <PetCard v-for="pet in pets" :key="pet.patientId" :pet="pet"/>
+    <div class="no-pet-warning" v-show="showNoPetWarning" >
+      <h2>Looks like your account has not been setup yet.</h2>
+      <h3>Please contact your veterinary hospital.</h3>
+    </div>
+
   </div>
 </template>
 
@@ -10,7 +15,8 @@ import PetService from '@/services/PetService';
 
   export default {
     components: {
-      PetCard
+      PetCard,
+      showNoPetWarning: false
     },
     data() {
       return {
@@ -21,6 +27,9 @@ import PetService from '@/services/PetService';
       PetService.getPets(this.$store.state.token).then(response => {
         this.pets = response.data;
         console.log(response.data);
+        if (response.data.length === 0) {
+          this.showNoPetWarning = true;
+        }
       }).catch(error => {
         console.log(error);
       }
@@ -40,6 +49,19 @@ import PetService from '@/services/PetService';
   align-items: center;
   margin: 20px;
   color: #000;
+}
+
+.no-pet-warning {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+
+  h2 {
+    font-size: 2em;
+    margin: 10px;
+  }
 }
 
 @media screen and (max-width: 1024px) {

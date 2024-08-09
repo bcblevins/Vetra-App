@@ -4,6 +4,10 @@ const http = axios.create({
     baseURL: 'http://localhost:8080',
 });
 
+http.headers = {
+    'Content-type': 'application/json',
+};
+
 export default {
     login(username, password) {
         return http.post('/auth/login', { username, password });
@@ -23,5 +27,8 @@ export default {
     updateSelf(user, token) {
         http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return http.put(`/users/${user.username}/self`, user);
+    },
+    register(user) {
+        return http.post('/users', user);
     }
 }

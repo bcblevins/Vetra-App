@@ -38,7 +38,7 @@ export default {
             }).catch((error) => {
                 console.error(error);
 
-                if (error.response.status === 401) {
+                if (error.response.status === 401 && this.$route.path !== '/') {
                     this.$router.push({ name: 'login' })
                 }
             });

@@ -48,15 +48,14 @@ export default {
         Notifications,
     },
     created() {
-
-
-        this.getNotifications();
+        if (!(this.$route.name === 'login' || this.$route.name === 'register')) {
+            this.getNotifications();
+        }
         setInterval(() => {
             if (!(this.$route.name === 'login' || this.$route.name === 'register')) {
                 this.getNotifications();
             }
         }, 5000)
-
     },
     computed: {
         stop() {

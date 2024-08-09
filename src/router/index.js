@@ -6,7 +6,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: HomeView
     },
@@ -54,7 +54,7 @@ const router = createRouter({
       component: () => import('../views/NotificationsView.vue')
     },
     {
-      path: '/register',
+      path: '/',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
     }
@@ -62,8 +62,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && store.state.token === null) {
-    next({ name: 'login' })
+  if (to.name !== 'register' && to.name !== 'login' && store.state.token === null) {
+    next({ name: 'login'})
   } else {
     next()
   }

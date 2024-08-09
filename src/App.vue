@@ -12,7 +12,7 @@ export default {
       return useRoute()
     },
     showHeader() {
-      return this.route.name !== 'login'
+      return this.route.name !== 'login' && this.route.name !== 'register'
     }
   }
 };

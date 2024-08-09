@@ -1,5 +1,5 @@
 <template>
-  <div class="pet-cards">
+  <div class="pet-cards" v-cloak>
     <PetCard v-for="pet in pets" :key="pet.patientId" :pet="pet"/>
     <div class="no-pet-warning" v-show="showNoPetWarning" >
       <h2>Looks like your account has not been setup yet.</h2>
@@ -49,6 +49,17 @@ import PetService from '@/services/PetService';
   align-items: center;
   margin: 20px;
   color: #000;
+  animation: fade-in 1s forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+    
+  }
 }
 
 .no-pet-warning {

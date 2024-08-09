@@ -149,11 +149,26 @@ export default {
 
 <style lang="scss" scoped>
 .notification-container {
+    animation: grow-in .4s forwards;
+
+    @keyframes grow-in {
+        from {
+            scale: 0;
+            transform: translateY(-100%);
+        }
+        to {
+            scale: 1;
+            transform: translateY(0%);
+        }
+    }
+}
+
+.notification-container {
     position: absolute;
     top: 55px;
     background-color: white;
-    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
     z-index: 100;
+
 
     ul {
         list-style: none;

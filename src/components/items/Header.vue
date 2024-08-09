@@ -27,9 +27,11 @@ export default {
     },
     methods: {
         goToHome() {
+            this.hideNotifications();
             this.$router.push({ name: 'home' });
         },
         goToUser() {
+            this.hideNotifications();
             this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
         },
         getNotifications() {
@@ -42,6 +44,9 @@ export default {
                     this.$router.push({ name: 'login' })
                 }
             });
+        },
+        hideNotifications() {
+            this.showNotifications = false;
         }
     },
     components: {
@@ -62,6 +67,11 @@ export default {
             return this.$route.name === 'login' || this.$route.name === 'register'
         }
     },
+    watch: {
+        $route(to, from) {
+            this.hideNotifications();
+        }
+    }
 }
 </script>
 

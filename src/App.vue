@@ -14,20 +14,24 @@ export default {
     showHeader() {
       return this.route.name !== 'login' && this.route.name !== 'register'
     }
-  }
+  },
 };
 
 
 </script>
 
 <template>
-  <div class="app">
+  <div class="app" v-cloak>
     <Header v-if="showHeader" class="header"/>
     <RouterView class="router-view"/>
   </div>
 </template>
 
 <style scoped>
+
+[v-cloak] {
+  display: none;
+}
 
 .app {
   height: 100%;

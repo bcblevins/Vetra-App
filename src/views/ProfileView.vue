@@ -116,6 +116,16 @@ export default {
             width: 16vw;
             background-color: var(--off-white);
             border-inline: 3px solid var(--dark-blue);
+            animation: slide-in .4s forwards;
+
+            @keyframes slide-in {
+                from {
+                    transform: translateX(-100%);
+                }
+                to {
+                    transform: translateX(0%);
+                }
+            }
 
 
             .pet-info {
@@ -259,6 +269,18 @@ export default {
             margin-block: 1em;
             box-shadow: 0px 5px 10px -5px var(--shadow-color);
             min-height: 30em;
+
+            animation: fade-in 1s forwards;
+
+            @keyframes fade-in {
+                from {
+                    opacity: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
 
         }
 

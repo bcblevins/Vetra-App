@@ -1,6 +1,6 @@
 <template>
-    <div class="test-view">
-        <nav>
+    <div :class=" {'loading': loading, 'test-view': true} " v-cloak>
+        <nav >
             <TestList :tests="tests" :shrink="true" />
         </nav>
         <main>
@@ -20,13 +20,14 @@ export default {
     components: {
         TestList,
         TestItem,
-        Conversation
+        Conversation,
     },
     data() {
         return {
             tests: [],
             messages: [],
             test: {},
+            loading: true
         }
     },
     created() {
@@ -42,6 +43,7 @@ export default {
 
             Promise.all(resultPromises).then(() => {
                 this.test = this.tests.find(test => test.id == this.$route.params.testId);
+                this.loading = false; 
             });
 
         }).catch(error => {
@@ -59,11 +61,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.loading {
+    display: none;
+}
+
 .test-view {
     display: flex;
     nav {
         height: calc(100vh - var(--header-total-height));
         box-shadow: 0px 0px 10px 0px #094567;
+        overflow: scroll;
+        animation: slide-in .4s forwards;
+        @keyframes slide-in {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0%);
+            }
+        }
     }
     main {
         padding: 20px;
@@ -74,6 +90,18 @@ export default {
         height: calc(100vh - var(--header-total-height) - 40px);
         width: 100%;
         overflow: scroll;
+        animation: fade-in 1s forwards;
+
+        @keyframes fade-in {
+            0%, 20% {
+                opacity: 0;
+                scale: 0.9;
+            }
+            100% {
+                opacity: 1;
+                scale: 1;
+            }
+        }
 
         .test-item {
             width: 50vw;

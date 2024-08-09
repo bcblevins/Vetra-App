@@ -80,7 +80,16 @@ export default {
             border: none;
             overflow-y: scroll;
             font-size: var(--standard-text);
+            animation: slide-in .4s forwards;
 
+            @keyframes slide-in {
+                from {
+                    transform: translateY(100%);
+                }
+                to {
+                    transform: translateY(0%);
+                }
+            }
         }
     }
 }

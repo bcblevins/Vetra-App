@@ -135,9 +135,6 @@ export default {
                 justify-content: center;
                 align-items: center;
 
-
-
-
                 margin-bottom: 5vh;
                 padding-top: 10px;
                 width: 100%;

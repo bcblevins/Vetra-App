@@ -78,7 +78,6 @@ export default {
 <style lang="scss" scoped>
 .user-view {
     height: 100%;
-    background-color: white;
     margin: 20px;
     margin-inline: 100px;
     display: flex;

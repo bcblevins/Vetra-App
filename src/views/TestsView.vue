@@ -1,11 +1,11 @@
 <template>
-    <div :class=" {'loading': loading, 'test-view': true} " v-cloak>
-        <nav >
+    <div :class="{ 'loading': loading, 'test-view': true }" v-cloak>
+        <nav>
             <TestList :tests="tests" :shrink="true" />
         </nav>
         <main>
-            <TestItem :test="test" class="test-item"/>
-            <Conversation :test="true" class="conversation"/>
+            <TestItem :test="test" class="test-item" />
+            <Conversation :test="true" class="conversation" />
         </main>
     </div>
 </template>
@@ -30,29 +30,45 @@ export default {
             loading: true
         }
     },
+    methods: {
+        getTests() {
+            TestService.getTests(this.$route.params.id, this.$store.state.token).then(response => {
+                this.tests = response.data;
+                let resultPromises = this.tests.map(test => {
+                    return TestService.getResults(test.id, this.$route.params.id, this.$store.state.token).then(response => {
+                        test.results = response.data;
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                });
+
+                Promise.all(resultPromises).then(() => {
+                    this.test = this.tests.find(test => test.id == this.$route.params.testId);
+                    this.loading = false;
+                });
+
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    },
     created() {
-        TestService.getTests(this.$route.params.id, this.$store.state.token).then(response => {
-            this.tests = response.data;
-            let resultPromises = this.tests.map(test => {
-                return TestService.getResults(test.id, this.$route.params.id, this.$store.state.token).then(response => {
-                    test.results = response.data;
+        this.getTests();
+    },
+    watch: {
+        $route(to, from) {
+            if (to.params.id === from.params.id) {
+                this.test = this.tests.find(test => test.id == to.params.testId);
+            } else {
+                TestService.getTests(to.params.id, this.$store.state.token).then(response => {
+                    console.log(response.data)
+                    this.tests = response.data;
+                    console.log(to.params.id, this.tests[0].id)
+                    this.$router.push({ name: 'tests', params: { id: to.params.id, testId: this.tests[0].id } })
                 }).catch(error => {
                     console.log(error);
                 });
-            });
-
-            Promise.all(resultPromises).then(() => {
-                this.test = this.tests.find(test => test.id == this.$route.params.testId);
-                this.loading = false; 
-            });
-
-        }).catch(error => {
-            console.log(error);
-        });
-    },
-    watch: {
-        '$route.params.testId': function() {
-            this.test = this.tests.find(test => test.id == this.$route.params.testId);
+            }
         }
     }
 
@@ -67,20 +83,24 @@ export default {
 
 .test-view {
     display: flex;
+
     nav {
         height: calc(100vh - var(--header-total-height));
         box-shadow: 0px 0px 10px 0px #094567;
-        overflow: scroll;
+        overflow-y: scroll;
         animation: slide-in .4s forwards;
+
         @keyframes slide-in {
             from {
                 transform: translateX(-100%);
             }
+
             to {
                 transform: translateX(0%);
             }
         }
     }
+
     main {
         padding: 20px;
         display: flex;
@@ -93,10 +113,13 @@ export default {
         animation: fade-in 1s forwards;
 
         @keyframes fade-in {
-            0%, 20% {
+
+            0%,
+            20% {
                 opacity: 0;
                 scale: 0.9;
             }
+
             100% {
                 opacity: 1;
                 scale: 1;
@@ -122,19 +145,18 @@ export default {
 
 @media screen and (max-width: 1024px) {
     .test-view {
-        nav {
+        nav {}
 
-        }
         main {
 
             .test-item {
                 width: 100%;
             }
+
             .conversation {
                 width: 90vw;
             }
         }
     }
-    
-}
-</style>
+
+}</style>

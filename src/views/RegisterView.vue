@@ -245,4 +245,30 @@ export default {
 
 
 }
+
+@media screen and (max-width: 1024px) {
+    .register-view {
+
+        .register-header {
+            background-position: 70%;
+            justify-content: flex-end;
+            align-items: center;
+
+            .logo {
+                margin-left: 0px;
+                margin-top: 5px;
+                width: 80vw;
+                animation: bounce 2s infinite;
+            }
+
+            .slogan {
+                display: none;
+            }
+
+            .arrow {
+                margin-top: 20px;
+            }
+        }
+    }
+}
 </style>

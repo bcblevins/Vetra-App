@@ -34,7 +34,7 @@ export default {
     border: 3px solid #094567;
     border-block: 1px solid;
     border-radius: .5em;
-    overflow: scroll;
+    overflow-Y: scroll;
     background: linear-gradient(to bottom, #ffffff 95%, var(--shadow-color) 110%);  
     height: 100%;
 }

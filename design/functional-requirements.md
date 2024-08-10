@@ -23,7 +23,7 @@
         - view a list of up to 4 test results for the pet
         - view messages about the pet
         - send a message about the pet
-        - recieve messages about the pet
+        - receive messages about the pet
         - click the VetRA logo to return to the home page
         - click the user icon to visit my profile
         - click the medication list to view the pet's medications
@@ -42,7 +42,7 @@
         - click on the test card to view the full test result
         - view messages about the test result
         - send a message about the test result
-        - recieve messages about the test result
+        - receive messages about the test result
         - click the VetRA logo to return to the home page
         - click the user icon to visit my profile
   

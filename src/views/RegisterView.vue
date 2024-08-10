@@ -269,6 +269,13 @@ export default {
                 margin-top: 20px;
             }
         }
+
+        .join-vetra {
+            
+            form {
+                width: 90vw;
+            }
+        }
     }
 }
 </style>

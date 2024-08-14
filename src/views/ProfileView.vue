@@ -213,7 +213,6 @@ export default {
 
             .tests {
                 width: 100%;
-                text-decoration: underline;
 
 
                 h2 {
@@ -264,7 +263,6 @@ export default {
             flex-grow: 1;
             margin-inline: 2em;
             margin-block: 1em;
-            box-shadow: 0px 5px 10px -5px var(--shadow-color);
             min-height: 30em;
 
             animation: fade-in 1s forwards;

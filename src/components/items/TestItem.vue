@@ -15,8 +15,11 @@
                 <th>Low Normal</th>
                 <th>High Normal</th>
             </tr>
-            <tr v-for="result in test.results" :key="result.resultID" :class="{'abnormal': abnormal(result)}">
-                <td> {{ result.parameterName }} </td>
+            <tr v-for="result in test.results" :key="result.resultID" :class="{ 'abnormal': abnormal(result) }">
+                <td class="param-name">
+                    {{ result.parameterName }}
+                    <span class="param-description"> {{ paramDescription(result.parameterName) }} </span>
+                </td>
                 <td> {{ result.resultValue }} </td>
                 <td> {{ result.unit }} </td>
                 <td> {{ result.rangeLow }} </td>
@@ -48,11 +51,22 @@ export default {
             return this.test.doctorUsername;
         },
 
+
     },
     methods: {
         abnormal(result) {
             // "+" is used to convert strings to numbers
             return +result.resultValue < +result.rangeLow || +result.resultValue > +result.rangeHigh;
+        },
+        paramDescription(name) {
+            let descs = this.$store.state.parameterDescriptions;
+            let desc = descs.find((d) => {
+                return d.name.includes(name);
+            });
+            if (desc == undefined) {
+                return "No description available";
+            }
+            return desc.description;
         }
     },
 
@@ -63,7 +77,6 @@ export default {
 .main {
     color: #094567;
     background-color: rgb(255, 255, 255);
-    border: 2px solid #094567;
     border-radius: 5px;
     padding: 10px;
     width: 75vw;
@@ -87,7 +100,7 @@ export default {
         display: inline;
         padding-right: 10px
     }
-    
+
 
     .results {
         padding: 20px;
@@ -117,6 +130,41 @@ export default {
             background-color: #ff6e6e;
             color: black;
         }
+
+        .param-name .param-description {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1;
+            box-shadow: 0px 0px 10px -5px var(--shadow-color);
+            background-color: white;
+            border-radius: 5px;
+            padding: 5px;
+            width: 200px;
+            left: 100px;
+            top: -2px;
+        }
+
+        .param-description::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 0px;
+            margin-left: -20px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent white transparent transparent;
+
+        }
+
+        .param-name:hover {
+            background-color: #d7effe;
+            position: relative;
+            cursor: help;
+
+            .param-description {
+                visibility: visible;
+            }
+        }
     }
 }
 
@@ -143,7 +191,6 @@ export default {
             margin: 0px;
         }
     }
-    
-}
 
+}
 </style>

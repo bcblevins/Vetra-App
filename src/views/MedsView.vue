@@ -54,6 +54,7 @@ export default {
     background-color: white;
     margin: 20px;
     margin-inline: 10vw;
+    box-shadow: 0px 0px 10px -5px var(--shadow-color);
 
 
     main {
@@ -62,7 +63,7 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: start;
-        margin-top: 80px;
+        margin-top: 20px;
 
         img {
             height: var(--header-1);
@@ -71,9 +72,13 @@ export default {
         h1 {
             padding: 10px;
             display: inline-block;
+            width: 80%;
             font-size: var(--header-1);
-            background-color: var(--dark-blue);
-            color: white;
+            color: var(--dark-blue);
+            border-bottom: 2px solid var(--dark-blue);
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0px 10px 5px -10px var(--shadow-color);
         }
 
         .rx-list {

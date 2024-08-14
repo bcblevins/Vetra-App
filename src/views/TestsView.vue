@@ -118,18 +118,26 @@ export default {
             20% {
                 opacity: 0;
                 scale: 0.9;
+                filter: blur(10px);
+            }
+
+            55% {
+                opacity: 0.5;
+                scale: 1;
+                filter: blur(0px);
             }
 
             100% {
                 opacity: 1;
                 scale: 1;
+                filter: blur(0px);
             }
         }
 
         .test-item {
             width: 50vw;
             margin-bottom: 20px;
-            box-shadow: 0px 5px 10px -5px #094567;
+            box-shadow: 0px 0px 10px -5px #094567;
 
         }
 
@@ -137,7 +145,6 @@ export default {
             width: 60vw;
             min-height: 30em;
             border-radius: 0%;
-            box-shadow: 0px 5px 10px -5px #094567;
 
         }
     }

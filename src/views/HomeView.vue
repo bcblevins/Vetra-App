@@ -52,11 +52,19 @@ import PetService from '@/services/PetService';
   animation: fade-in 1s forwards;
 
   @keyframes fade-in {
-    from {
+    0% {
       opacity: 0;
+      scale: .9;
+      filter: blur(10px);
     }
-    to {
+    20% {
+      opacity: 0.5;
+      scale: 1;
+      filter: blur(0px);
+    }
+    100% {
       opacity: 1;
+      scale: 1;
     }
     
   }

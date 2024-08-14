@@ -109,14 +109,11 @@ export default {
 
 <style lang="scss" scoped>
 .conversation {
-    border: 3px solid var(--dark-blue);
-    border-block: 1px solid;
 
     border-radius: .5em;
 
     display: flex;
     flex-direction: column;
-    background-image: var(--gradient-9);
     background-size: 200% 200%;
 
     min-width: 20vw;
@@ -145,6 +142,9 @@ export default {
         padding: 1em;
         background-color: #f1f1f1;
         height: 6em;
+        border-radius: .5em;
+        margin: 5px;
+
 
         .box {
             padding: 0.5em;
@@ -158,9 +158,19 @@ export default {
         input {
             margin-left: 10px;
             margin-bottom: auto;
+            background-color: var(--dark-blue);
+            color: white;
+            border-radius: 5px;
+            padding: 5px;
+            border: none;
         }
 
-        ;
+        input:hover {
+            cursor: pointer;
+            filter: brightness(2.0);
+        }
+
+        
     }
 }
 </style>

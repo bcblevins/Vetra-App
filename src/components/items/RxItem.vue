@@ -57,7 +57,7 @@ export default {
     height: auto;
     background-color: var(--off-white);
     margin-bottom: 10px;
-    box-shadow: 0px 5px 10px -5px;
+    box-shadow: 0px 5px 10px -5px var(--shadow-color);
     border-radius: 10px;
 
 

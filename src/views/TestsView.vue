@@ -110,7 +110,7 @@ export default {
         height: calc(100vh - var(--header-total-height) - 40px);
         width: 100%;
         overflow: scroll;
-        animation: fade-in 1s forwards;
+        animation: fade-in .4s forwards;
 
         @keyframes fade-in {
 

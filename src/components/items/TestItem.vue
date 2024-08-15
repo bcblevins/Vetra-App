@@ -135,13 +135,14 @@ export default {
             visibility: hidden;
             position: absolute;
             z-index: 1;
-            box-shadow: 0px 0px 10px -5px var(--shadow-color);
+            box-shadow: 0px 0px 15px 0px white;
             background-color: white;
             border-radius: 5px;
             padding: 5px;
             width: 200px;
             left: 100px;
-            top: -2px;
+            top: -5px;
+            border: 1px inset #094567;
         }
 
         .param-description::before {
@@ -152,7 +153,7 @@ export default {
             margin-left: -20px;
             border-width: 10px;
             border-style: solid;
-            border-color: transparent white transparent transparent;
+            border-color: transparent var(--dark-blue) transparent transparent;
 
         }
 

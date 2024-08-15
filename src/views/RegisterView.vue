@@ -96,7 +96,7 @@ export default {
         .logo {
             width: 30vw;
             margin-left: 8vw;
-            filter: drop-shadow(0px 5px 10px rgb(49, 53, 60));
+            filter: drop-shadow(3px 2px 2px rgb(49, 53, 60));
             margin-top: auto;
         }
 

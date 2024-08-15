@@ -23,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 .login-view {
     background-image: url('../assets/backgrounds/collageDS.png');
-    background-size: 2000px;
+    background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;

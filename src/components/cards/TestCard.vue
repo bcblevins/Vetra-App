@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-    border-bottom: 2px solid #094567;
+    border-block: 1px solid #094567;
     height: 4em;
     color: #094567;
     padding-top: 10px;
@@ -55,6 +55,16 @@ export default {
     }
 }
 
+.active-test {
+    background-color: rgb(187, 255, 255);
+    border-left: ridge 4px var(--dark-blue);
+    border-block: none;
+    margin-left: 10px;
+    h2 {
+        color: #000000;
+    
+    }
+}
 
 
 .main:hover {
@@ -63,8 +73,12 @@ export default {
     color: #000000;
 }
 
+.active-test:hover {
+    background-color: rgb(187, 255, 255);
+}
+
 .main.shrink {
-    border-bottom: 2px solid #094567;
+
     height: auto;
     color: #094567;
     padding: 10px;
@@ -96,7 +110,7 @@ export default {
 
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     .main.shrink {
         padding: 15px;
         padding-inline: 2px;

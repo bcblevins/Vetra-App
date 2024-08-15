@@ -1,6 +1,6 @@
 <template>
     <div :class="{ 'test-container': true, 'shrink': shrink, 'nav': true }">
-        <TestCard v-for="test in tests" :key="test.id" :test="test" :class="{ 'shrink': shrink }"/>
+        <TestCard v-for="test in tests" :key="test.id" :test="test" :class="{ 'shrink': shrink, 'active-test': activeTest === test }"/>
     </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
         shrink: {
             type: Boolean,
             default: false
-        }
+        },
+        activeTest: Object
     },
 
     components: {
@@ -34,7 +35,6 @@ export default {
     border: 3px solid #094567;
     border-block: 1px solid;
     border-radius: .5em;
-    overflow-Y: scroll;
     background: linear-gradient(to bottom, #ffffff 95%, var(--shadow-color) 110%);  
     height: 100%;
 }

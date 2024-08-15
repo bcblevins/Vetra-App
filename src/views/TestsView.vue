@@ -1,9 +1,9 @@
 <template>
     <div :class="{ 'loading': loading, 'test-view': true }" v-cloak>
         <nav>
-            <TestList :tests="tests" :shrink="true" />
+            <TestList :tests="tests" :shrink="true" :active-test="test"/>
         </nav>
-        <main>
+        <main :key="keyToggle">
             <TestItem :test="test" class="test-item" />
             <Conversation :test="true" class="conversation" />
         </main>
@@ -27,7 +27,8 @@ export default {
             tests: [],
             messages: [],
             test: {},
-            loading: true
+            loading: true,
+            keyToggle: 0
         }
     },
     methods: {
@@ -59,6 +60,7 @@ export default {
         $route(to, from) {
             if (to.params.id === from.params.id) {
                 this.test = this.tests.find(test => test.id == to.params.testId);
+                this.keyToggle++;
             } else {
                 TestService.getTests(to.params.id, this.$store.state.token).then(response => {
                     console.log(response.data)
@@ -88,9 +90,11 @@ export default {
         height: calc(100vh - var(--header-total-height));
         box-shadow: 0px 0px 10px 0px #094567;
         overflow-y: scroll;
-        animation: slide-in .4s forwards;
+        overflow-x: hidden;
+        animation: slide-in-right .4s forwards;
+        border-right: 4px solid #094567;
 
-        @keyframes slide-in {
+        @keyframes slide-in-right {
             from {
                 transform: translateX(-100%);
             }
@@ -110,28 +114,18 @@ export default {
         height: calc(100vh - var(--header-total-height) - 40px);
         width: 100%;
         overflow: scroll;
-        animation: fade-in .4s forwards;
+        animation: slide-in-up ease-in-out .2s forwards;
 
-        @keyframes fade-in {
+        @keyframes slide-in-up {
 
-            0%,
-            20% {
+            0% {
                 opacity: 0;
-                scale: 0.9;
-                filter: blur(10px);
-            }
-
-            55% {
-                opacity: 0.5;
-                scale: 1;
-                filter: blur(0px);
             }
 
             100% {
                 opacity: 1;
-                scale: 1;
-                filter: blur(0px);
             }
+
         }
 
         .test-item {
@@ -150,7 +144,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     .test-view {
         nav {}
 

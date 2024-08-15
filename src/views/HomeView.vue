@@ -83,7 +83,7 @@ import PetService from '@/services/PetService';
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
   .pet-cards {
     display:flex;
     max-width: 100vw;

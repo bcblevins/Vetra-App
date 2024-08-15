@@ -13,6 +13,7 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </div>
 </template>
@@ -40,7 +41,9 @@ export default {
                 console.log("Login result: " + loginResult);
                 if (loginResult) {
                     console.log("Login successful");
-                    this.$router.push({ name: 'home' });
+                    setTimeout(() => {
+                        this.$router.push({ name: 'home' });
+                    }, 2000);
                 } else {
                     this.fail = true;
                     return;
@@ -49,7 +52,9 @@ export default {
                 console.log("Error: " + error);
                 this.fail = true;
             } finally {
-                this.loading = false;
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000);
             }
 
         }
@@ -80,12 +85,13 @@ export default {
 
         .dot {
             display: inline-block;
-            height: 5px;
-            width: 5px;
+            height: 8px;
+            width: 8px;
             background-color: #ffffff;
             border-radius: 50%;
             margin: 4px;
             animation: dot-bounce .8s infinite;
+            margin-bottom: 80px;
         }
 
         .dot:nth-child(1) {
@@ -100,16 +106,29 @@ export default {
             animation-delay: 0s;
         }
 
+        .dot:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
         @keyframes dot-bounce {
 
-            0%,
-            20%,
-            100% {
-                transform: translateY(0);
+            0% {
+                transform: translateY(0px);
+                opacity: 1;
             }
 
             50% {
-                transform: translateY(-10px);
+                transform: translateY(50px);
+                opacity: 1;
+            }
+
+            51% {
+                opacity: .3;
+            }
+
+            100% {
+                transform: translateY(0px);
+                opacity: .3;
             }
 
         }
@@ -147,5 +166,4 @@ export default {
     }
 
     ;
-}
-</style>
+}</style>

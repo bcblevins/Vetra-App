@@ -135,7 +135,7 @@ export default {
             visibility: hidden;
             position: absolute;
             z-index: 1;
-            box-shadow: 0px 0px 15px 0px white;
+            filter: drop-shadow(0px 0px 15px white);
             background-color: white;
             border-radius: 5px;
             padding: 5px;
@@ -169,7 +169,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     .main {
         .heading {
 

@@ -181,7 +181,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     .user-view {
         margin: 0px;
         main {

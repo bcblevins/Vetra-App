@@ -246,7 +246,7 @@ export default {
 
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     .register-view {
 
         .register-header {

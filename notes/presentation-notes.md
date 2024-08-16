@@ -10,15 +10,16 @@
 
 ### Why I created VetRA
 
+To solve 2 main problems:
  1. Veterinary Technician Perspective
     - Large amount of time spent on the phone with clients
     - National shortage of veterinary staff
-    - VetRA allows vet staff to spend less time on the phone with clients WITHOUT compromising client education
+    - VetRA allows vet staff to spend less time on the phone with clients, easing burden of staff shortage WITHOUT compromising client education
  2. Pet Owner Perspective
     - Human patients can easily access *their* medical records online, but most rely on paper documents for their pets. 
     - VetRA provides a hospital-independent platform to keep track of your pets' medical information and to allow streamlined communication with your pets' doctors.
 
-There are 2 main interfaces to the site: the **client interface** and the **veterinary staff interface.** Today I will be showing the **client interface.**
+There are 2 main interfaces to the site: the **pet owner interface** and the **veterinary staff interface.** Today I will be showing the **pet owner interface.**
 
 ## Website Walkthrough
 
@@ -35,7 +36,7 @@ There are 2 main interfaces to the site: the **client interface** and the **vete
    - User Icon (top right): User settings
    - VetRA Logo (top center): Return to Homepage
    - Bell Icon (top left): Notifications
-     - User sent notifications for new messages, lab results, and updates to refill requests.
+     - Notifications are created for new messages, new lab results, and updates to refill requests.
      - Each notification is clickable and will take the user to the relevant page.
 
 *(Click Portrait)*
@@ -51,14 +52,14 @@ There are 2 main interfaces to the site: the **client interface** and the **vete
 ### Tests Screen
 
  - List of all lab results for the pet on left
- - Each test in list on the left is clickable and will display the test details on the right
+ - List on the left is clickable and will display the test details on the right as well as conversation about the test
  - Hover over test parameters to see easy-to-understand explanations
 
 *(Home --> Medications)*
 
 ### Medications Screen
 
- - List of all medications for the pet
+ - List of all medications for the pet and their details
  - Refill requests can be made by clicking the **Refill** button
  - Status will update and display on the button
 

@@ -129,6 +129,7 @@ export default {
             100% {
                 transform: translateY(0px);
                 opacity: .3;
+                scale: 0.9;
             }
 
         }

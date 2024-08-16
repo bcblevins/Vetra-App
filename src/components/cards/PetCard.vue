@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="portrait" @click="$router.push({ name: 'profile', params: { id: pet.patientId } })">
-            <img :src="imgSrc" :alt="pet.name" height="200px">
+            <img :src="imgSrc" :alt="pet.name" height="250px">
             <span>How's {{ pet.name }} doing?</span>
         </div>
 
@@ -50,8 +50,8 @@ export default {
 <style scoped>
 .main {
     position: relative;
-    --card-width: 200px;
-    --card-height: 320px;
+    --card-width: 250px;
+    --card-height: 390px;
     --shadow-color: #094567;
 
     width: var(--card-width);
@@ -120,6 +120,7 @@ export default {
         text-shadow: 0px 1px 0px #011927;
         margin-bottom: 0px;
         margin-top: 10px;
+        font-size: 40px;
 
     }
 

@@ -264,6 +264,7 @@ export default {
             margin-inline: 2em;
             margin-block: 1em;
             min-height: 30em;
+            max-width: 80vw;
 
             animation: fade-in 1s forwards;
 

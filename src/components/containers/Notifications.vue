@@ -149,16 +149,15 @@ export default {
 
 <style lang="scss" scoped>
 .notification-container {
-    animation: grow-in .4s forwards;
+    animation: grow-in ease-in-out .4s forwards;
+    overflow: hidden;
 
     @keyframes grow-in {
         from {
-            scale: 0;
-            transform: translateY(-100%);
+            max-height: 0%;
         }
         to {
-            scale: 1;
-            transform: translateY(0%);
+            max-height: 500px;
         }
     }
 }

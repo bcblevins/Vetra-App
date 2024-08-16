@@ -91,7 +91,7 @@ There are 2 main interfaces to the site: the **client interface** and the **vete
  - Notifications are created on the server level on the DAO when a there is a creation or update to a message, test, or refill request.
  - The notification container checks for unread notifications every 5 seconds and updates the notification count and list of notifications accordingly.
 
-### Loading Animation
+### Loading Helix Animation
 
 
 

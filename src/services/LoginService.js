@@ -59,8 +59,8 @@ export default {
       console.log(
         "Final success states: ",
         "Token received: ", tokenSuccess,
-        "User Received: ",  userSuccess,
-        "Roles received",  rolesSuccess
+        "User Received: ", userSuccess,
+        "Roles received", rolesSuccess
       );
 
       return tokenSuccess && userSuccess && rolesSuccess;
@@ -87,7 +87,7 @@ export default {
           store.commit("SET_TOKEN", token);
           store.commit("SET_USER", userResponse.data);
         })
-        .catch((error) => {});
+        .catch((error) => { });
     }
     return Promise.resolve();
   },
@@ -129,3 +129,5 @@ login(username, password, rememberMe) {
     return fullPromise;
   },
 */
+
+

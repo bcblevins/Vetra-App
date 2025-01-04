@@ -1,3 +1,4 @@
 module.exports = {
-    publicPath: process.env.NODE_ENV === "production" ? "/Vetra-App/" : "/",
+  // Change first "/" to "/Vetra-App/"
+    publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
   };

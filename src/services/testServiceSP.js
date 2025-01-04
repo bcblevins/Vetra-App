@@ -1,9 +1,10 @@
 import { supabase } from "./SupabaseClient";
 
-export async function getPets() {
+export async function getTests(testId) {
     const { data, error } = await supabase
-    .from('patient')
+    .from('test')
     .select()
+    .eq('test_id', testId)
 
     if (error) {
         throw new Error(error.message)
@@ -12,19 +13,15 @@ export async function getPets() {
     return data
 }
 
-export async function getPet(petId) {
+export async function getResults(testId) {
     const { data, error } = await supabase
-    .from('patient')
+    .from('result')
     .select()
-    .eq('patient_id', petId)
+    .eq('test_id', testId)
 
     if (error) {
         throw new Error(error.message)
     }
 
     return data
-}
-
-export function imgSource(id) {
-    return '/src/assets/img/' + id + '.jpg'
 }

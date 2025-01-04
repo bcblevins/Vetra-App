@@ -137,3 +137,4 @@ export default {
         return http.get(`/patients/${petId}/tests/${id}/results`);
     }
 }
+

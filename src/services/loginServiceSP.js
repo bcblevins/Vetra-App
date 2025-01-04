@@ -1,5 +1,10 @@
 import { supabase } from "./SupabaseClient";
-
+/**
+ * Logs in user.
+ * @param {string} email 
+ * @param {string} password 
+ * @returns {object} session 
+ */
 export async function login(email, password) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -12,6 +17,12 @@ export async function login(email, password) {
   return data
 }
 
+/**
+ * Registers new user
+ * @param {string} email 
+ * @param {string} password 
+ * @returns {object} user object 
+ */
 export async function register(email, password) {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -23,6 +34,9 @@ export async function register(email, password) {
   return data
 }
 
+/**
+ * Logs out current user and clears localstorage of user info.
+ */
 export async function logout() {
     const { error } = await supabase.auth.signOut();
 

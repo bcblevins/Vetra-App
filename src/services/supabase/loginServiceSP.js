@@ -1,4 +1,6 @@
 import { supabase } from "./supabaseClient"
+import { getUser } from "./userServiceSP"
+import { store } from "@/main"
 
 /**
  * Logs in user.
@@ -14,6 +16,11 @@ export async function login(email, password) {
   if (error) {
     throw new Error("Login error: " + error.message)
   }
+
+  const userResponse = await getUser();
+  store.commit("SET_USER", userResponse);
+
+  store.commit("SET_ROLES", userResponse.role);
 
   return data
 }

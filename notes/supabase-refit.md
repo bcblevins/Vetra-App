@@ -1,6 +1,6 @@
 # Supabase Refit
 
-- **store** has user stored inside, but is obsolete with supabase's API since it stores user info by default
+- **store** has user stored inside, but needs to be handled differently
 - new service files will be camelCase"SP"
   - rxService was split from refill request operations for consistency
 - Files that use services:

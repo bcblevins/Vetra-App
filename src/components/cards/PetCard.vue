@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import TestService from '@/services/TestService';
+import { getTests } from '@/services/supabase/testServiceSP';
 export default {
     props: ['pet'],
     computed: {
@@ -33,7 +33,7 @@ export default {
     methods: {
         openTest(id) {
             let tests
-            TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
+            getTests(this.pet.patientId).then(response => {
                 tests = response.data;
                 console.log(id, tests[0].id)
                 this.$router.push({ name: 'tests', params: { id: id, testId: tests[0].id } })

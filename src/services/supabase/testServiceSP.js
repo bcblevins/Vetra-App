@@ -1,10 +1,10 @@
-import { supabase } from "./SupabaseClient";
+import { supabase } from "./supabaseClient";
 
 export async function getTests(testId) {
     const { data, error } = await supabase
-    .from('test')
-    .select()
-    .eq('test_id', testId)
+        .from('test')
+        .select()
+        .eq('test_id', testId)
 
     if (error) {
         throw new Error(error.message)
@@ -15,9 +15,9 @@ export async function getTests(testId) {
 
 export async function getResults(testId) {
     const { data, error } = await supabase
-    .from('result')
-    .select()
-    .eq('test_id', testId)
+        .from('result')
+        .select()
+        .eq('test_id', testId)
 
     if (error) {
         throw new Error(error.message)

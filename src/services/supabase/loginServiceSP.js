@@ -1,4 +1,5 @@
-import { supabase } from "./SupabaseClient";
+import { supabase } from "./supabaseClient"
+
 /**
  * Logs in user.
  * @param {string} email 
@@ -13,7 +14,7 @@ export async function login(email, password) {
   if (error) {
     throw new Error("Login error: " + error.message)
   }
-  
+
   return data
 }
 
@@ -38,9 +39,9 @@ export async function register(email, password) {
  * Logs out current user and clears localstorage of user info.
  */
 export async function logout() {
-    const { error } = await supabase.auth.signOut();
+  const { error } = await supabase.auth.signOut();
 
-    if (error) {
-        throw new Error("Error logging out: " + error.message)
-    }
+  if (error) {
+    throw new Error("Error logging out: " + error.message)
+  }
 }

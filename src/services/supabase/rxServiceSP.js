@@ -1,10 +1,10 @@
-import { supabase } from "./SupabaseClient";
+import { supabase } from "./supabaseClient";
 
 export async function getMeds(petId) {
     const { data, error } = await supabase
-    .from('prescription')
-    .select()
-    .eq('patient_id', petId)
+        .from('prescription')
+        .select()
+        .eq('patient_id', petId)
 
     if (error) {
         throw new Error(error.message)

@@ -22,6 +22,7 @@
 import UserService from '@/services/UserService.js';
 import PetService from '@/services/PetService';
 import LoginService from '@/services/LoginService';
+import { login } from '@/services/supabase/loginServiceSP';
 
 export default {
     data() {
@@ -37,7 +38,7 @@ export default {
             this.loading = true;
             this.fail = false;
             try {
-                const loginResult = await LoginService.login(this.username, this.password, true)
+                const loginResult = await login(this.username, this.password, true)
                 console.log("Login result: " + loginResult);
                 if (loginResult) {
                     console.log("Login successful");

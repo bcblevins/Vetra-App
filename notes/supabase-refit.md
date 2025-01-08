@@ -12,6 +12,7 @@
   - **Items:**
     - [ ] Header
     - [ ] Login
+      - [ ] Started, register and login presumably work, but not redirecting after login.
     - [ ] MessageBubble
     - [ ] RxItem
   - **Views:**

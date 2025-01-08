@@ -29,15 +29,36 @@ export async function login(email, password) {
  * Registers new user
  * @param {string} email 
  * @param {string} password 
- * @returns {object} user object 
+ * @returns {{}} user object 
  */
-export async function register(email, password) {
+export async function register(user) {
+  // TODO: Need to understand how profile table trigger works so we can obtain info we need
+  /* 
+    According to supabase, this is the format of how signup should go:
+    const { data, error } = await supabase.auth.signUp({
+      email: 'valid.email@supabase.io',
+      password: 'example-password',
+      options: {
+        data: {
+          first_name: 'John',
+          age: 27,
+        },
+      },
+    })
+  */
   const { data, error } = await supabase.auth.signUp({
-    email,
-    password
+    email: user.email,
+    password: user.password,
+    options: {
+      data: {
+        first_name: user.firstName,
+        last_name: user.lastName,
+        role: 'OWNER'
+      },
+    },
   })
   if (error) {
-    throw new Error("Error registering new user: " + error.message)
+    throw new Error("Error registering new user: " + error)
   }
   return data
 }

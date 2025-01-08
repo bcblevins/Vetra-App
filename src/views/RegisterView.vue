@@ -11,7 +11,6 @@
         <div class="join-vetra">
             <form @submit.prevent="register">
                 <h1>Join VetRA today</h1>
-                <input type="text" placeholder="username" class="username" name="username" v-model="username">
                 <input type="text" placeholder="email" class="email" name="email" v-model="email">
                 <input type="text" placeholder="First Name" class="first-name" name="firstname" v-model="firstName">
                 <input type="text" placeholder="Last Name" class="last-name" name="lastname" v-model="lastName">
@@ -29,13 +28,13 @@
 </template>
 
 <script>
+import { register } from '@/services/supabase/loginServiceSP';
 import UserService from '@/services/UserService';
 
 export default {
 
     data() {
         return {
-            username: '',
             email: '',
             firstName: '',
             lastName: '',
@@ -46,15 +45,14 @@ export default {
     },
     methods: {
         register() {
-            if (this.password === this.confirmPassword) {
+            if (this.password === this.confirmPassword) { 
                 let user = {
-                    username: this.username,
                     email: this.email,
                     firstName: this.firstName,
                     lastName: this.lastName,
                     password: this.password
                 }
-                UserService.register(user)
+                register(user)
                     .then(() => {
                         this.$router.push({ name: 'login' });
                     })
@@ -192,7 +190,6 @@ export default {
                 font-weight: 400;
             }
 
-            .username,
             .first-name,
             .last-name,
             .password,

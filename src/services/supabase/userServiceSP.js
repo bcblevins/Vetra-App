@@ -2,7 +2,7 @@ import { supabase } from "./supabaseClient";
 
 export async function getUser() {
     const { data, error } = await supabase
-    .from('profile')
+    .from('profiles')
     .select()
 
     if (error) {

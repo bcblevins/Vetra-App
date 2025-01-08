@@ -11,7 +11,7 @@
 
 <script>
 import PetCard from '@/components/cards/PetCard.vue';
-import PetService from '@/services/PetService';
+import { getPets } from '@/services/supabase/petServiceSP';
 
   export default {
     components: {
@@ -24,7 +24,7 @@ import PetService from '@/services/PetService';
       }
     },
     created() {
-      PetService.getPets(this.$store.state.token).then(response => {
+      getPets(this.$store.state.token).then(response => {
         this.pets = response.data;
         console.log(response.data);
         if (response.data.length === 0) {

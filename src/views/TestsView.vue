@@ -12,9 +12,9 @@
 
 <script>
 import TestList from '@/components/containers/TestList.vue';
-import TestService from '@/services/TestService';
 import TestItem from '@/components/items/TestItem.vue';
 import Conversation from '@/components/containers/Conversation.vue';
+import { getResults, getTests } from '@/services/supabase/testServiceSP';
 
 export default {
     components: {
@@ -32,11 +32,11 @@ export default {
         }
     },
     methods: {
-        getTests() {
-            TestService.getTests(this.$route.params.id, this.$store.state.token).then(response => {
+        fetchTests() {
+            getTests(this.$route.params.id).then(response => {
                 this.tests = response.data;
                 let resultPromises = this.tests.map(test => {
-                    return TestService.getResults(test.id, this.$route.params.id, this.$store.state.token).then(response => {
+                    return getResults(test.id).then(response => {
                         test.results = response.data;
                     }).catch(error => {
                         console.log(error);
@@ -54,7 +54,7 @@ export default {
         }
     },
     created() {
-        this.getTests();
+        this.fetchTests();
     },
     watch: {
         $route(to, from) {
@@ -62,7 +62,7 @@ export default {
                 this.test = this.tests.find(test => test.id == to.params.testId);
                 this.keyToggle++;
             } else {
-                TestService.getTests(to.params.id, this.$store.state.token).then(response => {
+                getTests(to.params.id).then(response => {
                     console.log(response.data)
                     this.tests = response.data;
                     console.log(to.params.id, this.tests[0].id)

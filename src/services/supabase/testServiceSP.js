@@ -1,10 +1,10 @@
 import { supabase } from "./supabaseClient";
 
-export async function getTests(testId) {
+export async function getTests(patientId) {
     const { data, error } = await supabase
         .from('test')
         .select()
-        .eq('test_id', testId)
+        .eq('patient_id', patientId)
 
     if (error) {
         throw new Error(error.message)

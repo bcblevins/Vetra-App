@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import RxService from '@/services/RxService';
 import RxItem from '@/components/items/RxItem.vue';
+import { getMeds } from '@/services/supabase/rxServiceSP';
+import { getRefillRequests } from '@/services/supabase/refillServiceSP';
 export default {
     data() {
         return {
@@ -23,10 +24,10 @@ export default {
         RxItem
     },
     created() {
-        RxService.getMeds(this.$route.params.id, this.$store.state.token).then(response => {
+        getMeds(this.$route.params.id, this.$store.state.token).then(response => {
             this.meds = response.data;
             for (let med of this.meds) {
-                RxService.getRefillRequests(this.$route.params.id, med.prescriptionId, this.$store.state.token).then(response => {
+                getRefillRequests(this.$route.params.id, med.prescriptionId, this.$store.state.token).then(response => {
                     if (response.data.length > 0) {
                         let array = response.data;
                         console.log(array);

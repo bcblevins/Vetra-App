@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import PetService from '@/services/PetService';
-import UserService from '@/services/UserService';
+import { getPets } from '@/services/supabase/petServiceSP';
+import { updateUser } from '@/services/supabase/userServiceSP';
 export default {
     data() {
         return {
@@ -44,7 +44,7 @@ export default {
         }
     },
     created() {
-        PetService.getPets(this.$store.state.token).then(response => {
+        getPets().then(response => {
             this.pets = response.data;
         }).catch(error => {
             console.log(error);
@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         saveChanges() {
-            UserService.updateSelf(this.editedUser, this.$store.state.token).then(response => {
+            updateUser(this.editedUser).then(response => {
                 this.$store.commit('SET_USER', response.data);
                 this.editing = !this.editing;
             }).catch(error => {

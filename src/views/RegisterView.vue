@@ -29,7 +29,6 @@
 
 <script>
 import { register } from '@/services/supabase/loginServiceSP';
-import UserService from '@/services/UserService';
 
 export default {
 

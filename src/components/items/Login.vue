@@ -19,9 +19,6 @@
 </template>
 
 <script>
-import UserService from '@/services/UserService.js';
-import PetService from '@/services/PetService';
-import LoginService from '@/services/LoginService';
 import { login } from '@/services/supabase/loginServiceSP';
 
 export default {

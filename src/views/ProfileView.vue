@@ -40,9 +40,9 @@
 import TestList from '@/components/containers/TestList.vue';
 import RxList from '@/components/containers/RxList.vue';
 import Conversation from '@/components/containers/Conversation.vue';
-import TestService from '@/services/TestService';
-import RxService from '@/services/RxService';
-import PetService from '@/services/PetService';
+import { getTests } from '@/services/supabase/testServiceSP';
+import { getPet, imgSource } from '@/services/supabase/petServiceSP';
+import { getMeds } from '@/services/supabase/rxServiceSP';
 
 export default {
     data() {
@@ -72,18 +72,18 @@ export default {
         }
     },
     created() {
-        PetService.getPet(this.$route.params.id, this.$store.state.token).then(response => {
+        getPet(this.$route.params.id).then(response => {
             this.pet = response.data;
 
-            TestService.getTests(this.pet.patientId, this.$store.state.token).then(response => {
+            getTests(this.pet.patientId).then(response => {
                 this.tests = response.data;
             });
 
-            RxService.getMeds(this.pet.patientId, this.$store.state.token).then(response => {
+            getMeds(this.pet.patientId).then(response => {
                 this.meds = response.data;
             });
 
-            this.imgSrc = PetService.imgSource(this.pet.patientId);
+            this.imgSrc = imgSource(this.pet.patientId);
         }).catch(error => {
             console.log(error);
         })

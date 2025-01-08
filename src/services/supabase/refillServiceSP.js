@@ -13,6 +13,7 @@ export async function getRefillRequests(rxId) {
     return data
 }
 
+// TODO: this function makes no sense. Should be an insert, also need to figure out how to handle refill requests.
 export async function sendRefillRequest(rxId) {
     const { data, error } = await supabase
         .from('request')

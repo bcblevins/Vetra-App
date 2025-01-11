@@ -14,9 +14,8 @@
 </template>
 
 <script>
+import { getNotifications } from '@/services/supabase/notificationServiceSP';
 import Notifications from '../containers/Notifications.vue';
-import NotificationService from '@/services/NotificationService'
-
 
 export default {
     data() {
@@ -35,7 +34,7 @@ export default {
             this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
         },
         getNotifications() {
-            NotificationService.getNotifications(this.$store.state.token).then(response => {
+            getNotifications(this.$store.state.pets.map((pet) => pet.patient_id)).then(response => {
                 this.unreadNotifications = response.data.length
             }).catch((error) => {
                 console.error(error);

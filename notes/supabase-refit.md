@@ -18,7 +18,7 @@
 - Service files that need to be rewritten:
   - [x] LoginService
   - [x] MessageService
-  - [ ] NotificationService
+  - [x] NotificationService
   - [x] PetService
   - [x] RxService*
   - [x] TestService
@@ -33,10 +33,10 @@
     - [ ] Conversation*
       - [ ] message service
     - [ ] Notification*
-      - [ ] notification service
+      - [x] notification service
   - **Items:**
-    - [ ] Header*
-      - [ ] notification service
+    - [x] Header*
+      - [x] notification service
     - [x] Login
       - login presumably works, but not redirecting after login.
     - [ ] MessageBubble*

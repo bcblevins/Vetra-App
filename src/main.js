@@ -10,11 +10,11 @@ import router from "./router";
 
 export const store = createStore();
 
-loginService.restoreLogin().then(() => {
+// loginService.restoreLogin().then(() => {
   const app = createApp(App);
   app.use(createPinia());
   app.use(store);
   app.use(router);
 
   app.mount("#app");
-});
+// });

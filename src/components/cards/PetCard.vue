@@ -20,13 +20,13 @@
 </template>
 
 <script>
+import { imgSource } from '@/services/supabase/petServiceSP';
 import { getTests } from '@/services/supabase/testServiceSP';
 export default {
     props: ['pet'],
     computed: {
         imgSrc() {
-            console.log(this.pet.name)
-            return '/src/assets/img/' + this.pet.patientId + '.jpg'
+            return imgSource(this.pet)
         },
 
     },

@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import NotificationService from '@/services/NotificationService'
 import MessageService from '@/services/MessageService';
+import { getNotifications, markRead } from '@/services/supabase/notificationServiceSP';
 
 export default {
     props: ['full-view', 'clear-event'],
@@ -35,13 +35,13 @@ export default {
     },
     methods: {
         title(n) {
-            if (n.messageId > 0) {
+            if (n.message_id > 0) {
                 n.type = 'message';
                 return 'New message received';
-            } else if (n.testId > 0) {
+            } else if (n.test_id > 0) {
                 n.type = 'test';
                 return 'New test posted';
-            } else if (n.requestId > 0) {
+            } else if (n.request_id > 0) {
                 n.type = 'request';
                 return 'Update to refill request';
             }
@@ -67,32 +67,32 @@ export default {
 
         },
         imgSrc(n) {
-            if (n.messageId > 0) {
+            if (n.message_id > 0) {
                 return '/img/message.svg';
-            } else if (n.testId > 0) {
+            } else if (n.test_id > 0) {
                 return '/img/results.svg';
-            } else if (n.requestId > 0) {
+            } else if (n.request_id > 0) {
                 return '/img/pill.svg';
             }
         },
         go(n) {
-            NotificationService.markRead(n.id, this.$store.state.token).then(response => {
+            markRead(n.id).then(response => {
 
 
                 if (n.type === "message") {
-                    MessageService.getMessage(n.messageId, this.$store.state.token).then(response => {
+                    MessageService.getMessage(n.message_id, this.$store.state.token).then(response => {
                         let message = response.data;
 
-                        if (message.testId > 0) {
-                            this.$router.push({ name: 'tests', params: { id: message.patientId, testId: message.testId } });
+                        if (message.test_id > 0) {
+                            this.$router.push({ name: 'tests', params: { id: message.patient_id, test_id: message.test_id } });
                         } else {
-                            this.$router.push({ name: 'profile', params: { id: message.patientId } })
+                            this.$router.push({ name: 'profile', params: { id: message.patient_id } })
                         }
                     })
                 } else if (n.type === "test") {
-                    this.$router.push({ name: 'tests', params: { id: n.patientId, testId: n.testId } });
+                    this.$router.push({ name: 'tests', params: { id: n.patient_id, test_id: n.test_id } });
                 } else if (n.type === "request") {
-                    this.$router.push({ name: 'rx', params: { id: n.patientId } });
+                    this.$router.push({ name: 'rx', params: { id: n.patient_id } });
                 } else {
                     console.log("Error redirecting to notification source. Notification type not set properly.")
                 }
@@ -105,18 +105,19 @@ export default {
 
         },
         loadNotifications() {
-            NotificationService.getNotifications(this.$store.state.token).then(response => {
-                response.data.sort((a, b) => {
+            getNotifications(this.$store.state.pets.map((pet) => pet.patient_id)).then(data => {
+                console.log("notification data: ", data)
+                data.sort((a, b) => {
                     let dateA = new Date(a.timestamp);
                     let dateB = new Date(b.timestamp);
 
                     return dateB - dateA;
                 });
-                if (response.data.length > 4 && !this.fullView) {
+                if (data.length > 4 && !this.fullView) {
                     this.longerThanFive = true;
-                    this.notifications = response.data.slice(0, 4);
-                } else if (response.data.length > 0) {
-                    this.notifications = response.data;
+                    this.notifications = data.slice(0, 4);
+                } else if (data.length > 0) {
+                    this.notifications = data;
                 } else {
                     this.longerThanZero = false;
                     this.notifications = []
@@ -130,7 +131,7 @@ export default {
             console.log("clearing notifications")
             let promises = []
             for (let n of this.notifications) {
-                promises.push(NotificationService.markRead(n.id, this.$store.state.token));
+                promises.push(markRead(n.id));
             }
             Promise.all(promises).then(() => {
                 this.loadNotifications();

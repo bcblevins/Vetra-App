@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { store } from '../main'
 import HomeView from '../views/HomeView.vue'
+import { supabase } from '@/services/supabase/supabaseClient';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,11 +63,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'register' && to.name !== 'login' && store.state.token === null) {
-    next({ name: 'login'})
-  } else {
-    next()
-  }
+  supabase.auth.getUser().then(({data, error}) => {
+    const user = data.user
+    if (to.name !== 'register' && to.name !== 'login' && !user) {
+      next({ name: 'login' })
+    } else {
+      next()
+    }
+  })
 });
 
 export default router

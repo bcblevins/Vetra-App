@@ -11,6 +11,7 @@
 
 <script>
 import PetCard from '@/components/cards/PetCard.vue';
+import { store } from '@/main';
 import { getPets } from '@/services/supabase/petServiceSP';
 
   export default {
@@ -24,10 +25,11 @@ import { getPets } from '@/services/supabase/petServiceSP';
       }
     },
     created() {
-      getPets(this.$store.state.token).then(response => {
-        this.pets = response.data;
-        console.log(response.data);
-        if (response.data.length === 0) {
+      getPets().then(data => {
+        console.log("getPets() data: ", data)
+        this.pets = data;
+        store.commit("SET_PETS", data);
+        if (data.length === 0) {
           this.showNoPetWarning = true;
         }
       }).catch(error => {

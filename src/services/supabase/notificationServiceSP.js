@@ -1,12 +1,18 @@
 import { supabase } from "./supabaseClient";
 
 export async function getNotifications(patientIds) {
+
+    if (!patientIds) {
+        console.log("No patient ids passed to getNotifications")
+        return
+    }
     const { data, error } = await supabase
     .from('notification')
     .select()
     .in('patient_id', patientIds);
 
     if (error) {
+        console.log(patientIds)
         throw new Error(error.message);
     }
 

@@ -35,11 +35,11 @@ export default {
         },
         getNotifications() {
             getNotifications(this.$store.state.pets.map((pet) => pet.patient_id)).then(response => {
-                this.unreadNotifications = response.data.length
+                this.unreadNotifications = response.length
             }).catch((error) => {
                 console.error(error);
 
-                if (error.response.status === 401 && this.$route.path !== '/') {
+                if (this.$route.path !== '/') {
                     this.$router.push({ name: 'login' })
                 }
             });

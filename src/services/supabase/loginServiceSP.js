@@ -1,3 +1,4 @@
+import { getPets } from "./petServiceSP"
 import { supabase } from "./supabaseClient"
 import { getUser } from "./userServiceSP"
 import { store } from "@/main"
@@ -21,6 +22,10 @@ export async function login(email, password) {
   store.commit("SET_USER", userResponse);
 
   store.commit("SET_ROLES", userResponse.role);
+
+  const pets = await getPets();
+
+  store.commit("SET_PETS", [pets])
 
   return data
 }

@@ -12,30 +12,30 @@ export function createStore() {
         email: "beau@test.com"
       },
       pets: [
-        {
-          patientId: "3",
-          firstName: "Arlo",
-          birthday: "01/01/2019",
-          species: "Feline",
-          sex: "CM",
-          ownerUsername: "bblevins96",
-        },
-        {
-          patientId: "1",
-          firstName: "Charlie",
-          birthday: "03/03/2015",
-          species: "Canine",
-          sex: "SF",
-          ownerUsername: "bblevins96",
-        },
-        {
-          patientId: "2",
-          firstName: "Sunny",
-          birthday: "01/01/2017",
-          species: "Feline",
-          sex: "CM",
-          ownerUsername: "bblevins96",
-        }
+        // {
+        //   patientId: "3",
+        //   firstName: "Arlo",
+        //   birthday: "01/01/2019",
+        //   species: "Feline",
+        //   sex: "CM",
+        //   ownerUsername: "bblevins96",
+        // },
+        // {
+        //   patientId: "1",
+        //   firstName: "Charlie",
+        //   birthday: "03/03/2015",
+        //   species: "Canine",
+        //   sex: "SF",
+        //   ownerUsername: "bblevins96",
+        // },
+        // {
+        //   patientId: "2",
+        //   firstName: "Sunny",
+        //   birthday: "01/01/2017",
+        //   species: "Feline",
+        //   sex: "CM",
+        //   ownerUsername: "bblevins96",
+        // }
       ],
       roles: [
         "owner",

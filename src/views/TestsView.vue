@@ -5,7 +5,7 @@
         </nav>
         <main :key="keyToggle">
             <TestItem :test="test" class="test-item" />
-            <Conversation :test="true" class="conversation" />
+            <Conversation :broken="true" :test="true" class="conversation" /> <!-- Remove "broken" prop to render messages-->
         </main>
     </div>
 </template>
@@ -33,18 +33,18 @@ export default {
     },
     methods: {
         fetchTests() {
-            getTests(this.$route.params.id).then(response => {
-                this.tests = response.data;
+            getTests(this.$route.params.id).then(data => {
+                this.tests = data;
                 let resultPromises = this.tests.map(test => {
-                    return getResults(test.id).then(response => {
-                        test.results = response.data;
+                    return getResults(test.test_id).then(data => {
+                        test.results = data;
                     }).catch(error => {
                         console.log(error);
                     });
                 });
 
                 Promise.all(resultPromises).then(() => {
-                    this.test = this.tests.find(test => test.id == this.$route.params.testId);
+                    this.test = this.tests.find(test => test.test_id == this.$route.params.testId);
                     this.loading = false;
                 });
 
@@ -59,14 +59,14 @@ export default {
     watch: {
         $route(to, from) {
             if (to.params.id === from.params.id) {
-                this.test = this.tests.find(test => test.id == to.params.testId);
+                this.test = this.tests.find(test => test.test_id == to.params.testId);
                 this.keyToggle++;
             } else {
-                getTests(to.params.id).then(response => {
-                    console.log(response.data)
-                    this.tests = response.data;
-                    console.log(to.params.id, this.tests[0].id)
-                    this.$router.push({ name: 'tests', params: { id: to.params.id, testId: this.tests[0].id } })
+                getTests(to.params.id).then(data => {
+                    console.log(data)
+                    this.tests = data;
+                    console.log(to.params.id, this.tests[0].test_id)
+                    this.$router.push({ name: 'tests', params: { id: to.params.id, testId: this.tests[0].test_id } })
                 }).catch(error => {
                     console.log(error);
                 });

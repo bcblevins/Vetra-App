@@ -10,7 +10,7 @@ export default {
     props: ['test'],
     computed: {
         formattedTimeStamp() {
-            const date = new Date(this.test.timestamp);
+            const date = new Date(this.test.time_stamp);
             const dateString = date.toLocaleDateString('en-US', {
                 month: 'numeric',
                 day: 'numeric',
@@ -27,7 +27,8 @@ export default {
     },        
     methods: {
         goToTest() {
-            this.$router.push({ name: 'tests', params: { id: this.test.patientID, testId: this.test.id } })
+            console.log(":)")
+            this.$router.push({ name: 'tests', params: { id: this.test.patient_iD, testId: this.test.test_id } })
         }
     }
 }

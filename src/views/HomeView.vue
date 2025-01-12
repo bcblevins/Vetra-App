@@ -17,16 +17,15 @@ import { getPets } from '@/services/supabase/petServiceSP';
   export default {
     components: {
       PetCard,
-      showNoPetWarning: false
     },
     data() {
       return {
-        pets: []
+        pets: [],
+        showNoPetWarning: false
       }
     },
     created() {
       getPets().then(data => {
-        console.log("getPets() data: ", data)
         this.pets = data;
         store.commit("SET_PETS", data);
         if (data.length === 0) {

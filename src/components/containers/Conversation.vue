@@ -1,6 +1,6 @@
 <template>
     <div class="conversation">
-        <div class="messages" ref="messagesContainer">
+        <div class="messages" ref="messagesContainer" >
             <MessageBubble v-for="message in sortedMessages" :key="message.id" :message="message" />
             <span v-show="noMessages">Send a message to start a conversation...</span>
         </div>
@@ -31,7 +31,10 @@ export default {
         test: {
             type: Boolean
         },
-        medication: {
+        medication: { // Don't think this is used. Remove?
+            type: Boolean
+        },
+        broken: { // TODO: Remove me when message service fixed
             type: Boolean
         }
     },
@@ -72,7 +75,9 @@ export default {
                 });
         },
         updateMessages() {
-            if (this.patient) {
+            if (this.broken) { // TODO: Remove me when message service fixed
+                console.log("Not attempting to retrieve messages")
+            } else if (this.patient) {
                 MessageService.getMessagesByPatient(this.$route.params.id, this.$store.state.token).then(response => {
                     this.messages = response.data;
                     this.scrollToBottom();

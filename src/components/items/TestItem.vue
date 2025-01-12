@@ -15,15 +15,15 @@
                 <th>Low Normal</th>
                 <th>High Normal</th>
             </tr>
-            <tr v-for="result in test.results" :key="result.resultID" :class="{ 'abnormal': abnormal(result) }">
+            <tr v-for="result in test.results" :key="result.result_id" :class="{ 'abnormal': abnormal(result) }">
                 <td class="param-name">
-                    {{ result.parameterName }}
-                    <span class="param-description"> {{ paramDescription(result.parameterName) }} </span>
+                    {{ result.parameter_name }}
+                    <span class="param-description"> {{ paramDescription(result.parameter_name) }} </span>
                 </td>
-                <td> {{ result.resultValue }} </td>
+                <td> {{ result.result_value }} </td>
                 <td> {{ result.unit }} </td>
-                <td> {{ result.rangeLow }} </td>
-                <td> {{ result.rangeHigh }} </td>
+                <td> {{ result.range_low }} </td>
+                <td> {{ result.range_high }} </td>
             </tr>
         </table>
     </div>
@@ -34,7 +34,8 @@ export default {
     props: ['test'],
     computed: {
         formattedTimeStamp() {
-            const date = new Date(this.test.timestamp);
+            const date = new Date(this.test.time_stamp);
+            console.log(this.test)
             const dateString = date.toLocaleDateString('en-US', {
                 month: 'numeric',
                 day: 'numeric',
@@ -56,7 +57,7 @@ export default {
     methods: {
         abnormal(result) {
             // "+" is used to convert strings to numbers
-            return +result.resultValue < +result.rangeLow || +result.resultValue > +result.rangeHigh;
+            return +result.result_value < +result.range_low || +result.result_value > +result.range_high;
         },
         paramDescription(name) {
             let descs = this.$store.state.parameterDescriptions;

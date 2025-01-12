@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <div class="portrait" @click="$router.push({ name: 'profile', params: { id: pet.patientId } })">
+        <div class="portrait" @click="$router.push({ name: 'profile', params: { id: pet.patient_id } })">
             <img :src="imgSrc" :alt="pet.name" height="250px">
             <span>How's {{ pet.name }} doing?</span>
         </div>
@@ -9,11 +9,11 @@
 
         <div class="icon-container">
             <img src="../../assets/icons/message.svg" alt="Messages" class="icon messages"
-                @click="$router.push({ name: 'profile', params: { id: pet.patientId } })">
+                @click="$router.push({ name: 'profile', params: { id: pet.patient_id } })">
             <img src="../../assets/icons/results.svg" alt="Results" class="icon results"
-                @click="openTest(pet.patientId)">
+                @click="openTest(pet.patient_id)">
             <img src="../../assets/icons/pill.svg" alt="Medications" class="icon meds"
-                @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
+                @click="$router.push({ name: 'rx', params: { id: pet.patient_id } })">
         </div>
 
     </div>
@@ -33,10 +33,11 @@ export default {
     methods: {
         openTest(id) {
             let tests
-            getTests(this.pet.patientId).then(response => {
-                tests = response.data;
-                console.log(id, tests[0].id)
-                this.$router.push({ name: 'tests', params: { id: id, testId: tests[0].id } })
+            getTests(this.pet.patient_id).then(data => {
+                console.log(data)
+                tests = data;
+                console.log(id, tests[0].test_id)
+                this.$router.push({ name: 'tests', params: { id: id, testId: tests[0].test_id } })
             }).catch(error => {
                 console.log(error);
             });

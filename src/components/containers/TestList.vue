@@ -1,6 +1,6 @@
 <template>
     <div :class="{ 'test-container': true, 'shrink': shrink, 'nav': true }">
-        <TestCard v-for="test in tests" :key="test.id" :test="test" :class="{ 'shrink': shrink, 'active-test': activeTest === test }"/>
+        <TestCard v-for="test in tests" :key="test.test_id" :test="test" :class="{ 'shrink': shrink, 'active-test': activeTest === test }"/>
     </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
 
     methods: {
         goToTest(test) {
-            this.$router.push({ name: 'tests', params: { id: test.patientID, testId: test.id } });
+            this.$router.push({ name: 'tests', params: { id: test.patientID, testId: test.test_id } });
         }
     }
 }

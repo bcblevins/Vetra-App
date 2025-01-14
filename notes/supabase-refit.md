@@ -1,16 +1,12 @@
 # Supabase Refit
 
-## Notes
-
-- new service files will be camelCase"SP"
-  - rxService was split from refill request operations for consistency
-
 ## Pressing Todos
 - ~~**store** has user stored inside, but needs to be handled differently~~
 - Messages have "to_user". Need to figure out how to implement.
   - Do it based on emails?
 - Notifications need to be figured out
-  - Looks like "edge functions" with Supabase are the way
+  - ~~Looks like "edge functions" with Supabase are the way~~
+  - SQL triggers proved more convenient for my purposes. 
 
   
 ## Service reworking

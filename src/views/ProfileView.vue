@@ -7,20 +7,20 @@
                     <img :src="imgSrc" :alt="pet.name">
                     <h1> {{ pet.name }} </h1>
                 </div>
-                <div class="meds" @click="$router.push({ name: 'rx', params: { id: pet.patientId } })">
+                <div class="meds" @click="$router.push({ name: 'rx', params: { id: pet.patient_id } })">
                     <h2>Prescriptions</h2>
                     <ul class="meds-list">
-                        <li v-for="med in meds.slice(0, 2)" key="med.prescriptionId"> {{ med.name }} </li>
+                        <li v-for="med in meds.slice(0, 2)" key="med.prescription_id"> {{ med.medication_name }} </li>
                         <li v-show="meds.length > 3">...</li>
                         <li v-show="meds.length < 1" >No current medications</li>
                     </ul>
                 </div>
                 <div class="tests"
-                    @click="$router.push({ name: 'tests', params: { id: this.$route.params.id, testId: this.tests[0].id } })">
+                    @click="$router.push({ name: 'tests', params: { id: this.$route.params.id, testId: this.tests[0].test_id } })">
                     <h2>Tests</h2>
                     <ul>
                         <li v-for="test in tests.slice(0, 3)"> {{ test.name + " | " + new
-                            Date(test.timestamp).toLocaleDateString()}} </li>
+                            Date(test.time_stamp).toLocaleDateString()}} </li>
                         <li v-show="tests.length > 4">...</li>
                         <li v-show="tests.length < 1" >No tests in record</li>
                     </ul>
@@ -28,7 +28,7 @@
 
             </nav>
 
-            <Conversation class="conversation" :patient="true" />
+            <Conversation class="conversation" :broken="true" :patient="true" />
 
         </main>
 
@@ -72,18 +72,19 @@ export default {
         }
     },
     created() {
-        getPet(this.$route.params.id).then(response => {
-            this.pet = response.data;
+        getPet(this.$route.params.id).then(data => {
+            this.pet = data;
+            console.log(data)
 
-            getTests(this.pet.patientId).then(response => {
-                this.tests = response.data;
+            getTests(this.pet.patient_id).then(data => {
+                this.tests = data;
             });
 
-            getMeds(this.pet.patientId).then(response => {
-                this.meds = response.data;
+            getMeds(this.pet.patient_id).then(data => {
+                this.meds = data;
             });
 
-            this.imgSrc = imgSource(this.pet.patientId);
+            this.imgSrc = imgSource(this.pet);
         }).catch(error => {
             console.log(error);
         })

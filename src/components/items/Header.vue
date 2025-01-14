@@ -34,8 +34,9 @@ export default {
             this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
         },
         getNotifications() {
-            getNotifications(this.$store.state.pets.map((pet) => pet.patient_id)).then(response => {
-                this.unreadNotifications = response.length
+            let petIds = this.$store.state.pets.map((pet) => pet.patient_id)
+            getNotifications(petIds).then(data => {
+                this.unreadNotifications = data.length
             }).catch((error) => {
                 console.error(error);
 

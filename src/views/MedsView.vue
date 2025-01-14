@@ -24,22 +24,23 @@ export default {
         RxItem
     },
     created() {
-        getMeds(this.$route.params.id, this.$store.state.token).then(response => {
-            this.meds = response.data;
+        getMeds(this.$route.params.id).then(data => {
+            this.meds = data;
             for (let med of this.meds) {
-                getRefillRequests(this.$route.params.id, med.prescriptionId, this.$store.state.token).then(response => {
-                    if (response.data.length > 0) {
-                        let array = response.data;
+                getRefillRequests(med.prescription_id).then(data => {
+                    console.log(data)
+                    if (data.length > 0) {
+                        let array = data;
                         console.log(array);
                         array.sort((a, b) => {
-                            return new Date(b.requestId) - new Date(a.requestId);
+                            return new Date(b.request_id) - new Date(a.request_id);
                         });
                         console.log(array);
                         if (array[0].status === 'PENDING') {
                             med.refillPending = true;
                         }
                     } else {
-                        med.refillPending = false;
+                        med.refill_pending = false;
                     }
                 });
             }

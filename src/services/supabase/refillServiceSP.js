@@ -14,11 +14,14 @@ export async function getRefillRequests(rxId) {
 }
 
 // TODO: this function makes no sense. Should be an insert, also need to figure out how to handle refill requests.
-export async function sendRefillRequest(rxId) {
+export async function sendRefillRequest(med) {
     const { data, error } = await supabase
         .from('request')
+        .insert({
+            prescription_id: med.prescription_id,
+            user_id: med.doctor
+        })
         .select()
-        .eq('prescription_id', rxId)
 
     if (error) {
         throw new Error(error.message)

@@ -22,7 +22,7 @@ export async function getPet(petId) {
         throw new Error(error.message)
     }
 
-    return data
+    return data[0];
 }
 
 export function imgSource(pet) {

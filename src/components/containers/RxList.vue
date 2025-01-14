@@ -1,6 +1,6 @@
 <template>
     <div class="rx-list" >
-        <RxItem v-for="med in meds" :key="med.id" :med="med" :class="{ 'shrink': shrink}"/>
+        <RxItem v-for="med in meds" :key="med.medication_id" :med="med" :class="{ 'shrink': shrink}"/>
     </div>
 </template>
 

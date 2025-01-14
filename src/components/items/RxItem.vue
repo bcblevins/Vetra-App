@@ -1,11 +1,11 @@
 <template>
     <div class="main">
-        <div :class="{ 'med-refills': true, 'pending': med.refillPending }" @click="sendRefillRequest">
-            <p class="request-refill"> {{med.refillPending ? 'Pending' : 'Refill'}} </p>
+        <div :class="{ 'med-refills': true, 'pending': med.refill_pending }" @click="sendRefillRequest">
+            <p class="request-refill"> {{med.refill_pending ? 'Pending' : 'Refill'}} </p>
         </div>
         <div class="med-details">
             <div class="med-title">
-                <span class="med-name"> {{ med.name }} </span>
+                <span class="med-name"> {{ med.medication_name }} </span>
                 <span class="med-quantity"> {{ med.quantity + ' ' + med.unit}} </span>
                 <span class="med-refill-quantity"> {{ med.refills + ' refills' }} </span>
             </div>
@@ -17,6 +17,7 @@
 
 <script>
 import RxService from '@/services/RxService';
+import { sendRefillRequest } from '@/services/supabase/refillServiceSP';
 
 export default {
     props: ['med'],
@@ -32,14 +33,14 @@ export default {
     },
     methods: {
         sendRefillRequest() {
-            if (this.med.refillPending) {
+            if (this.med.refill_pending) {
                 console.log('Refill request already pending');
                 return;
             }
-            RxService.sendRefillRequest(this.med.prescriptionId, this.$route.params.id, this.$store.state.token).then((response) => {
+            sendRefillRequest(this.med).then((data) => {
 
-                
-                this.med.refillPending = response.data.status === 'PENDING';
+                console.log(data)
+                this.med.refillPending = data.status === 'PENDING';
             }).catch((error) => {
                 console.log(error);
             });

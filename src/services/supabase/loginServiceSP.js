@@ -25,7 +25,7 @@ export async function login(email, password) {
 
   const pets = await getPets();
 
-  store.commit("SET_PETS", [pets])
+  store.commit("SET_PETS", pets)
 
   return data
 }

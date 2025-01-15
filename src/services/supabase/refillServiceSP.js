@@ -1,10 +1,12 @@
 import { supabase } from "./supabaseClient";
 
 export async function getRefillRequests(rxId) {
+    console.log("getRefillRequests: ", rxId)
     const { data, error } = await supabase
         .from('request')
         .select()
         .eq('prescription_id', rxId)
+        .eq('status', 'PENDING')
 
     if (error) {
         throw new Error(error.message)

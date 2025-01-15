@@ -64,7 +64,7 @@ export default {
             let desc = descs.find((d) => {
                 return d.name.includes(name);
             });
-            if (desc == undefined) {
+            if (desc === undefined) {
                 return "No description available";
             }
             return desc.description;

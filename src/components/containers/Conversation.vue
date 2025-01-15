@@ -134,6 +134,8 @@ export default {
         border-radius: .5em;
         margin: 5px;
         background-color: white;
+        overflow: hidden;
+
 
         span {
             margin: auto;

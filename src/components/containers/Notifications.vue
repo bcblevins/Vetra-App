@@ -76,7 +76,7 @@ export default {
             }
         },
         go(n) {
-            markRead(n.id).then(response => {
+            markRead(n.notification_id).then(() => {
 
 
                 if (n.type === "message") {
@@ -84,13 +84,13 @@ export default {
                         let message = response.data;
 
                         if (message.test_id > 0) {
-                            this.$router.push({ name: 'tests', params: { id: message.patient_id, test_id: message.test_id } });
+                            this.$router.push({ name: 'tests', params: { id: message.patient_id, testId: message.test_id } });
                         } else {
                             this.$router.push({ name: 'profile', params: { id: message.patient_id } })
                         }
                     })
                 } else if (n.type === "test") {
-                    this.$router.push({ name: 'tests', params: { id: n.patient_id, test_id: n.test_id } });
+                    this.$router.push({ name: 'tests', params: { id: n.patient_id, testId: n.test_id } });
                 } else if (n.type === "request") {
                     this.$router.push({ name: 'rx', params: { id: n.patient_id } });
                 } else {

@@ -5,6 +5,9 @@
             <div class="rx-list">
                 <RxItem v-for="med in meds" :key="med.id" :med="med" />
             </div>
+            <div class="none-message" v-if="meds.length === 0" >
+                No active prescriptions...
+            </div>
 
         </main>
     </div>
@@ -85,7 +88,7 @@ export default {
 
         .rx-list {
             border: none;
-            overflow-y: scroll;
+            overflow-y: hidden;
             font-size: var(--standard-text);
             animation: slide-in .4s forwards;
 
@@ -97,6 +100,11 @@ export default {
                     transform: translateY(0%);
                 }
             }
+        }
+
+        .none-message {
+            font-size: 20px;
+            color: rgb(155, 159, 165);
         }
     }
 }

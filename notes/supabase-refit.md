@@ -4,9 +4,10 @@
 - ~~**store** has user stored inside, but needs to be handled differently~~
 - Messages have "to_user". Need to figure out how to implement.
   - Do it based on emails?
-- Notifications need to be figured out
+- [x] Notifications need to be figured out
   - ~~Looks like "edge functions" with Supabase are the way~~
   - SQL triggers proved more convenient for my purposes. 
+- [ ] Figure out messages
 
   
 ## Service reworking
@@ -53,7 +54,7 @@
 
 TODO:
 - write js docs for each service fn with return types
-- Figure out user situation
+- [x] Figure out user situation
   - Add profiles table to track names, etc about users
   - Figure out what is needed to adjust in components/store/services to account for change.
 - Create a "Demo Engine" service to provide simulated user experience on a unique branch.

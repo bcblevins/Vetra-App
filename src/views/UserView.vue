@@ -2,11 +2,11 @@
     <div class="user-view">
         <main v-show="!editing">
             <h1> {{ user.firstName + " " + user.lastName }} </h1>
-            <p> {{ "Username: " + user.username }} </p>
-            <p> {{ "Email: " + user.email }} </p>
+            <!-- <p> {{ "Username: " + user.username }} </p> -->
+            <!-- <p> {{ "Email: " + user.email }} </p> -->
             <p class="pet-list-header">Pets:</p>
             <ul>
-                <li v-for="pet in pets" key="pet.patientId"> {{ pet.name }} </li>
+                <li v-for="pet in pets" key="pet.patient_id"> {{ pet.name }} </li>
             </ul>
             <button @click="editing = !editing">Edit</button>
         </main>
@@ -16,8 +16,8 @@
             <input type="text" id="firstName" name="firstName" v-model="editedUser.firstName" required>
             <label for="lastName">Last Name:</label>
             <input type="text" id="lastName" name="lastName" v-model="editedUser.lastName" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" v-model="editedUser.email" required>
+           <!-- <label for="email">Email:</label>
+            <input type="email" id="email" name="email" v-model="editedUser.email" required> -->
             <button @click="editing = !editing">Cancel</button>
             <button @click="saveChanges">Save</button>
         </form>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { logout } from '@/services/supabase/loginServiceSP';
 import { getPets } from '@/services/supabase/petServiceSP';
 import { updateUser } from '@/services/supabase/userServiceSP';
 export default {
@@ -44,16 +45,16 @@ export default {
         }
     },
     created() {
-        getPets().then(response => {
-            this.pets = response.data;
+        getPets().then(data => {
+            this.pets = data;
         }).catch(error => {
             console.log(error);
         });
     },
     methods: {
         saveChanges() {
-            updateUser(this.editedUser).then(response => {
-                this.$store.commit('SET_USER', response.data);
+            updateUser(this.editedUser).then(data => {
+                this.$store.commit('SET_USER', data);
                 this.editing = !this.editing;
             }).catch(error => {
                 console.log(error);
@@ -61,8 +62,7 @@ export default {
         },
         logout() {
             console.log("Logging out");
-            localStorage.removeItem('token');
-            this.$store.commit('SET_TOKEN', null);
+            logout()
             this.$router.push('/login');
         }
     },

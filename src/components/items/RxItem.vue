@@ -1,12 +1,12 @@
 <template>
     <div class="main">
-        <div :class="{ 'med-refills': true, 'pending': med.refill_pending }" @click="sendRefillRequest">
-            <p class="request-refill"> {{med.refill_pending ? 'Pending' : 'Refill'}} </p>
+        <div :class="{ 'med-refills': true, 'pending': isPending }" @click="sendRefillRequest">
+            <p class="request-refill"> {{ isPending ? 'Pending' : 'Refill' }} </p>
         </div>
         <div class="med-details">
             <div class="med-title">
                 <span class="med-name"> {{ med.medication_name }} </span>
-                <span class="med-quantity"> {{ med.quantity + ' ' + med.unit}} </span>
+                <span class="med-quantity"> {{ med.quantity + ' ' + (med.unit ? med.unit : '') }} </span>
                 <span class="med-refill-quantity"> {{ med.refills + ' refills' }} </span>
             </div>
 
@@ -16,14 +16,13 @@
 </template>
 
 <script>
-import RxService from '@/services/RxService';
-import { sendRefillRequest } from '@/services/supabase/refillServiceSP';
+import { getRefillRequests, sendRefillRequest } from '@/services/supabase/refillServiceSP';
 
 export default {
     props: ['med'],
     data() {
         return {
-
+            isPending: false
         }
     },
     computed: {
@@ -33,19 +32,31 @@ export default {
     },
     methods: {
         sendRefillRequest() {
-            if (this.med.refill_pending) {
+            if (this.isPending) {
                 console.log('Refill request already pending');
                 return;
             }
             sendRefillRequest(this.med).then((data) => {
 
                 console.log(data)
-                this.med.refillPending = data.status === 'PENDING';
+                this.getRequests()
             }).catch((error) => {
                 console.log(error);
             });
-        }
+        },
+        getRequests() {
+            getRefillRequests(this.med.prescription_id).then((data) => {
+                console.log("requests:", data)
+                if (data.length > 0) {
+                    this.isPending = true;
+                }
+            })
+        },
     },
+    mounted() {
+        this.getRequests()
+    }
+
 }
 </script>
 

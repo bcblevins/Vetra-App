@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { getMessagesByPatient, getMessagesByTest, sendMessage } from '@/services/supabase/messageServiceSP';
 import MessageBubble from '../items/MessageBubble.vue';
 import MessageService from '@/services/MessageService';
 
@@ -44,7 +45,7 @@ export default {
     computed: {
         sortedMessages() {
             return this.messages.slice().sort((a, b) => {
-                return new Date(a.timestamp) - new Date(b.timestamp);
+                return new Date(a.time_stamp) - new Date(b.time_stamp);
             });
         },
         noMessages() {
@@ -55,18 +56,18 @@ export default {
         sendMessage() {
             this.message = {
                     body: this.messageBody,
-                    patientId: this.$route.params.id,
-                    timestamp: new Date(),
-                    fromUsername: this.$store.state.user.username,
+                    patient_id: this.$route.params.id,
+                    time_stamp: new Date(),
+                    from_user: null, //from_user set automatically by supabase
                     // TODO: Hardcoded! Bad!
-                    toUsername: "cakelly4",
-                    testId: null,
-                    prescriptionId: null
+                    to_user: "762c2374-c178-458b-b155-2918b9c5aad4",
+                    test_id: null,
+                    prescription_id: null
                 }
             if (this.test) {
-                this.message.testId = this.$route.params.testId;
+                this.message.test_id = this.$route.params.testId;
             }
-            MessageService.sendMessage(this.message, this.$store.state.token).then(response => {
+            sendMessage(this.message).then(response => {
                     this.updateMessages();
                     this.messageBody = '';
                     this.scrollToBottom();
@@ -78,13 +79,13 @@ export default {
             if (this.broken) { // TODO: Remove me when message service fixed
                 console.log("Not attempting to retrieve messages")
             } else if (this.patient) {
-                MessageService.getMessagesByPatient(this.$route.params.id, this.$store.state.token).then(response => {
-                    this.messages = response.data;
+                getMessagesByPatient(this.$route.params.id).then(data => {
+                    this.messages = data;
                     this.scrollToBottom();
                 });
             } else if (this.test) {
-                MessageService.getMessagesByTest(this.$route.params.id, this.$route.params.testId, this.$store.state.token).then(response => {
-                    this.messages = response.data;
+                getMessagesByTest(this.$route.params.testId).then(data => {
+                    this.messages = data;
                     this.scrollToBottom();
                 });
             }
@@ -129,12 +130,11 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         padding: 1em;
-        overflow: scroll;
+        overflow: auto;
         flex-grow: 1;
         border-radius: .5em;
         margin: 5px;
         background-color: white;
-        overflow: hidden;
 
 
         span {

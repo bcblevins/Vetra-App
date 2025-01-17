@@ -4,11 +4,12 @@
         <span class="body">
             {{ message.body }}
         </span>
-        <span class="timestamp"> {{ formatDate(message.timestamp) }} </span>
+        <span class="timestamp"> {{ formatDate(message.time_stamp) }} </span>
     </div>
 </template>
 
 <script>
+import { getName } from '@/services/supabase/userServiceSP';
 import UserService from '@/services/UserService';
 export default {
     props: ['message'],
@@ -30,12 +31,14 @@ export default {
             });
         },
         isFrom() {
-            return this.message.fromUsername === this.$store.state.user.username;
+            console.log("message: ", this.message.from_user)
+            console.log(this.$store.state.user)
+            return this.message.from_user === this.$store.state.user.id;
         }
     },
     created() {
-        UserService.getName(this.message.fromUsername, this.$store.state.token).then(response => {
-                this.name = response.data;
+        getName(this.message.from_user).then(data => {
+                this.name = data;
             })
     }
 }

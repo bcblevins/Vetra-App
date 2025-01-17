@@ -28,7 +28,7 @@
 
             </nav>
 
-            <Conversation class="conversation" :broken="true" :patient="true" />
+            <Conversation class="conversation" :patient="true" />
 
         </main>
 
@@ -74,7 +74,6 @@ export default {
     created() {
         getPet(this.$route.params.id).then(data => {
             this.pet = data;
-            console.log(data)
 
             getTests(this.pet.patient_id).then(data => {
                 this.tests = data;

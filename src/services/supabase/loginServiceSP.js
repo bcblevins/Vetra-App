@@ -18,7 +18,12 @@ export async function login(email, password) {
     throw new Error("Login error: " + error.message)
   }
 
-  const userResponse = await getUser();
+  const userId = (await supabase.auth.getUser()).data.user.id
+
+  const userResponse = await getUser(userId);
+
+  console.log(userResponse)
+
   store.commit("SET_USER", userResponse);
 
   store.commit("SET_ROLES", userResponse.role);
@@ -78,3 +83,4 @@ export async function logout() {
     throw new Error("Error logging out: " + error.message)
   }
 }
+

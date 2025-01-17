@@ -31,7 +31,7 @@ export default {
         },
         goToUser() {
             this.hideNotifications();
-            this.$router.push({ name: 'user', params: { id: this.$store.state.user.username } });
+            this.$router.push({ name: 'user' });
         },
         getNotifications() {
             let petIds = this.$store.state.pets.map((pet) => pet.patient_id)

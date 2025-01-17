@@ -5,11 +5,7 @@ export function createStore() {
     state: {
       token: null,
       user: {
-        username: "bblevins96",
-        password: "$2a$10$o5y4WbVoawMUwZiTnQINJOAm6QJyOE3dD2KYIE1kkze7O0m6PzqA.",
-        firstName: "Beau",
-        lastName: "Blevins",
-        email: "beau@test.com"
+        empty: true
       },
       pets: [
         // {

@@ -58,7 +58,7 @@ export default {
                     body: this.messageBody,
                     patient_id: this.$route.params.id,
                     time_stamp: new Date(),
-                    from_user: null, //from_user set automatically by supabase
+                    from_user: this.$store.state.user.id,
                     // TODO: Hardcoded! Bad!
                     to_user: "762c2374-c178-458b-b155-2918b9c5aad4",
                     test_id: null,

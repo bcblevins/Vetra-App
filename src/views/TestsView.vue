@@ -5,7 +5,7 @@
         </nav>
         <main :key="keyToggle">
             <TestItem :test="test" class="test-item" />
-            <Conversation :broken="true" :test="true" class="conversation" /> <!-- Remove "broken" prop to render messages-->
+            <Conversation  :test="true" class="conversation" /> <!-- Remove "broken" prop to render messages-->
         </main>
     </div>
 </template>

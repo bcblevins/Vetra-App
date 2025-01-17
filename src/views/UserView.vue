@@ -1,7 +1,7 @@
 <template>
     <div class="user-view">
         <main v-show="!editing">
-            <h1> {{ user.firstName + " " + user.lastName }} </h1>
+            <h1> {{ user.first_name + " " + user.last_name }} </h1>
             <!-- <p> {{ "Username: " + user.username }} </p> -->
             <!-- <p> {{ "Email: " + user.email }} </p> -->
             <p class="pet-list-header">Pets:</p>
@@ -46,7 +46,7 @@ export default {
     },
     created() {
         getPets().then(data => {
-            this.pets = data;
+            this.pets = data;0
         }).catch(error => {
             console.log(error);
         });
@@ -68,6 +68,7 @@ export default {
     },
     computed: {
         user() {
+            console.log(this.$store.state.user)
             return this.$store.state.user;
         }
     },

@@ -60,6 +60,7 @@ export async function getMessagesByTest(testId) {
  * @returns {object} message
  */
 export async function sendMessage(message) {
+    console.log(JSON.stringify(message))
     const { data, error } = await supabase
         .from('message')
         .insert(message)

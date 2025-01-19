@@ -26,7 +26,7 @@ export default {
     props: ['pet'],
     computed: {
         imgSrc() {
-            return "../../.." + imgSource(this.pet)
+            return imgSource(this.pet)
         },
 
     },

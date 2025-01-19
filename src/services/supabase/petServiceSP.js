@@ -40,12 +40,12 @@ export async function getPetName(petId) {
 
 export function imgSource(pet) {
     if ([1,2,3].includes(pet.patient_id)) {
-        return '/assets/img/' + pet.patient_id + '.jpg'
+        return '/img/' + pet.patient_id + '.jpg'
     } else {
         if (pet.species === "Canine") {
-            return '/assets/img/dog.png'
+            return '/img/dog.png'
         } else {
-            return '/assets/img/cat.png'
+            return '/img/cat.png'
         }
     }
 }

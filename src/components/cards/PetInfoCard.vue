@@ -20,7 +20,7 @@ export default {
     props: ['pet'],
     computed: {
         imgSrc() {
-            return './src/assets/img/' + this.pet.id + '.jpg'
+            return '@/src/assets/img/' + this.pet.id + '.jpg'
         },
         petAge() {
             return new Date().getFullYear() - new Date(this.pet.birthday).getFullYear();

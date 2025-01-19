@@ -12,7 +12,7 @@
                     <ul class="meds-list">
                         <li v-for="med in meds.slice(0, 2)" key="med.prescription_id"> {{ med.medication_name }} </li>
                         <li v-show="meds.length > 3">...</li>
-                        <li v-show="meds.length < 1" >No current medications</li>
+                        <li v-show="meds.length < 1">No current medications</li>
                     </ul>
                 </div>
                 <div class="tests"
@@ -20,9 +20,9 @@
                     <h2>Tests</h2>
                     <ul>
                         <li v-for="test in tests.slice(0, 3)"> {{ test.name + " | " + new
-                            Date(test.time_stamp).toLocaleDateString()}} </li>
+                            Date(test.time_stamp).toLocaleDateString() }} </li>
                         <li v-show="tests.length > 4">...</li>
-                        <li v-show="tests.length < 1" >No tests in record</li>
+                        <li v-show="tests.length < 1">No tests in record</li>
                     </ul>
                 </div>
 
@@ -50,7 +50,6 @@ export default {
             pet: {},
             meds: [],
             tests: [],
-            imgSrc: '',
 
         }
     },
@@ -69,6 +68,17 @@ export default {
                 age--;
             }
             return age;
+        },
+        imgSrc() {
+            if ([1, 2, 3].includes(this.pet.patient_id)) {
+                return '@/assets/img/' + this.pet.patient_id + '.jpg'
+            } else {
+                if (pet.species === "Canine") {
+                    return '@/assets/img/dog.png'
+                } else {
+                    return '@/assets/img/cat.png'
+                }
+            }
         }
     },
     created() {
@@ -85,7 +95,7 @@ export default {
                 this.meds = data;
             });
 
-            this.imgSrc = imgSource(this.pet);
+            this.imgSrc = ".." + imgSource(this.pet);
         }).catch(error => {
             console.log(error);
         })
@@ -124,6 +134,7 @@ export default {
                 from {
                     transform: translateX(-100%);
                 }
+
                 to {
                     transform: translateX(0%);
                 }
@@ -188,7 +199,7 @@ export default {
                     list-style: none;
                     margin-bottom: 20px;
                     text-decoration: underline;
-                    
+
                     li::before {
                         content: '';
                         display: inline-block;
@@ -242,7 +253,7 @@ export default {
                         width: 1em;
                         height: 1em;
                         background-image: url('../assets/icons/results.svg');
-                        background-size:contain;
+                        background-size: contain;
                         background-repeat: no-repeat;
                         margin-right: 8px;
                     }

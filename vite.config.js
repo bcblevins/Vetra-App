@@ -15,6 +15,6 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  // TODO: Change below to "/Vetra-App/"
+  // TODO: For build change below to "/Vetra-App/"
   base: "/Vetra-App"
 })

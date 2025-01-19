@@ -1,7 +1,6 @@
 import { supabase } from "./supabaseClient";
 
 export async function getRefillRequests(rxId) {
-    console.log("getRefillRequests: ", rxId)
     const { data, error } = await supabase
         .from('request')
         .select()

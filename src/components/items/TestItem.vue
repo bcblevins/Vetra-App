@@ -35,7 +35,6 @@ export default {
     computed: {
         formattedTimeStamp() {
             const date = new Date(this.test.time_stamp);
-            console.log(this.test)
             const dateString = date.toLocaleDateString('en-US', {
                 month: 'numeric',
                 day: 'numeric',

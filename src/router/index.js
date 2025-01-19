@@ -68,8 +68,7 @@ router.beforeEach((to, from, next) => {
     const user = data.user
     if (to.name !== 'register' && to.name !== 'login' && !user) {
       next({ name: 'login' })
-    } else if (store.state.user.empty) {
-      console.log(user)
+    } else if (store.state.user.empty && user !== null) {
       getUser(user.id).then((data) => {
         store.commit("SET_USER", data)
         next()

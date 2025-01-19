@@ -75,6 +75,8 @@ export default {
         getPet(this.$route.params.id).then(data => {
             this.pet = data;
 
+            document.title = this.pet.name + "'s Profile";
+
             getTests(this.pet.patient_id).then(data => {
                 this.tests = data;
             });
@@ -93,7 +95,7 @@ export default {
 
     },
     mounted() {
-        document.title = 'Profile | ' + this.pet.name;
+        console.log(this.pet)
     }
 }
 </script>

@@ -25,6 +25,19 @@ export async function getPet(petId) {
     return data[0];
 }
 
+export async function getPetName(petId) {
+    const { data, error } = await supabase
+    .from('patient')
+    .select('name')
+    .eq('patient_id', petId);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data[0].name;
+}
+
 export function imgSource(pet) {
     if ([1,2,3].includes(pet.patient_id)) {
         return '/src/assets/img/' + pet.patient_id + '.jpg'

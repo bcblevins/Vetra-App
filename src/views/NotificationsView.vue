@@ -2,7 +2,7 @@
     <div class="notifications">
         <Notifications :full-view="true" :clear-event="clearEvent" />
         <button @click="clearEvent = !clearEvent">Clear Notifications</button>
-        <LoadingDots dark="true" v-if="loading"/>
+        <LoadingDots dark="true" v-if="loading" />
     </div>
 </template>
 
@@ -18,12 +18,15 @@ export default {
         }
     },
     components: {
-    Notifications,
-    LoadingDots
-},
+        Notifications,
+        LoadingDots
+    },
+    mounted() {
+        document.title = "Notifications"
+    }
 }
 </script>
-  
+
 <style scoped>
 .notifications {
     display: flex;

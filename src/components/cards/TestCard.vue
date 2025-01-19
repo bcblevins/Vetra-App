@@ -27,7 +27,6 @@ export default {
     },        
     methods: {
         goToTest() {
-            console.log(":)")
             this.$router.push({ name: 'tests', params: { id: this.test.patient_iD, testId: this.test.test_id } })
         }
     }

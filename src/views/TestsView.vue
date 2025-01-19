@@ -15,6 +15,7 @@ import TestList from '@/components/containers/TestList.vue';
 import TestItem from '@/components/items/TestItem.vue';
 import Conversation from '@/components/containers/Conversation.vue';
 import { getResults, getTests } from '@/services/supabase/testServiceSP';
+import { getPetName } from '@/services/supabase/petServiceSP';
 
 export default {
     components: {
@@ -51,10 +52,16 @@ export default {
             }).catch(error => {
                 console.log(error);
             });
+        },
+        setPageTitle() {
+            getPetName(this.$route.params.id).then((data) => {
+                document.title = data + "'s Diagnostic Tests" 
+            })
         }
     },
     created() {
         this.fetchTests();
+
     },
     watch: {
         $route(to, from) {
@@ -63,15 +70,16 @@ export default {
                 this.keyToggle++;
             } else {
                 getTests(to.params.id).then(data => {
-                    console.log(data)
                     this.tests = data;
-                    console.log(to.params.id, this.tests[0].test_id)
                     this.$router.push({ name: 'tests', params: { id: to.params.id, testId: this.tests[0].test_id } })
                 }).catch(error => {
                     console.log(error);
                 });
             }
         }
+    },
+    mounted() {
+        this.setPageTitle()
     }
 
 }

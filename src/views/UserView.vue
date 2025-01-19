@@ -50,6 +50,7 @@ export default {
         }).catch(error => {
             console.log(error);
         });
+        document.title = 'Settings'
     },
     methods: {
         saveChanges() {
@@ -68,7 +69,6 @@ export default {
     },
     computed: {
         user() {
-            console.log(this.$store.state.user)
             return this.$store.state.user;
         }
     },

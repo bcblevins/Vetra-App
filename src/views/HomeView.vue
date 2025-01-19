@@ -37,7 +37,7 @@ import { getPets } from '@/services/supabase/petServiceSP';
       );
     },
     mounted() {
-      document.title = 'Home';
+      document.title = 'Home - VetRA';
     }
   }
 </script>

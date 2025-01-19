@@ -36,9 +36,7 @@ export default {
             this.fail = false;
             try {
                 const loginResult = await login(this.username, this.password, true)
-                console.log("Login result: " + loginResult);
                 if (loginResult) {
-                    console.log("Login successful");
                     setTimeout(() => {
                         this.$router.push({ name: 'home' });
                     }, 2000);

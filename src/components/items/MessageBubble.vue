@@ -31,8 +31,6 @@ export default {
             });
         },
         isFrom() {
-            console.log("message: ", this.message.from_user)
-            console.log(this.$store.state.user)
             return this.message.from_user === this.$store.state.user.id;
         }
     },

@@ -46,7 +46,6 @@ export default {
         },
         getRequests() {
             getRefillRequests(this.med.prescription_id).then((data) => {
-                console.log("requests:", data)
                 if (data.length > 0) {
                     this.isPending = true;
                 }

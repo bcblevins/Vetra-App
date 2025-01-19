@@ -22,7 +22,6 @@ export async function login(email, password) {
 
   const userResponse = await getUser(userId);
 
-  console.log(userResponse)
 
   store.commit("SET_USER", userResponse);
 

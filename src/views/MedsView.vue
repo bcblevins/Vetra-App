@@ -17,6 +17,7 @@
 import RxItem from '@/components/items/RxItem.vue';
 import { getMeds } from '@/services/supabase/rxServiceSP';
 import { getRefillRequests } from '@/services/supabase/refillServiceSP';
+import { getPetName } from '@/services/supabase/petServiceSP';
 export default {
     data() {
         return {
@@ -31,14 +32,11 @@ export default {
             this.meds = data;
             for (let med of this.meds) {
                 getRefillRequests(med.prescription_id).then(data => {
-                    console.log(data)
                     if (data.length > 0) {
                         let array = data;
-                        console.log(array);
                         array.sort((a, b) => {
                             return new Date(b.request_id) - new Date(a.request_id);
                         });
-                        console.log(array);
                         if (array[0].status === 'PENDING') {
                             med.refillPending = true;
                         }
@@ -49,6 +47,16 @@ export default {
             }
         });
     },
+    methods: {
+        setPageTitle() {
+            getPetName(this.$route.params.id).then((data) => {
+                document.title = data + "'s Prescriptions" 
+            })
+        }
+    },
+    mounted() {
+        this.setPageTitle()
+    }
 }
 </script>
 

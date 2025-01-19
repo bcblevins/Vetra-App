@@ -66,6 +66,9 @@ export default {
             const lastElement = this.$refs.loginLink
             lastElement.scrollIntoView({ behavior: 'smooth' });
         }
+    },
+    mounted() {
+        document.title = "Welcome to VetRA"
     }
 
 }

@@ -53,11 +53,11 @@ export default {
         Notifications,
     },
     created() {
-        if (!(this.$route.name === 'login' || this.$route.name === 'register')) {
+        if (!(this.$route.name === 'login' && this.$route.name === 'register')) {
             this.getNotifications();
         }
         setInterval(() => {
-            if (!(this.$route.name === 'login' || this.$route.name === 'register')) {
+            if (!(this.$route.name === 'login' && this.$route.name === 'register')) {
                 this.getNotifications();
             }
         }, 5000)

@@ -34,9 +34,7 @@ export default {
         openTest(id) {
             let tests
             getTests(this.pet.patient_id).then(data => {
-                console.log(data)
                 tests = data;
-                console.log(id, tests[0].test_id)
                 this.$router.push({ name: 'tests', params: { id: id, testId: tests[0].test_id } })
             }).catch(error => {
                 console.log(error);

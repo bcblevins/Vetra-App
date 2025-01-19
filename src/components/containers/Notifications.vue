@@ -106,7 +106,6 @@ export default {
         },
         loadNotifications() {
             getNotifications(this.$store.state.pets.map((pet) => pet.patient_id)).then(data => {
-                console.log("notification data: ", data)
                 data.sort((a, b) => {
                     let dateA = new Date(a.timestamp);
                     let dateB = new Date(b.timestamp);
@@ -128,20 +127,17 @@ export default {
             });
         },
         clearNotifications() {
-            console.log("clearing notifications")
             let promises = []
             for (let n of this.notifications) {
                 promises.push(markRead(n.id));
             }
             Promise.all(promises).then(() => {
                 this.loadNotifications();
-                console.log(this.notifications);
             });
         }
     },
     watch: {
         clearEvent() {
-            console.log("clear event")
             this.clearNotifications();
         }
     }

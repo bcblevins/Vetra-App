@@ -16,5 +16,5 @@ export default defineConfig({
     }
   },
   // TODO: For build change below to "/Vetra-App/"
-  base: "/Vetra-App"
+  base: "/Vetra-App/"
 })

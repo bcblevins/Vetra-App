@@ -4,7 +4,7 @@
         <main>
             <nav class="left">
                 <div class="pet-info">
-                    <img :src="imgSrc" :alt="pet.name">
+                    <img :src="pet.image_source" :alt="pet.name">
                     <h1> {{ pet.name }} </h1>
                 </div>
                 <div class="meds" @click="$router.push({ name: 'rx', params: { id: pet.patient_id } })">

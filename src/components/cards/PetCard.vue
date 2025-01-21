@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="portrait" @click="$router.push({ name: 'profile', params: { id: pet.patient_id } })">
-            <img :src="imgSrc" :alt="pet.name" height="250px">
+            <img :src="pet.image_source" :alt="pet.name" height="250px">
             <span>How's {{ pet.name }} doing?</span>
         </div>
 
